@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale=1.0>
+    <title>Title</title>
+    <style type="text/css">
+
+            .head {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background-color: #EFF2FB;
+                height: 80px;
+                z-index: 1;
+             }
+             .name{
+                text-align: center;
+                line-height: 80px;
+                float: left;
+                height: 80px; width: auto;
+                background-color: #EFF2FB;
+                color: black; font-weight: 600; font-size: 22px;
+                margin-left: 70px;
+             }
+             .home{
+                text-align: center;
+                line-height: 80px;
+                float: left;
+                height: 80px; width: 110px;
+                background-color: #EFF2FB;
+                margin-left: 70px;
+             }
+             .menu{
+                text-align: center;
+                line-height: 80px;
+                 float: left;
+                height: 80px; width: 110px;
+                background-color: EFF2FB;
+                color: #424242; font-weight: 550; font-size: 16px;
+             }
+            .menu:hover {
+                float: left;
+                height: 80px; width: 110px;
+                background-color: #EFF2FB;
+                color: black; font-weight: 600; font-size: 16px;
+            }
+            .q{
+                text-align: center;
+                line-height: 80px;
+                 float: left;
+                height: 80px; width: 110px;
+                background-color: EFF2FB;
+                color: #424242; font-weight: 550; font-size: 16px;
+             }
+            .q:hover {
+                float: left;
+                height: 80px; width: 110px;
+                background-color: #EFF2FB;
+                color: black; font-weight: 600; font-size: 16px;
+            }
+            .h_right {
+                float:right;
+                text-align: center;
+                line-height: 80px;
+                height: 50px; width: 110px;
+
+
+                background-color: #EFF2FB;
+                color: #424242; font-weight: 450; font-size: 16px;
+            }
+            .h_right2 {
+                float:right;
+                text-align: center;
+                line-height: 80px;
+                height: 80px; width: 110px;
+                margin-right: 100px;
+
+                background-color: #EFF2FB;
+                color: #3104B4; font-weight: 450; font-size: 16px;
+            }
+
+
+
+        </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <!-- 헤드 영역 -->
+    <div class="head">
+        <div class="name"><a href='/'>은혜갚은 AI</a></div>
+        <div class="home">주식</div>
+        <div class="menu">커뮤니티</div>
+        <div class="menu">문의하기</div>
+        <div class="q">마이페이지</div>
+        {% if user.is_authenticated %}
+        <div class="h_right2">{{ user.username }}님</div>
+        <div class="h_right" onclick="location.href='{% url 'users:logout' %}'">로그아웃</div>
+        {% else %}
+        <div class="h_right2"><a href="{% url 'users:signup' %}"}>회원가입</a></div>
+        <div class="h_right"><a href="{% url 'users:login' %}"}>로그인</a></div>
+        {% endif %}
+    </div>
+</nav>
+</body>
+</html>

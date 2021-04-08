@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>커뮤니티</title>
+    <style type="text/css">
+            .head {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background-color: #EFF2FB;
+                height: 80px;
+                z-index: 1;
+             }
+             .name{
+                text-align: center;
+                line-height: 80px;
+                float: left;
+                height: 80px; width: auto;
+                background-color: #EFF2FB;
+                color: black; font-weight: 600; font-size: 22px;
+                margin-left: 70px;
+             }
+             .home{
+                text-align: center;
+                line-height: 80px;
+                float: left;
+                height: 80px; width: 110px;
+                background-color: #EFF2FB;
+                color: #424242; font-weight: 550; font-size: 16px;
+                margin-left: 70px;
+             }
+             .menu{
+                text-align: center;
+                line-height: 80px;
+                 float: left;
+                height: 80px; width: 110px;
+                background-color: EFF2FB;
+                color: #424242; font-weight: 550; font-size: 16px;
+             }
+            .menu:hover {
+                float: left;
+                height: 80px; width: 110px;
+                background-color: #EFF2FB;
+                color: black; font-weight: 600; font-size: 16px;
+            }
+            .q{
+                text-align: center;
+                line-height: 80px;
+                 float: left;
+                height: 60px; width: 110px;
+                background-color: EFF2FB;
+                color: #424242; font-weight: 550; font-size: 16px;
+             }
+            .q:hover {
+                float: left;
+                height: 80px; width: 110px;
+                background-color: #EFF2FB;
+                color: black; font-weight: 600; font-size: 16px;
+            }
+            .h_right {
+                float:right;
+                text-align: center;
+                line-height: 80px;
+                height: 50px; width: 110px;
+
+
+                background-color: #EFF2FB;
+                color: #F5A9BC; font-weight: 550; font-size: 16px;
+            }
+            .h_right2 {
+                float:right;
+                text-align: center;
+                line-height: 80px;
+                height: 80px; width: 110px;
+                margin-right: 100px;
+
+                background-color: #EFF2FB;
+                color: #424242; font-weight: 550; font-size: 16px;
+            }
+            /* 전체 옵션 */
+            * {
+                margin: 0 auto;
+                padding: 0;
+                font-family: 'Malgun gothic','Sans-Serif','Arial';
+            }
+            a {
+                text-decoration: none;
+                color:#333;
+            }
+            ul li {
+                list-style:none;
+            }
+
+            /* 공통 */
+            .fl {
+                float:left;
+            }
+            .tc {
+                text-align:center;
+            }
+
+            /* 게시판 목록 */
+            #board_area {
+                padding-top: 150px;
+                width: 900px;
+                position: relative;
+            }
+            .list-table {
+                margin-top: 40px;
+            }
+            .list-table thead th{
+                height:40px;
+                border-top:2px solid #09C;
+                border-bottom:1px solid #CCC;
+                font-weight: bold;
+                font-size: 17px;
+            }
+            .list-table tbody td{
+                text-align:center;
+                padding:10px 0;
+                border-bottom:1px solid #CCC; height:20px;
+                font-size: 14px 
+            }
+            .write_btn {
+                position: absolute;
+                margin-top:20px;
+                right: 0;
+            }
+            #w_btn {
+                width: 70px;
+                height: 30px;
+                border: 0px;
+                color: white;
+                background-color: #A4A4A4;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- 헤드 영역 -->
+        <div class="head">
+            <div class="name">은혜갚은 AI</div>
+            <div class="home">주식</div>
+            <div class="menu" style="color: #0080FF; font-weight: 600;">커뮤니티</div>
+            <div class="menu">문의하기</div>
+            <div class="q">마이페이지</div>
+            <div class="h_right2">로그아웃</div>
+            <div class="h_right">메시지</div>
+        </div>
+
+        <div id="board_area"> 
+            <h1>자유게시판</h1>
+            <h4>자유롭게 글을 쓸 수 있는 게시판입니다.</h4>
+              <table class="list-table">
+                <thead>
+                    <tr>
+                        <th width="70">번호</th>
+                          <th width="500">제목</th>
+                          <th width="120">글쓴이</th>
+                          <th width="100">작성일</th>
+                          <th width="100">조회수</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td width="70"><?php echo $board['idx']; ?></td>
+                      <td width="500"><a href=""><?php echo $title;?></a></td>
+                      <td width="120"><?php echo $board['name']?></td>
+                      <td width="100"><?php echo $board['date']?></td>
+                      <td width="100"><?php echo $board['hit']; ?></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="write_btn">
+                  <a href="#"><button id="w_btn">글쓰기</button></a>
+                </div>
+        </div>
+
+    </body>
+    </html>
