@@ -21,7 +21,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("user:login")
+    return redirect("users:login")
 
 
 def signup_view(request):
@@ -37,6 +37,6 @@ def signup_view(request):
         user.first_name = firstname
         user.last_name = lastname
         user.save()
-        return redirect("user:login")
+        return redirect("users:login")
 
     return render(request, "users/signup.html")
