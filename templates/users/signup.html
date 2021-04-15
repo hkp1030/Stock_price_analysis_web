@@ -1,212 +1,214 @@
 <!DOCTYPE html>
-<!-- saved from url=(0141)file:///C:/Users/betty/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/signup.html -->
+<!-- saved from url=(0139)file:///C:/Users/betty/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/sign.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    
     <title>회원가입</title>
     <style type="text/css">
-            body {
-                background-color: #f9f9f9;
-            }
+           
+        html {
+            height: 100%;
+        }
 
-            #logo {
-                margin: 40px auto 30px;
-                max-width: 175px;
-                color: #0080FF;
-                font-size: 27px; font-weight: 550; font-family: "고딕";
-            }
+        body {
+            margin: 0;
+            height: 100%;
+            background: #f5f6f7;
+            font-family: Dotum,'돋움',Helvetica,sans-serif;
+        }
+        #logo {
+            font-size: 44px; font-weight: 600;
+            font-family: "고딕";
+        }
 
-            .inlineToBlock {
-                display: block;
-            }
-
-            .contentsWrap{
-                margin: 90px auto;
-                max-width: 460px;
-                border: none;
-                padding: 20px;
-                text-align: center;
-            }
-
-            .joinWindow {
-                background-color: #f5f6f7;
-                padding: 10px auto;
-                border: 1px solid #dfdfdf;
-                border-radius: 3px;
-            }
-
-            .ordinaryJoin {
-                height: 37px;
-                box-sizing: border-box;
-                border: 0px;
-                border-radius: 5px;
-                color: #ffffff;
-                font-size: 15px;
-                font-weight: 700;
-                margin: 30px 0 30px;
-            }
-
-            .unactivatedJoinColor {
-                background-color: #0080FF;
-            }
-
-            .activatedJoinColor {
-                background-color: #00aeff;
-            }
-
-            .joinWindow * {
-                width: 80%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .noneunderline {
-                text-decoration:none;
-            }
-
-            /* 입력폼 */
-
-            input:focus {
-                outline: none;
-            }
-
-
-            h3 {
-                margin: 19px 0 8px;
-                font-size: 14px;
-                font-weight: 600;
-                text-align: left;
-            }
-
-
-            .box {
-                display: block;
-                width: 80%;
-                height: 45px;
-                border: solid 1px #dadada;
-                padding: 6px 14px 6px 14px;
-                box-sizing: border-box;
-                background: #fff;
-                position: relative;
-            }
-
-            .int {
-                display: block;
-                position: relative;
-                border: 1px solid #eaeaea;
-                width: 100%;
-                height: 29px;
-                border: none;
-                background: #fff;
-                font-size: 15px;
-            }
-
-            input {
-                font-family: Dotum,'돋움',Helvetica,sans-serif;
-            }
-
-            .box.int_id {
-                padding-right: 110px;
-            }
-
-            .box.int_pass {
-                padding-right: 40px;
-            }
-
-            .box.int_pass_check {
-                padding-right: 40px;
-            }
-
-            .step_url {
-                /*@naver.com*/
-                position: absolute;
-                top: 16px;
-                right: 13px;
-                font-size: 15px;
-                color: #8e8e8e;
-            }
-
-            .pswdImg {
-                width: 18px;
-                height: 20px;
-                display: inline-block;
-                position: absolute;
-                top: 50%;
-                right: 16px;
-                margin-top: -10px;
-                cursor: pointer;
-            }
-
-            #bir_wrap {
-                display: table;
-                width: 85%;
-            }
-
-            #bir_yy {
-                display: table-cell;
-                width: 149px;
-
-            }
-
-            #bir_mm {
-                display: table-cell;
-                width: 149px;
-                vertical-align: middle;
-            }
-
-            #bir_dd {
-                display: table-cell;
-                width: 149px;
-            }
-
-            select {
-                width: 100%;
-                height: 29px;
-                font-size: 15px;
-                background: #fff url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
-                background-size: 20px 8px;
-                -webkit-appearance: none;
-                display: inline-block;
-                text-align: start;
-                border: none;
-                cursor: default;
-                font-family: Dotum,'돋움',Helvetica,sans-serif;
-            }
-
-            /* 에러메세지 */
-
-            .error_next_box {
-                margin-top: 9px;
-                font-size: 12px;
-                color: red;
-                display: none;
-            }
-
-            #alertTxt {
-                position: absolute;
-                top: 19px;
-                right: 38px;
-                font-size: 12px;
-                color: red;
-                display: none;
-            }
-
-            .si_btn {
+        #header {
+            padding-top: 62px;
+            padding-bottom: 20px;
             text-align: center;
-            margin-bottom: 30px;
+        }
+        #wrapper {
+            position: relative;
+            height: 100%;
+        }
+
+        #content {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            width: 460px;
         }
 
 
 
+
+        /* 입력폼 */
+
+        input:focus {
+            outline: none;
+        }
+
+
+        h3 {
+            margin: 19px 0 8px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+
+        .box {
+            display: block;
+            width: 100%;
+            height: 51px;
+            border: solid 1px #dadada;
+            padding: 10px 14px 10px 14px;
+            box-sizing: border-box;
+            background: #fff;
+            position: relative;
+        }
+
+        .int {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 29px;
+            border: none;
+            background: #fff;
+            font-size: 15px;
+        }
+
+        input {
+            font-family: Dotum,'돋움',Helvetica,sans-serif;    
+        }
+
+        .box.int_id {
+            padding-right: 110px;
+        }
+
+        .box.int_pass {
+            padding-right: 40px;
+        }
+
+        .box.int_pass_check {
+            padding-right: 40px;
+        }
+
+        .step_url {
+            /*@naver.com*/
+            position: absolute;
+            top: 16px;
+            right: 13px;
+            font-size: 15px;
+            color: #8e8e8e;
+        }
+
+        .pswdImg {
+            width: 18px;
+            height: 20px;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            margin-top: -10px;
+            cursor: pointer;
+        }
+
+        #bir_wrap {
+            display: table;
+            width: 100%;
+        }
+
+        #bir_yy {
+            display: table-cell;
+            width: 147px;
+            
+        }
+
+        #bir_mm {
+            display: table-cell;
+            width: 147px;
+            vertical-align: middle;
+        }
+
+        #bir_dd {
+            display: table-cell;
+            width: 147px;
+        }
+
+        #bir_mm, #bir_dd {
+            padding-left: 10px;
+        }
+
+        select {
+            width: 100%;
+            height: 29px;
+            font-size: 15px;
+            background: #fff url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
+            background-size: 20px 8px;
+            -webkit-appearance: none;
+            display: inline-block;
+            text-align: start;
+            border: none;
+            cursor: default;
+            font-family: Dotum,'돋움',Helvetica,sans-serif;
+        }
+
+        /* 에러메세지 */
+
+        .error_next_box {
+            margin-top: 9px;
+            font-size: 12px;
+            color: red;    
+            display: none;
+        }
+
+        #alertTxt {
+            position: absolute;
+            top: 19px;
+            right: 38px;
+            font-size: 12px;
+            color: red;
+            display: none;
+        }
+
+        /* 버튼 */
+
+        .btn_area {
+            margin: 30px 0 30px;
+        }
+
+        #btnJoin {
+            width: 100%;
+            padding: 21px 0 17px;
+            border: 0;
+            cursor: pointer;
+            color: #fff;
+            background-color: #0080FF;
+            font-size: 20px;
+            font-weight: 400;
+            font-family: Dotum,'돋움',Helvetica,sans-serif;
+        }
+
+        .si_btn {
+            text-align: center;
+            margin-bottom: 91px;
+        }
         </style>
+        
     </head>
     <body>
-     {% include "navi.html" %}
+{% include "navi.html" %}
+        <!-- 컨테이너 영역 -->
+        <div class="container">
+            <!-- header -->
+        <div id="header">
+            <h2 id="logo"><span style="color: #0431B4;">은혜갚은 AI</span></h2>
+        </div>
+
+
         <!-- wrapper -->
-        <div class="contentsWrap">
+        <div id="wrapper">
 
             <!-- content-->
-            <div class="joinWindow">
-                <div id="logo">회원가입</div>
+            <div id="content">
 
                 <!-- ID -->
                 <div>
@@ -225,7 +227,7 @@
                     <span class="box int_pass">
                         <input type="text" id="pswd1" class="int" maxlength="20">
                         <span id="alertTxt">사용불가</span>
-                        <img src="https://raw.githubusercontent.com/from97/naver_join/master/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
+                        <img src="./회원가입_files/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
                     </span>
                     <span class="error_next_box"></span>
                 </div>
@@ -235,7 +237,7 @@
                     <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
                     <span class="box int_pass_check">
                         <input type="text" id="pswd2" class="int" maxlength="20">
-                        <img src="https://raw.githubusercontent.com/from97/naver_join/master/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
+                        <img src="./회원가입_files/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
                     </span>
                     <span class="error_next_box"></span>
                 </div>
@@ -274,7 +276,7 @@
                                     <option value="06">6</option>
                                     <option value="07">7</option>
                                     <option value="08">8</option>
-                                    <option value="09">9</option>
+                                    <option value="09">9</option>                                    
                                     <option value="10">10</option>
                                     <option value="11">11</option>
                                     <option value="12">12</option>
@@ -290,7 +292,7 @@
                         </div>
 
                     </div>
-                    <span class="error_next_box"></span>
+                    <span class="error_next_box"></span>    
                 </div>
 
                 <!-- GENDER -->
@@ -301,7 +303,7 @@
                             <option>성별</option>
                             <option value="M">남자</option>
                             <option value="F">여자</option>
-                        </select>
+                        </select>                            
                     </span>
                     <span class="error_next_box">필수 정보입니다.</span>
                 </div>
@@ -312,7 +314,7 @@
                     <span class="box int_email">
                         <input type="text" id="email" class="int" maxlength="100" placeholder="선택입력">
                     </span>
-                    <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
+                    <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
                 </div>
 
                 <!-- MOBILE -->
@@ -321,27 +323,29 @@
                     <span class="box int_mobile">
                         <input type="tel" id="mobile" class="int" maxlength="11" placeholder="전화번호 입력">
                     </span>
-                    <span class="error_next_box"></span>
+                    <span class="error_next_box"></span>    
                 </div>
 
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button class="inlineToBlock ordinaryJoin unactivatedJoinColor">가입하기</button>
+                    <button type="button" id="btnJoin">
+                        <span>가입하기</span>
+                    </button>
                 </div>
 
                 <div class="si_btn">
-                    계정이 있으신가요?<a href="#" class="noneunderline" style="color: #0080FF; font-weight: 600; "> 로그인</a>
+                    계정이 있으신가요?<span style="color: #0080FF; font-weight: 600; "> 로그인</span>
                 </div>
 
+                
 
-
-            </div>
+            </div> 
             <!-- content-->
 
-        </div>
+        </div> 
         <!-- wrapper -->
     <script src="file:///C:/Users/betty/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/main.js"></script>
         </div>
-
+    
 </body></html>
