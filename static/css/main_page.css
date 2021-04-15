@@ -1,0 +1,46 @@
+.container {
+    padding-top: 80px;
+    height: 700px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 0;
+}
+.container::after {
+    width: 100%;
+    height: 700px;
+    content: "";
+    background-image: url('https://blog.toss.im/wp-content/uploads/2018/10/%EB%A9%94%EC%9D%B8-%ED%95%B4%EC%99%B8%EC%A3%BC%EC%8B%9D-%ED%88%AC%EC%9E%90-%ED%8A%B9%EC%A7%95%EA%B3%BC-%EC%A3%BC%EC%8B%9D-%EB%A7%A4%EB%A7%A4-%EC%88%98%EC%88%98%EB%A3%8C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%90%98%EB%82%98%EC%9A%94-1024x538.jpg');
+    position: absolute;
+    top: 80px;
+    left: 0;
+    z-index: -1;
+    opacity: 0.5;
+    background-size: cover;
+}
+.cnt{
+    margin-top: 150px;
+    color: black; font-weight: 400; font-size: 35px;
+}
+.cnt2{
+    margin-top: 20px;
+    color: #0431B4; font-weight: 550; font-size: 50px;
+}
+.btn_group button{
+    height: 50px;
+    width: 160px;
+    border: 0;
+    margin-top: 100px;
+    text-align: center;
+    color: white; font-weight: 550; font-size: 16px;
+}
+.main_btn {
+    background-color: #0080FF;
+    margin-right: 4px;
+
+}
+.main_btn2 {
+    background-color: #0431B4;
+    margin-left: 2px;
+
+}

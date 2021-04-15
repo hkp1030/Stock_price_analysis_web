@@ -1,0 +1,129 @@
+.head {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #EFF2FB;
+    height: 80px;
+    z-index: 1;
+ }
+ .name {
+    text-align: center;
+    line-height: 80px;
+    float: left;
+    width: auto;
+    color: black; font-weight: 600; font-size: 22px;
+    margin-left: 70px;
+ }
+ .home a{
+    text-align: center;
+    line-height: 80px;
+    float: left;
+    width: 110px;
+    color: #424242; font-weight: 550; font-size: 16px;
+    margin-left: 70px;
+ }
+ .home a:hover {
+    color: #248ae3; font-weight: 600; font-size: 16px;
+}
+ .menu a{
+    text-align: center;
+    line-height: 80px;
+    float: left;
+    width: 110px;
+    color: #424242; font-weight: 550; font-size: 16px;
+ }
+.menu a:hover {
+    color: #248ae3; font-weight: 600; font-size: 16px;
+}
+.q a{
+    text-align: center;
+    line-height: 80px;
+    float: left;
+    width: 110px;
+    color: #424242; font-weight: 550; font-size: 16px;
+ }
+.q a:hover {
+    color: #248ae3; font-weight: 600; font-size: 16px;
+}
+.h_right a{
+    float:right;
+    text-align: center;
+    line-height: 80px;
+    width: 110px;
+    color: #F5A9BC; font-weight: 550; font-size: 16px;
+}
+.h_right a:hover {
+    color: #F7819F; font-weight: 600; font-size: 16px;
+}
+.h_right2 a{
+    float:right;
+    text-align: center;
+    line-height: 80px;
+    width: 110px;
+    margin-right: 100px;
+    color: #424242; font-weight: 550; font-size: 16px;
+}
+.h_right2 a:hover {
+    color: black; font-weight: 600; font-size: 16px;
+}
+/* 전체 옵션 */
+* {
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'Malgun gothic','Sans-Serif','Arial';
+}
+a {
+    text-decoration: none;
+    color:#333;
+}
+ul li {
+    list-style:none;
+}
+
+/* 공통 */
+.fl {
+    float:left;
+}
+.tc {
+    text-align:center;
+}
+
+/* 게시판 목록 */
+#board_area {
+    padding-top: 150px;
+    width: 900px;
+    position: relative;
+}
+.list-table {
+    margin-top: 40px;
+}
+.list-table thead th{
+    height:40px;
+    border-top:2px solid #09C;
+    border-bottom:1px solid #CCC;
+    font-weight: bold;
+    font-size: 17px;
+}
+.list-table tbody td{
+    text-align:center;
+    padding:10px 0;
+    border-bottom:1px solid #CCC; height:20px;
+    font-size: 14px
+}
+.write_btn {
+    position: absolute;
+    margin-top:20px;
+    right: 0;
+}
+#w_btn {
+    width: 70px;
+    height: 30px;
+    border: 0px;
+    color: white;
+    background-color: #A4A4A4;
+}
+
+.noneunderline {
+    text-decoration:none;
+}
