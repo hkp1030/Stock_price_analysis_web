@@ -15,70 +15,69 @@
                 height: 80px;
                 z-index: 1;
              }
-             .name{
+             .name a {
                 text-align: center;
                 line-height: 80px;
                 float: left;
-                height: 80px; width: auto;
-                background-color: #EFF2FB;
+                width: auto;
                 color: black; font-weight: 600; font-size: 22px;
                 margin-left: 70px;
              }
-             .home{
+             .home a{
                 text-align: center;
                 line-height: 80px;
                 float: left;
-                height: 80px; width: 110px;
-                background-color: #EFF2FB;
+                width: 110px;
+                color: #424242; font-weight: 550; font-size: 16px;
                 margin-left: 70px;
              }
-             .menu{
+             .home a:hover {
+                color: #248ae3; font-weight: 600; font-size: 16px;
+            }
+             .menu a{
                 text-align: center;
                 line-height: 80px;
-                 float: left;
-                height: 80px; width: 110px;
-                background-color: EFF2FB;
+                float: left;
+                width: 110px;
                 color: #424242; font-weight: 550; font-size: 16px;
              }
-            .menu:hover {
-                float: left;
-                height: 80px; width: 110px;
-                background-color: #EFF2FB;
-                color: black; font-weight: 600; font-size: 16px;
+            .menu a:hover {
+                color: #248ae3; font-weight: 600; font-size: 16px;
             }
-            .q{
+            .q a{
                 text-align: center;
                 line-height: 80px;
-                 float: left;
-                height: 80px; width: 110px;
-                background-color: EFF2FB;
+                float: left;
+                width: 110px;
                 color: #424242; font-weight: 550; font-size: 16px;
              }
-            .q:hover {
-                float: left;
-                height: 80px; width: 110px;
-                background-color: #EFF2FB;
-                color: black; font-weight: 600; font-size: 16px;
+            .q a:hover {
+                color: #248ae3; font-weight: 600; font-size: 16px;
             }
-            .h_right {
+            .h_right a{
                 float:right;
                 text-align: center;
                 line-height: 80px;
-                height: 50px; width: 110px;
-
-
-                background-color: #EFF2FB;
-                color: #424242; font-weight: 450; font-size: 16px;
+                width: 110px;
+                color: #424242; font-weight: 550; font-size: 16px;
             }
-            .h_right2 {
+            .h_right a:hover {
+                color: black; font-weight: 600; font-size: 16px;
+            }
+            .h_right2 a{
                 float:right;
                 text-align: center;
                 line-height: 80px;
-                height: 80px; width: 110px;
+                width: 110px;
                 margin-right: 100px;
+                color: #3104B4; font-weight: 550; font-size: 16px;
+            }
+            .h_right2 a:hover {
+                color: #210B61; font-weight: 600; font-size: 16px;
+            }
 
-                background-color: #EFF2FB;
-                color: #3104B4; font-weight: 450; font-size: 16px;
+           .noneunderline {
+                text-decoration:none;
             }
 
 
@@ -89,17 +88,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <!-- 헤드 영역 -->
     <div class="head">
-        <div class="name"><a href='/'>은혜갚은 AI</a></div>
-        <div class="home">주식</div>
-        <div class="menu">커뮤니티</div>
-        <div class="menu">문의하기</div>
-        <div class="q">마이페이지</div>
+        <div class="name"><a href='/' class="noneunderline">은혜갚은 AI</a></div>
+        <div class="home"><a href="#" class="noneunderline">주식</a></div>
+        <div class="menu" style="color: #0080FF; font-weight: 600;"><a href="#" class="noneunderline">커뮤니티</a></div>
+        <div class="menu"><a href="#" class="noneunderline">문의하기</a></div>
+        <div class="q"><a href="#" class="noneunderline">마이페이지</a></div>
         {% if user.is_authenticated %}
         <div class="h_right2">{{ user.username }}님</div>
-        <div class="h_right" onclick="location.href='{% url 'users:logout' %}'">로그아웃</div>
+        <div class="h_right"><a onclick="location.href='{% url 'users:logout' %}'" class="noneunderline">로그아웃</a></div>
         {% else %}
-        <div class="h_right2"><a href="{% url 'users:signup' %}"}>회원가입</a></div>
-        <div class="h_right"><a href="{% url 'users:login' %}"}>로그인</a></div>
+        <div class="h_right2"><a href="{% url 'users:signup' %}"} class="noneunderline">회원가입</a></div>
+        <div class="h_right"><a href="{% url 'users:login' %}"} class="noneunderline">로그인</a></div>
         {% endif %}
     </div>
 </nav>
