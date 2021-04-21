@@ -3,39 +3,39 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 <!-- saved from url=(0141)file:///C:/Users/betty/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/signup.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <title>로그인</title>
-    </head>
-    <body>
-     {% include "navi.html" %}
-        <!-- 컨테이너 영역 -->
-        <div class="contentsWrap">
-            <div class="loginWindow">
-                <form action="{% url 'users:login' %}" method="POST">
-                    {% csrf_token %}
-                <div id="logo">은혜갚은 AI</div>
-                <input name="username" type="text" placeholder="아이디" class="inlineToBlock">
-                <input name="password" type="password" placeholder="비밀번호" class="inlineToBlock">
+</head>
+<body>
+{% include "navi.html" %}
+<!-- 컨테이너 영역 -->
+<div class="contentsWrap">
+    <div class="loginWindow">
+        <form action="{% url 'users:login' %}" method="POST">
+            {% csrf_token %}
+            <div id="logo">은혜갚은 AI</div>
+            <input name="username" type="text" placeholder="아이디" class="inlineToBlock">
+            <input name="password" type="password" placeholder="비밀번호" class="inlineToBlock">
             <button class="inlineToBlock ordinaryLogin unactivatedLoginColor">로그인</button>
-            </form>
-                <div class="find">
-                <p>
-                    <a href="#" class="noneunderline">아이디</a>
-                     또는 
-                    <a href="#" class="noneunderline">비밀번호</a>
-                    를 잊으셨나요?
-                </p>
-            </div>
-                
-            </div>
-            <div class="haveAccount">
-                <p>계정이 없으신가요?
-                <a href="#" class="noneunderline">가입하기</a>
-                </p>
-            </div>
+        </form>
+        <div class="find">
+            <p>
+                <a href="#" class="noneunderline">아이디</a>
+                또는
+                <a href="#" class="noneunderline">비밀번호</a>
+                를 잊으셨나요?
+            </p>
         </div>
-    
-            
-      <script src="{% url 'users:login' %}"></script>
-    
+
+    </div>
+    <div class="haveAccount">
+        <p>계정이 없으신가요?
+            <a href="#" class="noneunderline">가입하기</a>
+        </p>
+    </div>
+</div>
+
+
+<script src="{% url 'users:login' %}"></script>
+
 </body></html>

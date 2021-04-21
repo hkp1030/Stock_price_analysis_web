@@ -13,26 +13,43 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #EFF2FB; height: 80px;">
-  <a class="navbar-brand" href="#">은혜갚은 AI</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">주식<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">커뮤니티</a>
-      <a class="nav-item nav-link" href="#">문의하기</a>
-      <a class="nav-item nav-link" href="#">마이페이지</a>
+    <a class="navbar-brand" href="/" style="font-size:22px; font-weight:600; width:110px; margin-left: 60px;">은혜갚은 AI</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">주식<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">커뮤니티</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">문의하기</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">마이페이지</a>
+            </li>
+        </div>
+        <ul class="navbar-nav justify-content-end">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'users:logout' %}" style="margin-right: 20px; color: #424242; font-weight: 550; font-size: 16px;">{{ user.username }}님</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'users:logout' %}" style="margin-right: 60px; color: #3104B4; font-weight: 550; font-size: 16px;">로그아웃</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'users:login' %}" style="margin-right: 20px; color: #424242; font-weight: 550; font-size: 16px;">로그인</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'users:signup' %}" style="margin-right: 60px; color: #3104B4; font-weight: 550; font-size: 16px;">회원가입</a>
+            </li>
+            {% endif %}
+        </ul>
     </div>
-  </div>
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">로그인</a>
-        </li
-        <li class="nav-item">
-            <a class="nav-link" href="#">회원가입</a>
-        </li>
-    </ul>
 </nav>
 </body>
 </html>

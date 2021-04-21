@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
 <!-- saved from url=(0141)file:///C:/Users/betty/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/signup.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -8,9 +7,13 @@
     </head>
     <body>
      {% include "navi.html" %}
+
+     <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
         <!-- wrapper -->
         <div class="contentsWrap">
 
+            <form method="post" class="post-form">
+        {% csrf_token %}
             <!-- content-->
             <div class="joinWindow">
                 <div id="logo">회원가입</div>
@@ -18,19 +21,21 @@
                 <!-- ID -->
                 <div>
                     <h3 class="join_title">
-                        <label for="id">아이디</label>
+                        <label for="username">아이디</label>
                     </h3>
                     <span class="box int_id">
-                        <input type="text" id="id" class="int" maxlength="20">
+                        <input type="text" id="username" name="username" class="int" maxlength="20"
+                   value="{{ form.username.value|default_if_none:'' }}">
                     </span>
                     <span class="error_next_box"></span>
                 </div>
 
                 <!-- PW1 -->
                 <div>
-                    <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
+                    <h3 class="join_title"><label for="password1">비밀번호</label></h3>
                     <span class="box int_pass">
-                        <input type="text" id="pswd1" class="int" maxlength="20">
+                        <input type="text" id="password1" name="password1" class="int" maxlength="20"
+                   value="{{ form.password1.value|default_if_none:'' }}">
                         <span id="alertTxt">사용불가</span>
                         <img src="https://raw.githubusercontent.com/from97/naver_join/master/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
                     </span>
@@ -39,9 +44,10 @@
 
                 <!-- PW2 -->
                 <div>
-                    <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
+                    <h3 class="join_title"><label for="password2">비밀번호 재확인</label></h3>
                     <span class="box int_pass_check">
-                        <input type="text" id="pswd2" class="int" maxlength="20">
+                        <input type="text" id="password2" name="password2" class="int" maxlength="20"
+                   value="{{ form.password2.value|default_if_none:'' }}">
                         <img src="https://raw.githubusercontent.com/from97/naver_join/master/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
                     </span>
                     <span class="error_next_box"></span>
@@ -51,49 +57,31 @@
                 <div>
                     <h3 class="join_title"><label for="name">이름</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="name" class="int" maxlength="20">
+                        <input type="text" id="name" name="name" class="int" maxlength="20"
+                   value="{{ form.name.value|default_if_none:'' }}">
+                    </span>
+                    <span class="error_next_box"></span>
+                </div>
+
+                <!-- N_NAME -->
+                <div>
+                    <h3 class="join_title"><label for="n_name">닉네임</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="n_name" name="n_name" class="int" maxlength="20"
+                   value="{{ form.n_name.value|default_if_none:'' }}">
                     </span>
                     <span class="error_next_box"></span>
                 </div>
 
                 <!-- BIRTH -->
                 <div>
-                    <h3 class="join_title"><label for="yy">생년월일</label></h3>
+                    <h3 class="join_title"><label for="birth">생년월일</label></h3>
 
                     <div id="bir_wrap">
-                        <!-- BIRTH_YY -->
+                        <!-- BIRTH -->
                         <div id="bir_yy">
-                            <span class="box">
-                                <input type="text" id="yy" class="int" maxlength="4" placeholder="년(4자)">
-                            </span>
-                        </div>
-
-                        <!-- BIRTH_MM -->
-                        <div id="bir_mm">
-                            <span class="box">
-                                <select id="mm" class="sel">
-                                    <option>월</option>
-                                    <option value="01">1</option>
-                                    <option value="02">2</option>
-                                    <option value="03">3</option>
-                                    <option value="04">4</option>
-                                    <option value="05">5</option>
-                                    <option value="06">6</option>
-                                    <option value="07">7</option>
-                                    <option value="08">8</option>
-                                    <option value="09">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </span>
-                        </div>
-
-                        <!-- BIRTH_DD -->
-                        <div id="bir_dd">
-                            <span class="box">
-                                <input type="text" id="dd" class="int" maxlength="2" placeholder="일">
-                            </span>
+                            <input type="date" id="birth" name="birth"
+                   value="{{ form.birth.value|default_if_none:'' }}">
                         </div>
 
                     </div>
@@ -102,9 +90,10 @@
 
                 <!-- GENDER -->
                 <div>
-                    <h3 class="join_title"><label for="gender">성별</label></h3>
+                    <h3 class="join_title"><label for="sex">성별</label></h3>
                     <span class="box gender_code">
-                        <select id="gender" class="sel">
+                        <select id="sex" name="sex" class="sel"
+                   value="{{ form.sex.value|default_if_none:'' }}">
                             <option>성별</option>
                             <option value="M">남자</option>
                             <option value="F">여자</option>
@@ -117,15 +106,17 @@
                 <div>
                     <h3 class="join_title"><label for="email">본인확인 이메일<span class="optional">(선택)</span></label></h3>
                     <span class="box int_email">
-                        <input type="text" id="email" class="int" maxlength="100" placeholder="선택입력">
+                        <input type="text" id="email" name="email" class="int" maxlength="100" placeholder="선택입력"
+                   value="{{ form.email.value|default_if_none:'' }}">
                     </span>
                     <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
                 </div>
 
+                {% include "form_errors.html" %}
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button class="inlineToBlock ordinaryJoin unactivatedJoinColor">가입하기</button>
+                    <button type="submit" class="inlineToBlock ordinaryJoin unactivatedJoinColor">가입하기</button>
                 </div>
 
                 <div class="si_btn">
@@ -136,10 +127,9 @@
 
             </div>
             <!-- content-->
-
+</form>
         </div>
         <!-- wrapper -->
-    <script src="file:///C:/Users/betty/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/main.js"></script>
         </div>
 
 </body></html>
