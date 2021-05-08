@@ -1,55 +1,48 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 <!-- jQuery JS -->
-<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-<!-- Bootstrap JS -->
-<script src="{% static 'js/bootstrap.js' %}"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" initial-scale=1.0>
-    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/navi.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
+
+    <title>Nav bar</title>
+
+    <script src="https://kit.fontawesome.com/2d323a629b.js"
+            crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/navi.js' %}" defer></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #EFF2FB; height: 80px;">
-    <a class="navbar-brand" href="/" style="font-size:22px; font-weight:600; width:110px; margin-left: 60px;">은혜갚은 AI</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">주식<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">커뮤니티</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">문의하기</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link" href="#" style="margin-left: 50px; color:#424242; font-size:16px; font-weight:550;">마이페이지</a>
-            </li>
+    <nav class="navbar">
+        <div class="navbar_logo">
+            <a href="/">은혜갚은 AI</a>
         </div>
-        <ul class="navbar-nav justify-content-end">
+
+        <ul class="navbar_menu">
+            <li><a href="">주식</a></li>
+            <li><a href="">커뮤니티</a></li>
+            <li><a href="">문의하기</a></li>
+            <li><a href="">마이페이지</a></li>
+        </ul>
+
+        <ul class="navbar_icons">
             {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url 'users:logout' %}" style="margin-right: 20px; color: #424242; font-weight: 550; font-size: 16px;">{{ user.username }}님</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:logout' %}" style="margin-right: 60px; color: #3104B4; font-weight: 550; font-size: 16px;">로그아웃</a>
-            </li>
+            <li><a href="{% url 'users:logout' %}">{{ user.username }}님</a></li>
+            <li><a href="{% url 'users:logout' %}">로그아웃</a></li>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url 'users:login' %}" style="margin-right: 20px; color: #424242; font-weight: 550; font-size: 16px;">로그인</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:signup' %}" style="margin-right: 60px; color: #3104B4; font-weight: 550; font-size: 16px;">회원가입</a>
-            </li>
+            <li><a href="{% url 'users:signup' %}">회원가입</a></li>
+            <li><a href="{% url 'users:login' %}">로그인</a></li>
             {% endif %}
         </ul>
-    </div>
-</nav>
+
+        <a href="#" class="navbar_toggleBtn">
+            <i class="fas fa-bars"></i>
+        </a>
+    </nav>
 </body>
 </html>

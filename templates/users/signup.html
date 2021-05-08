@@ -80,8 +80,10 @@
                     <div id="bir_wrap">
                         <!-- BIRTH -->
                         <div id="bir_yy">
-                            <input type="date" id="birth" name="birth"
-                   value="{{ form.birth.value|default_if_none:'' }}">
+                            <span class="box int_birth">
+                                <input type="date" id="birth" name="birth"
+                       value="{{ form.birth.value|default_if_none:'' }}">
+                            </span>
                         </div>
 
                     </div>

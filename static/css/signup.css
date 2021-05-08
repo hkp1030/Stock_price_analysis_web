@@ -110,6 +110,10 @@ input {
     padding-right: 40px;
 }
 
+.box.int_birth {
+    padding-right: 40px;
+}
+
 .step_url {
     /*@naver.com*/
     position: absolute;
@@ -132,24 +136,13 @@ input {
 
 #bir_wrap {
     display: table;
-    width: 85%;
+    width: 100%;
 }
 
 #bir_yy {
     display: table-cell;
-    width: 149px;
+    width: 80%;
 
-}
-
-#bir_mm {
-    display: table-cell;
-    width: 149px;
-    vertical-align: middle;
-}
-
-#bir_dd {
-    display: table-cell;
-    width: 149px;
 }
 
 select {

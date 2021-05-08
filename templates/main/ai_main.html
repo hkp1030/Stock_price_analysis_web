@@ -1,119 +1,28 @@
 <!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+<!-- jQuery JS -->
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.js' %}"></script>
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale=1.0>
     <title>Title</title>
-    <style type="text/css">
-            .container {
-                padding-top: 60px;
-            }
-            .head {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                background-color: #EFF5FB;
-                height: 60px;
-             }
-             .home{
-                text-align: center;
-                line-height: 60px;
-                float: left;
-                height: 60px; width: 110px;
-                background-color: #EFF2FB;
-                color: #424242; font-weight: 450; font-size: 14px;
-                border-left: 1pt solid #b4b4b4;
-                margin-left: 200px;
-             }
-             .home a:hover {
-                float: left;
-                height: 60px; width: 110px;
-                background-color: #EFF2FB;
-                color: black; font-weight: 550; font-size: 14px;
-            }
-             .menu{
-                text-align: center;
-                line-height: 60px;
-                float: left;
-                height: 60px; width: 110px;
-                border-left: 1pt solid #b4b4b4;
-                background-color: EFF2FB;
-                color: #424242; font-weight: 450; font-size: 14px;
-             }
-            .menu:hover {
-                float: left;
-                height: 60px; width: 110px;
-                background-color: #EFF2FB;
-                color: black; font-weight: 550; font-size: 14px;
-            }
-            .q{
-                text-align: center;
-                line-height: 60px;
-                 float: left;
-                height: 60px; width: 110px;
-                border-left: 1pt solid #b4b4b4;
-                border-right: 1pt solid #b4b4b4;
-                background-color: EFF2FB;
-                color: #424242; font-weight: 450; font-size: 14px;
-             }
-            .q:hover {
-                float: left;
-                height: 60px; width: 110px;
-                background-color: #EFF2FB;
-                color: black; font-weight: 550; font-size: 14px;
-            }
-            .h_right {
-                float:right;
-                text-align: center;
-                line-height: 60px;
-                height: 60px; width: 110px;
-
-                background-color: #EFF2FB;
-                color: #424242; font-weight: 450; font-size: 14px;
-            }
-            .head_logo {
-                height: 450px;
-                background-color: white;
-            }
-            .logo {
-                text-align: center;
-                line-height: 450px;
-                font-family: cursive;
-                font-size: 90px;
-            }
-            .content {
-                width: 100%;
-                height: 580px;
-            }
-
-            .noneunderline {
-                text-decoration:none;
-            }
-
-        </style>
     </head>
     <body>
-        <!-- 헤드 영역 -->
-        <div class="head">
-            <div class="home"><a href="#" class="noneunderline">HOME</a></div>
-            <div class="menu">커뮤니티</div>
-            <div class="menu">문의하기</div>
-            <div class="q">마이페이지</div>
-            <div class="h_right">로그인</div>
-            <div class="h_right">회원가입</div>
-        </div>
-
-        <!-- 컨테이너 영역 -->
+    {% include "navi.html" %}
+           <!-- 컨테이너 영역 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
         <div class="container">
-            <!-- 로고 -->
-            <div class="head_logo">
-                <div class="logo"><img class="left_side" src="C:\Users\sunmoon\Desktop\ai\mi.png" /></div>
-            </div>
-            <!-- 메인 이미지 -->
-            <div class="content">
-                <div><img class="left_side" src="./m3.png" /></div>
-                <div><img  class="content_main" src="./m1.png" /></div>
-                <div><img class="right_side" src="./m2.png" /></div>
+            <div class="cnt">주식 종목수</div>
+            <div class="cnt2">30개</div>
+            <div class="btn_group">
+                <button class="main_btn" type="button" onclick="#">주식정보 바로가기</button>
+                <button class="main_btn2" type="button" onclick="location.href='{% url 'users:login' %}'">로그인</button>
+
             </div>
         </div>
     </body>

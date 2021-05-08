@@ -1,74 +1,5 @@
-.head {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #EFF2FB;
-    height: 80px;
-    z-index: 1;
-}
-.name{
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    height: 80px; width: auto;
-    background-color: #EFF2FB;
-    color: black; font-weight: 600; font-size: 22px;
-    margin-left: 70px;
-    }
-.home{
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    height: 80px; width: 110px;
-    background-color: #EFF2FB;
-    color: #0080FF; font-weight: 600; font-size: 16px;
-    margin-left: 70px;
-}
-.menu{
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    height: 80px; width: 110px;
-    background-color: EFF2FB;
-    color: #424242; font-weight: 550; font-size: 16px;
-}
-.menu:hover {
-    float: left;
-    height: 80px; width: 110px;
-    background-color: #EFF2FB;
-    color: black; font-weight: 600; font-size: 16px;
-}
-.q{
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    height: 80px; width: 110px;
-    background-color: EFF2FB;
-    color: #424242; font-weight: 550; font-size: 16px;
-}
-.q:hover {
-    float: left;
-    height: 80px; width: 110px;
-    background-color: #EFF2FB;
-    color: black; font-weight: 600; font-size: 16px;
-}
-.h_right {
-    float:right;
-    text-align: center;
-    line-height: 80px;
-    height: 50px; width: 110px;
-    background-color: #EFF2FB;
-    color: #F5A9BC; font-weight: 550; font-size: 16px;
-}
-.h_right2 {
-    float:right;
-    text-align: center;
-    line-height: 80px;
-    height: 80px; width: 110px;
-    margin-right: 100px;
-    background-color: #EFF2FB;
-    color: #424242; font-weight: 550; font-size: 16px;
+.contain {
+    background-image: url('https://www.techm.kr/news/photo/202003/70070_60077_1023.jpg');
 }
 
 :root{
@@ -94,7 +25,7 @@
 .main-section .search{
     height: 110px;
     display: block;
-    padding-top: 200px;
+    padding-top: 150px;
     color: #363638; font-weight: 450; font-size: 40px;
 }
 .main-section .searchbar-wrap{
@@ -121,22 +52,4 @@
     font-size: 16px;
     border: none;
     outline: none;
-}
-.main-section .buttons{
-    padding-top:40px
-}
-.main-section .buttons button{
-    background-color:   var(  --button-gray-color);
-    border:  0;
-    height: 38px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin:5px;
-    border-radius: 5px;
-    font-size: 14px;
-    color: var(    --button-text-gray-color);
-}
-.main-section .now-lang{
-    padding-top:25px;
-    font-size: 18px;
 }

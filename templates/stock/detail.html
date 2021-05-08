@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+<!-- jQuery JS -->
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+
+<html lang="ko">
+<head>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+</style>
+</head>
+<body>
+{% include "navi.html" %}
+<div class="contain">
+    <div class="searchbar-wrap" style="float: right;">
+    <i class="fas fa-search"></i>
+    <input class="search-input" type="text"/>
+    <i class="fas fa-keyboard"></i>
+</div>
+    <div class="word" style="width: 200px; float: right">
+        <table>
+      <thead>
+        <tr>
+          <th>Lorem</th><th>Ipsum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td><
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td>
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+<div id="container" style="height: 400px; width: 600px; float: left; padding-left: 20px"></div>
+    <script>
+
+        function draw3(){
+            var chartdata = [];
+            $.getJSON('https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1455699200&end=9999999999&period=14400', function (data) {
+                $.each(data, function(i, item){
+                    chartdata.push([item.date*1000, item.open, item.high, item.low, item.close]);
+                });
+            }).done(function(){
+                Highcharts.stockChart('container',{
+                    title: {
+                        text: '삼성전자'
+                    },
+                    rangeSelector: {
+                        buttons: [
+                            {type: 'hour',count: 1,text: '1h'},
+                            {type: 'day',count: 1,text: '1d'},
+                            {type: 'all',count: 1,text: 'All'}
+                        ],
+                        selected: 2,
+                        inputEnabled: true
+                    },
+                    plotOptions: {
+                        candlestick: {
+                            downColor: 'blue',
+                            upColor: 'red'
+                        }
+                    },
+                    series: [{
+                        name: '삼성전자',
+                        type: 'candlestick',
+                        data: chartdata,
+                        tooltip: {
+                            valueDecimals: 8
+                        }
+                    }]
+                });
+            });
+        }
+        draw3();
+    </script>
+
+    <div class="col-md-6 col-xxl-3 mb-3 pr-md-2 pl-xxl-2>
+              <div class="card h-md-100">
+                <div class="card-body">
+                  <div class="row h-100 justify-content-between no-gutters">
+
+                     <table>
+      <thead>
+        <tr>
+          <th>Lorem</th><th>Ipsum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td><
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td>
+        </tr>
+        <tr>
+          <td>Lorem</td><td>Ipsum</td>
+        </tr>
+      </tbody>
+    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+</div>
+</body>
+</html>

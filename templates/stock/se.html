@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset='euc-kr'>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="styles.css">
+<script src="jquery-1.11.3.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+<!--
+function layerControl_over(){
+	var f1=document.getElementById("layer1").style;
+	var f2=document.getElementById("layer2").style;
+		f2.display='';
+		f1.display='none';
+
+}
+
+function layerControl_out(){
+	var f1=document.getElementById("layer1").style;
+	var f2=document.getElementById("layer2").style;
+		f2.display='none';
+		f1.display='';
+
+}
+-->
+</script>
+</head>
+<body>
+
+
+<?
+$url = './testdata.json';
+$content = file_get_contents($url);
+$json = json_decode($content, true);
+
+//echo "test";
+//echo time();
+	//echo "<br>";
+	//echo time()-60*5;
+
+ for ($i = 0; $i <= count($json); $i++) {
+
+	 $list[$i] = $json[$i]['term'];
+
+	// echo $json[$i]['time'];
+	//  echo $json[$i]['term']
+if ( $json[$i]['time'] <= time() - 60*5){
+		$list_pre[$i] = $json[$i]['term'];
+	}
+}
+
+
+$list = array_filter($list);
+	$list_pre = array_filter($list_pre);
+	////////////////
+
+	$list = array_filter($list);
+	$list_pre = array_filter($list_pre);
+
+
+	//print_r($list_pre);
+	/////////////
+	$word = array_count_values($list);
+	$word_pre = array_count_values($list_pre);
+
+	//print_r($word_pre);
+
+	arsort($word);
+	arsort($word_pre);
+
+	$word = array_slice($word, 0, 10);
+	$word_pre = array_slice($word_pre, 0, 10);
+
+
+
+
+
+?>
+
+<div align="center" width="100%">
+
+	<div class="search" style=" display:block; margin-left: 100px; padding: 10px">
+	<div style="display:inline;margin-right:10px">회사명로고
+	</div>
+	<form class="form-container" name="search" action="search.php" method="get">
+			<input class="search-textfield" type="text" name="search" />
+			<input class="search-submit-button" type="submit" href="javascript:void(0)" value="검색" />
+
+	</form>
+
+	</div>
+	<div id="container">
+	<ul id="nav">
+		<li style=""><a href="#">왼쪽 메뉴 ITEM1</a>
+			<div class="nav-submenu">
+				<div>
+					<ul>
+						<li><a href="#">서브 아이템1</a></li>
+						<li><a href="#">서브 아이템2</a></li>
+					</ul>
+				</div>
+			</div>
+		</li>
+
+		<li style=""><a href="#">왼쪽 메뉴 ITEM2</a>
+			<div class="nav-submenu">
+				<div>
+					<ul>
+						<li><a href="#">서브 아이템1</a></li>
+						<li><a href="#">서브 아이템2</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</li>
+
+		<li style=""><a href="#">왼쪽 메뉴 ITEM3</a></li>
+		<li style=""><a href="#">왼쪽 메뉴 ITEM4</a></li>
+		<li style=""><a href="#">왼쪽 메뉴 ITEM5</a></li>
+
+		<li >
+
+				<div id="layer1" onmouseover="layerControl_over();">
+				 <ul>
+                    <ol>
+                      <?
+					  				  $i=0;
+						foreach($word as $key=>$val){
+							$i++;
+						$new = array_search($key, array_keys($word));
+						$old = array_search($key, array_keys($word_pre));
+						//echo "<script>alert(".$old.")</script>";
+						echo "<li><a href=#>". $i."&nbsp;".iconv("UTF-8", "EUC-KR", $key)."&nbsp;".($old-$new)."</a></li>";
+
+						}?>
+
+                    </ol>
+                </ul>
+				</div>
+				<div id="layer2" onmouseover="layerControl_over();" onmouseout="layerControl_out();" style="display:none;">
+					<ul>
+                       <?
+					  				    $j=0;
+						foreach($word as $key=>$val){
+							$j++;
+							$new = array_search($key, array_keys($word));
+						$old = array_search($key, array_keys($word_pre));
+
+						echo "<li><a href=#>". $j."&nbsp;".iconv("UTF-8", "EUC-KR", $key)."&nbsp;".($old-$new)."</a></li>";
+						}?>
+
+                    </ul>
+				</div>
+
+		</li>
+	</ul>
+	</div>
+</div>
+</body>
+
+<script type="text/javascript">
+
+jQuery(window).load(function() {
+
+    $("#nav > li > a").mouseover(function (e) { // binding onclick
+        if ($(this).parent().hasClass('selected')) {
+            $("#nav .selected div div").slideUp(1); // hiding popups
+            $("#nav .selected").removeClass("selected");
+        } else {
+            $("#nav .selected div div").slideUp(1); // hiding popups
+            $("#nav .selected").removeClass("selected");
+
+            if ($(this).next(".nav-submenu").length) {
+                $(this).parent().addClass("selected"); // display popup
+                $(this).next(".nav-submenu").children().slideDown(0);
+            }
+        }
+      //  e.stopPropagation();
+    });
+
+
+
+});
+</script>
+
+
+<script>
+
+
+$(function() {
+    var count = $('#layer1 li').length;
+    var height = $('#layer1 li').height();
+
+    function step(index) {
+        $('#layer1 ol').delay(2000).animate({
+            top: -height * index,
+        }, 500, function() {
+            step((index + 1) % count);
+        });
+    }
+
+    step(1);
+});
+</script>
+
+
+
+</html>

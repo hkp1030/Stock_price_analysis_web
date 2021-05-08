@@ -1,73 +1,112 @@
-.head {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #EFF2FB;
-    height: 80px;
-    z-index: 1;
- }
- .name a {
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    width: auto;
-    color: black; font-weight: 600; font-size: 22px;
-    margin-left: 70px;
- }
- .home a{
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    width: 110px;
-    color: #424242; font-weight: 550; font-size: 16px;
-    margin-left: 70px;
- }
- .home a:hover {
-    color: #248ae3; font-weight: 600; font-size: 16px;
-}
- .menu a{
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    width: 110px;
-    color: #424242; font-weight: 550; font-size: 16px;
- }
-.menu a:hover {
-    color: #248ae3; font-weight: 600; font-size: 16px;
-}
-.q a{
-    text-align: center;
-    line-height: 80px;
-    float: left;
-    width: 110px;
-    color: #424242; font-weight: 550; font-size: 16px;
- }
-.q a:hover {
-    color: #248ae3; font-weight: 600; font-size: 16px;
-}
-.h_right a{
-    float:right;
-    text-align: center;
-    line-height: 80px;
-    width: 110px;
-    color: #424242; font-weight: 550; font-size: 16px;
-}
-.h_right a:hover {
-    color: black; font-weight: 600; font-size: 16px;
-}
-.h_right2 a{
-    float:right;
-    text-align: center;
-    line-height: 80px;
-    width: 110px;
-    margin-right: 100px;
-    color: #3104B4; font-weight: 550; font-size: 16px;
-}
-.h_right2 a:hover {
-    color: #210B61; font-weight: 600; font-size: 16px;
+body {
+    margin: 0;
+    font-family: 'Nanum Myeongjo';
 }
 
-.noneunderline {
-    text-decoration:none;
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #263343;
+    padding: 8px 12px;
+}
+
+.navbar_logo a {
+    font-size: 24px;
+    color: #d49466;
+    text-decoration: none;
+    margin-left: 23px;
+}
+
+.navbar_menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    margin: 5px
+}
+
+.navbar_menu li {
+    padding: 8px 25px;
+}
+
+.navbar_menu li:hover {
+    background-color: #d49466;
+    border-radius: 4px;
+}
+
+.navbar_menu li a {
+    text-decoration: none;
+}
+
+.navbar_menu li a:hover {
+    color: white;
+}
+
+.navbar_icons {
+    list-style: none;
+    color: white;
+    display: flex;
+    padding-left: 0;
+    margin: 5px
+}
+
+.navbar_icons li a {
+    padding: 8px 25px;
+    text-decoration: none;
+}
+
+.navbar_icons li a:hover {
+    color: #d49466;
+}
+
+.navbar_toggleBtn {
+    display: none;
+    position: absolute;
+    right: 35px;
+    font-size: 24px;
+    color: #d49466;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+
+    .navbar_menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navbar_menu li {
+        width: 100%;
+        text-align: center;
+        margin-top: 3px;
+    }
+
+    .navbar_icons {
+        display: none;
+        justify-content: center;
+        width: 100%;
+        margin-top: 7px;
+        margin-bottom: 11px;
+    }
+
+    .navbar_toggleBtn {
+        display: block;
+    }
+
+    .navbar_menu.active,
+    .navbar_icons.active {
+        display: flex;
+    }
+
 }

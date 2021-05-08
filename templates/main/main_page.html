@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 {% load static %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
 <html lang="en">
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" initial-scale=1.0>
-    <title>Title</title>
-    </head>
-    <body>
-    {% include "navi.html" %}
-           <!-- 컨테이너 영역 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
-        <div class="container">
-            <div class="cnt">주식 종목수</div>
-            <div class="cnt2">30개</div>
-            <div class="btn_group">
-                <button class="main_btn" type="button" onclick="#">주식정보 바로가기</button>
-                <button class="main_btn2" type="button" onclick="location.href='{% url 'users:login' %}'">로그인</button>
-
-            </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+    <title>메인화면</title>
+</head>
+<body>
+{% include "navi.html" %}
+    <div class="contain">
+    <section class="main-section">
+        <div class="search">
+            검색해주세요
         </div>
-    </body>
+        <div class="searchbar-wrap">
+            <i class="fas fa-search"></i>
+            <input class="search-input" type="text"/>
+            <i class="fas fa-keyboard"></i>
+        </div>
+    </section>
+    </div>
+</body>
 </html>
