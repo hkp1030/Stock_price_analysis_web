@@ -202,10 +202,10 @@ body {
 .find p {
     font-size: 14px;
     font-weight: 300;
-    color: #333333;
+    color: white;
 }
 
 .find p a{
     font-weight: 600;
-    color: #248ae3;
+    color: #ffc400;
 }

@@ -1,40 +1,97 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 <!-- saved from url=(0141)file:///C:/Users/betty/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/signup.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <title>로그인</title>
+    <style type="text/css">
+
+
+        body {
+            align-items: center center;
+            justify-content: center;
+            background-color: #f1f1f1;
+
+        }
+
+        form {
+            background-color: #263343;
+            padding: 20px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 8);
+            width: 300px;
+            height: 400px;
+        }
+
+        form h2 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        form input {
+          border: none;
+          background: none;
+          text-align: center;
+          outline: none;
+          padding: 10px;
+          margin: 20px;
+          color: white;
+          height: 30px;
+          width: 70%;
+          border-radius: 40px;
+          transition: 0.2s ease-in;
+        }
+        form input[type="text"],
+        form input[type="password"] {
+          border: solid 2px #ffc400;
+        }
+        form input[type="submit"] {
+          border: solid 2px #ec3b3b;
+          box-sizing: border-box;
+          height: 50px;
+          width: 50%;
+          cursor: pointer;
+        }
+        form input[type="text"]:focus,
+        form input[type="password"]:focus {
+          width: 80%;
+          border: solid 2px #ec3b3b;
+        }
+        form input[type="submit"]:hover {
+          background: #ec3b3b;
+          color: #000;
+        }
+
+    </style>
 </head>
 <body>
 {% include "navi.html" %}
 <!-- 컨테이너 영역 -->
-<div class="contentsWrap">
-    <div class="loginWindow">
+<div class="contentsWrap" style="margin: 90px auto; text-align: center;">
+    <div class="loginWindow" style="margin-top:60px;">
         <form action="{% url 'users:login' %}" method="POST">
-            {% csrf_token %}
-            <div id="logo">은혜갚은 AI</div>
-            <input name="username" type="text" placeholder="아이디" class="inlineToBlock">
-            <input name="password" type="password" placeholder="비밀번호" class="inlineToBlock">
-            <button class="inlineToBlock ordinaryLogin unactivatedLoginColor">로그인</button>
+            <h2>Login</h2>
+            <input name="username" type="text" placeholder="아이디">
+            <input name="password" type="password" placeholder="비밀번호">
+            <input type="submit" value="로그인" />
+            <link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
+            <div class="find">
+                <p style="color: white">
+                    <a href="#" class="noneunderline" style="color: #d49466">아이디</a>
+                     또는
+                    <a href="#" class="noneunderline" style="color: #d49466">비밀번호</a>
+                    를 잊으셨나요?
+                </p>
+            </div>
         </form>
-        <div class="find">
-            <p>
-                <a href="#" class="noneunderline">아이디</a>
-                또는
-                <a href="#" class="noneunderline">비밀번호</a>
-                를 잊으셨나요?
-            </p>
-        </div>
+    </div>
 
-    </div>
-    <div class="haveAccount">
-        <p>계정이 없으신가요?
-            <a href="#" class="noneunderline">가입하기</a>
-        </p>
-    </div>
 </div>
-
 
 <script src="{% url 'users:login' %}"></script>
 
