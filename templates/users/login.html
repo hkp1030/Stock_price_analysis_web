@@ -75,6 +75,7 @@
 <div class="contentsWrap" style="margin: 90px auto; text-align: center;">
     <div class="loginWindow" style="margin-top:60px;">
         <form action="{% url 'users:login' %}" method="POST">
+            {% csrf_token %}
             <h2>Login</h2>
             <input name="username" type="text" placeholder="아이디">
             <input name="password" type="password" placeholder="비밀번호">

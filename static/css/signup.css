@@ -1,183 +1,195 @@
 body {
-    background-color: #f9f9f9;
-}
+        align-items: center center;
+        justify-content: center;
+        background-color: #f1f1f1;
+    }
 
-#logo {
-    margin: 40px auto 30px;
-    max-width: 175px;
-    color: #0080FF;
-    font-size: 27px; font-weight: 550; font-family: "고딕";
-}
+    form h2 {
+        margin-bottom: 45px;
+        color: white;
+        font-size: 2.5rem;
+    }
 
-.inlineToBlock {
+    .inlineToBlock {
     display: block;
-}
+    }
 
-.contentsWrap{
-    margin: 90px auto;
-    max-width: 460px;
-    border: none;
-    padding: 20px;
+    .contentsWrap{
+        margin: 90px auto;
+        max-width: 460px;
+        border: none;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .joinWindow {
+        background-color: #263343;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 8);
+    }
+
+    .ordinaryJoin {
+        height: 50px;
+        width: 50%;
+        cursor: pointer;
+        box-sizing: border-box;
+        border: solid 2px #ec3b3b;
+        border-radius: 40px;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 700;
+        margin: 30px 0 30px;
+    }
+
+    .unactivatedJoinColor {
+        background-color: #ec3b3b;
+    }
+
+    .joinWindow * {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .noneunderline {
+        text-decoration:none;
+    }
+
+    /* 입력폼 */
+
+    input:focus {
+        border: solid 2px #ec3b3b;
+    }
+
+    h3 {
+        margin-top: 19px;
+        margin-bottom: 0px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: left;
+        color: rgba(255, 255, 255, 0.822);
+    }
+
+    .box {
+        display: block;
+        border: none;
+        background: none;
+        text-align: center;
+        outline: none;
+        padding: 10px;
+        color: white;
+        height: 45px;
+        width: 85%;
+        border-radius: 40px;
+        transition: 0.2s ease-in;
+        position: relative;
+
+    }
+
+    .int {
+        display: block;
+        background: none;
+        text-align: center;
+        outline: none;
+        padding: 10px;
+        color: white;
+        height: 29px;
+        width: 94%;
+        border-radius: 40px;
+        transition: 0.2s ease-in;
+        font-size: 15px;
+        border: solid 2px #ffc400;
+        position: relative;
+    }
+
+    .pswdImg {
+        width: 18px;
+        height: 20px;
+        display: inline-block;
+        position: absolute;
+        top: 55%;
+        right: 18px;
+        margin-top: -10px;
+        cursor: pointer;
+    }
+
+    #bir_wrap {
+        display: table;
+        width: 100%;
+    }
+
+    #bir_yy {
+        display: table-cell;
+        width: 80%;
+
+    }
+    #birth {
+        width: 90%;
+        height: 29px;
+        font-size: 15px;
+        background-size: 20px 8px;
+        -webkit-appearance: none;
+        display: inline-block;
+        text-align: start;
+        border: none;
+        cursor: default;
+        color: white;
+        background: none;
+    }
+
+    select {
+        width: 90%;
+        height: 29px;
+        font-size: 15px;
+        background: #263343 url(https://img.icons8.com/fluent-systems-regular/48/ffffff/expand-arrow--v1.png) 100% 50% no-repeat;
+        background-size: 15px 10px;
+        -webkit-appearance: none;
+        display: inline-block;
+        text-align: start;
+        border: none;
+        cursor: default;
+        color: white;
+        padding: 7px;
+        background-position-x: 90%;
+    }
+
+    .box2 {
+        display: block;
+        border: solid 2px #ffc400;
+        background: none;
+        text-align: center;
+        outline: none;
+        padding: 6px 14px 6px 14px;
+        color: white;
+        height: 45px;
+        width: 80%;
+        border-radius: 40px;
+        transition: 0.2s ease-in;
+        position: relative;
+        box-sizing: border-box;
+        margin-top: 10px;
+    }
+
+    /* 에러메세지 */
+
+    .error_next_box {
+        margin-top: 9px;
+        font-size: 12px;
+        color: red;
+        display: none;
+    }
+
+    #alertTxt {
+        position: absolute;
+        top: 19px;
+        right: 38px;
+        font-size: 12px;
+        color: red;
+        display: none;
+    }
+
+    .si_btn {
     text-align: center;
-}
-
-.joinWindow {
-    background-color: #f5f6f7;
-    padding: 10px auto;
-    border: 1px solid #dfdfdf;
-    border-radius: 3px;
-}
-
-.ordinaryJoin {
-    height: 37px;
-    box-sizing: border-box;
-    border: 0px;
-    border-radius: 5px;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 700;
-    margin: 30px 0 30px;
-}
-
-.unactivatedJoinColor {
-    background-color: #0080FF;
-}
-
-.activatedJoinColor {
-    background-color: #00aeff;
-}
-
-.joinWindow * {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.noneunderline {
-    text-decoration:none;
-}
-
-/* 입력폼 */
-
-input:focus {
-    outline: none;
-}
-
-
-h3 {
-    margin: 19px 0 8px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
-}
-
-
-.box {
-    display: block;
-    width: 80%;
-    height: 45px;
-    border: solid 1px #dadada;
-    padding: 6px 14px 6px 14px;
-    box-sizing: border-box;
-    background: #fff;
-    position: relative;
-}
-
-.int {
-    display: block;
-    position: relative;
-    border: 1px solid #eaeaea;
-    width: 100%;
-    height: 29px;
-    border: none;
-    background: #fff;
-    font-size: 15px;
-}
-
-input {
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
-}
-
-.box.int_id {
-    padding-right: 110px;
-}
-
-.box.int_pass {
-    padding-right: 40px;
-}
-
-.box.int_pass_check {
-    padding-right: 40px;
-}
-
-.box.int_birth {
-    padding-right: 40px;
-}
-
-.step_url {
-    /*@naver.com*/
-    position: absolute;
-    top: 16px;
-    right: 13px;
-    font-size: 15px;
-    color: #8e8e8e;
-}
-
-.pswdImg {
-    width: 18px;
-    height: 20px;
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    margin-top: -10px;
-    cursor: pointer;
-}
-
-#bir_wrap {
-    display: table;
-    width: 100%;
-}
-
-#bir_yy {
-    display: table-cell;
-    width: 80%;
-
-}
-
-select {
-    width: 100%;
-    height: 29px;
-    font-size: 15px;
-    background: #fff url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
-    background-size: 20px 8px;
-    -webkit-appearance: none;
-    display: inline-block;
-    text-align: start;
-    border: none;
-    cursor: default;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
-}
-
-/* 에러메세지 */
-
-.error_next_box {
-    margin-top: 9px;
-    font-size: 12px;
-    color: red;
-    display: none;
-}
-
-#alertTxt {
-    position: absolute;
-    top: 19px;
-    right: 38px;
-    font-size: 12px;
-    color: red;
-    display: none;
-}
-
-.si_btn {
-text-align: center;
-margin-bottom: 30px;
-}
+    margin-bottom: 30px;
+    }
