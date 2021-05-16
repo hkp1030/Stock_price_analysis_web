@@ -4,6 +4,6 @@ from stock import views
 app_name = 'stock'
 
 urlpatterns = [
-    path('detail', views.detail, name='detail'),
+    path('<str:stock_id>', views.detail, name='detail'),
 
 ]
