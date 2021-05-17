@@ -1,195 +1,195 @@
 body {
-        align-items: center center;
-        justify-content: center;
-        background-color: #f1f1f1;
-    }
+    align-items: center center;
+    justify-content: center;
+    background-color: #f1f1f1;
+}
 
-    form h2 {
-        margin-bottom: 45px;
-        color: white;
-        font-size: 2.5rem;
-    }
+form h2 {
+    margin-bottom: 45px;
+    color: white;
+    font-size: 2.5rem;
+}
 
-    .inlineToBlock {
-    display: block;
-    }
-
-    .contentsWrap{
-        margin: 90px auto;
-        max-width: 460px;
-        border: none;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .joinWindow {
-        background-color: #263343;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 8);
-    }
-
-    .ordinaryJoin {
-        height: 50px;
-        width: 50%;
-        cursor: pointer;
-        box-sizing: border-box;
-        border: solid 2px #ec3b3b;
-        border-radius: 40px;
-        color: #ffffff;
-        font-size: 15px;
-        font-weight: 700;
-        margin: 30px 0 30px;
-    }
-
-    .unactivatedJoinColor {
-        background-color: #ec3b3b;
-    }
-
-    .joinWindow * {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .noneunderline {
-        text-decoration:none;
-    }
-
-    /* 입력폼 */
-
-    input:focus {
-        border: solid 2px #ec3b3b;
-    }
-
-    h3 {
-        margin-top: 19px;
-        margin-bottom: 0px;
-        font-size: 14px;
-        font-weight: 600;
-        text-align: left;
-        color: rgba(255, 255, 255, 0.822);
-    }
-
-    .box {
-        display: block;
-        border: none;
-        background: none;
-        text-align: center;
-        outline: none;
-        padding: 10px;
-        color: white;
-        height: 45px;
-        width: 85%;
-        border-radius: 40px;
-        transition: 0.2s ease-in;
-        position: relative;
-
-    }
-
-    .int {
-        display: block;
-        background: none;
-        text-align: center;
-        outline: none;
-        padding: 10px;
-        color: white;
-        height: 29px;
-        width: 94%;
-        border-radius: 40px;
-        transition: 0.2s ease-in;
-        font-size: 15px;
-        border: solid 2px #ffc400;
-        position: relative;
-    }
-
-    .pswdImg {
-        width: 18px;
-        height: 20px;
-        display: inline-block;
-        position: absolute;
-        top: 55%;
-        right: 18px;
-        margin-top: -10px;
-        cursor: pointer;
-    }
-
-    #bir_wrap {
-        display: table;
-        width: 100%;
-    }
-
-    #bir_yy {
-        display: table-cell;
-        width: 80%;
-
-    }
-    #birth {
-        width: 90%;
-        height: 29px;
-        font-size: 15px;
-        background-size: 20px 8px;
-        -webkit-appearance: none;
-        display: inline-block;
-        text-align: start;
-        border: none;
-        cursor: default;
-        color: white;
-        background: none;
-    }
-
-    select {
-        width: 90%;
-        height: 29px;
-        font-size: 15px;
-        background: #263343 url(https://img.icons8.com/fluent-systems-regular/48/ffffff/expand-arrow--v1.png) 100% 50% no-repeat;
-        background-size: 15px 10px;
-        -webkit-appearance: none;
-        display: inline-block;
-        text-align: start;
-        border: none;
-        cursor: default;
-        color: white;
-        padding: 7px;
-        background-position-x: 90%;
-    }
-
-    .box2 {
-        display: block;
-        border: solid 2px #ffc400;
-        background: none;
-        text-align: center;
-        outline: none;
-        padding: 6px 14px 6px 14px;
-        color: white;
-        height: 45px;
-        width: 80%;
-        border-radius: 40px;
-        transition: 0.2s ease-in;
-        position: relative;
-        box-sizing: border-box;
-        margin-top: 10px;
-    }
-
-    /* 에러메세지 */
-
-    .error_next_box {
-        margin-top: 9px;
-        font-size: 12px;
-        color: red;
-        display: none;
-    }
-
-    #alertTxt {
-        position: absolute;
-        top: 19px;
-        right: 38px;
-        font-size: 12px;
-        color: red;
-        display: none;
-    }
-
-    .si_btn {
+.contentsWrap{
+    margin: 90px auto;
+    max-width: 460px;
+    border: none;
+    padding: 20px;
     text-align: center;
-    margin-bottom: 30px;
-    }
+}
+
+.joinWindow {
+    background-color: #263343;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 8);
+}
+
+.ordinaryJoin {
+    display: block;
+    height: 50px;
+    width: 50%;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: solid 2px #db3939;
+    border-radius: 40px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 30px 0 30px;
+    background: none;
+    background: none;
+    margin-top: 43px;
+}
+
+.ordinaryJoin:hover {
+    background: #ec3b3b;
+    color: #000;
+}
+
+.joinWindow * {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.noneunderline {
+    text-decoration:none;
+}
+
+/* 입력폼 */
+
+input:focus {
+    border: solid 2px #ec3b3b;
+}
+
+h3 {
+    margin-top: 19px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.822);
+}
+
+.box {
+    display: block;
+    border: none;
+    background: none;
+    text-align: center;
+    outline: none;
+    padding: 10px;
+    color: white;
+    height: 45px;
+    width: 85%;
+    border-radius: 40px;
+    transition: 0.2s ease-in;
+    position: relative;
+
+}
+
+.int {
+    display: block;
+    background: none;
+    text-align: center;
+    outline: none;
+    padding: 10px;
+    color: white;
+    height: 29px;
+    width: 94%;
+    border-radius: 40px;
+    transition: 0.2s ease-in;
+    font-size: 15px;
+    border: solid 2px #ffc400;
+    position: relative;
+}
+
+.pswdImg {
+    width: 18px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 55%;
+    right: 18px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+#bir_wrap {
+    display: table;
+    width: 100%;
+}
+
+#bir_yy {
+    display: table-cell;
+    width: 80%;
+}
+#birth {
+    width: 90%;
+    height: 29px;
+    font-size: 15px;
+    background-size: 20px 8px;
+    -webkit-appearance: none;
+    display: inline-block;
+    text-align: start;
+    border: none;
+    cursor: default;
+    color: white;
+    background: none;
+}
+
+select {
+    width: 90%;
+    height: 29px;
+    font-size: 15px;
+    background: #263343 url(https://img.icons8.com/fluent-systems-regular/48/ffffff/expand-arrow--v1.png) 100% 50% no-repeat;
+    background-size: 15px 10px;
+    -webkit-appearance: none;
+    display: inline-block;
+    text-align: start;
+    border: none;
+    cursor: default;
+    color: white;
+    padding: 7px;
+    background-position-x: 90%;
+}
+
+.box2 {
+    display: block;
+    border: solid 2px #ffc400;
+    background: none;
+    text-align: center;
+    outline: none;
+    padding: 10px 14px 6px 14px;
+    color: white;
+    height: 54px;
+    width: 86%;
+    border-radius: 40px;
+    transition: 0.2s ease-in;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+/* 에러메세지 */
+
+.error_next_box {
+    margin-top: 9px;
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+#alertTxt {
+    position: absolute;
+    top: 19px;
+    right: 38px;
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+.si_btn {
+text-align: center;
+margin-bottom: 30px;
+}

@@ -7,41 +7,40 @@
     <link rel="stylesheet" href="{% static 'css/navi.css' %}">
 
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
 
     <title>Nav bar</title>
 
     <script src="https://kit.fontawesome.com/2d323a629b.js"
             crossorigin="anonymous">
     </script>
-    <script src="{% static 'js/navi.js' %}" defer></script>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar_logo">
-            <a href="/">은혜갚은 AI</a>
+            <a class="a_d" href="/">은혜갚은 AI</a>
         </div>
 
         <ul class="navbar_menu">
-            <li><a href="#" onclick="location.href='{% url 'stock:detail' %}'">주식</a></li>
-            <li><a href="">커뮤니티</a></li>
-            <li><a href="">문의하기</a></li>
-            <li><a href="">마이페이지</a></li>
+            <li><a class="a_d" href="#">주식</a></li>
+            <li><a class="a_d" href="">커뮤니티</a></li>
+            <li><a class="a_d" href="">문의하기</a></li>
+            <li><a class="a_d" href="">마이페이지</a></li>
         </ul>
 
         <ul class="navbar_icons">
             {% if user.is_authenticated %}
-            <li><a href="{% url 'users:logout' %}">{{ user.username }}님</a></li>
-            <li><a href="{% url 'users:logout' %}">로그아웃</a></li>
+            <li><a class="a_d" href="{% url 'users:logout' %}">{{ user.username }}님</a></li>
+            <li><a class="a_d" href="{% url 'users:logout' %}">로그아웃</a></li>
             {% else %}
-            <li><a href="{% url 'users:signup' %}">회원가입</a></li>
-            <li><a href="{% url 'users:login' %}">로그인</a></li>
+            <li><a class="a_d" href="{% url 'users:signup' %}">회원가입</a></li>
+            <li><a class="a_d" href="{% url 'users:login' %}">로그인</a></li>
             {% endif %}
         </ul>
 
-        <a href="#" class="navbar_toggleBtn">
+        <a href="#" class="a_d navbar_toggleBtn">
             <i class="fas fa-bars"></i>
         </a>
     </nav>
 </body>
+<script src="{% static 'js/navi.js' %}"></script>
 </html>

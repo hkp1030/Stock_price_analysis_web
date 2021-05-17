@@ -11,9 +11,6 @@
             crossorigin="anonymous">
   </script>
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-		<script src="https://code.highcharts.com/stock/highstock.js"></script>
-		<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
@@ -33,6 +30,60 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     color: #fff!important;
     background-color: #f6941c!important;
 }
+
+
+  .one_quarter {
+    font-size: 14px;
+    line-height: 1.6em;
+    font-family: Verdana,Geneva,sans-serif;
+    color: #A5A6AA;
+    box-sizing: border-box;
+    transition: all .3s ease-in-out;
+    list-style: none;
+    display: block;
+    float: none;
+    width: 600px;
+  }
+
+  .heading {
+    list-style: none;
+    box-sizing: border-box;
+    transition: all .3s ease-in-out;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    margin: 0 0 20px 0;
+    line-height: normal;
+    font-weight: normal;
+    text-transform: capitalize;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+    color: black;
+  }
+
+  .nospace {
+    font-size: 14px;
+    line-height: 1.6em;
+    font-family: Verdana,Geneva,sans-serif;
+    color: #A5A6AA;
+    box-sizing: border-box;
+    transition: all .3s ease-in-out;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .linklist li {
+    display: block;
+    margin-bottom: 15px;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid;
+}
+
+*, *::before, *::after {
+    transition: all .3s ease-in-out;
+    box-sizing: border-box;
+}
+
+
 </style>
 {% include "navi.html" %}
 <body class="w3-light-grey">
@@ -93,46 +144,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird">
 
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>삼성전자</h2>
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>{{name}}</h2>
         <div class="w3-container">
-          <div id="container" style="height: 400px; min-width: 310px"></div>
-		<script>
-			function draw3(){
-				var chartdata = [];
-				$.getJSON('https://poloniex.com/public?command=returnChartData&currencyPair=BTC_ETH&start=1455699200&end=9999999999&period=14400', function (data) {
-					$.each(data, function(i, item){
-						chartdata.push([item.date*1000, item.open, item.high, item.low, item.close]);
-					});
-				}).done(function(){
-					Highcharts.stockChart('container',{
-						rangeSelector: {
-							buttons: [
-								{type: 'hour',count: 1,text: '1h'},
-								{type: 'day',count: 1,text: '1d'},
-								{type: 'all',count: 1,text: 'All'}
-							],
-							selected: 2,
-							inputEnabled: true
-						},
-						plotOptions: {
-							candlestick: {
-								downColor: 'blue',
-								upColor: 'red'
-							}
-						},
-						series: [{
-							name: '삼성전자',
-							type: 'candlestick',
-							data: chartdata,
-							tooltip: {
-								valueDecimals: 8
-							}
-						}]
-					});
-				});
-			}
-			draw3();
-		</script>
+          <iframe src="https://finance.daum.net/chart/A017670" width="800" height="500" scrolling="no" frameborder="2">
+            <p>Your browser does not support iframes.</p>
+          </iframe>
         </div>
         <div class="w3-container">
 
@@ -152,8 +168,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
         <div class="w3-container">
           <h5 class="w3-opacity"><b>관련기사</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
-          <p>삼성 '갤Z폰드3...'</p>
+          <div class="one_quarter">
+          <ul class="linklist">
+            {% for n in news %}
+            <li><a style="display:inline-block; width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" href="{{ n.link }}" target='_blank'>{{ n.title }}</a></li>
+            {% endfor %}
+          </ul>
+      </div>
           <hr>
         </div>
       </div>

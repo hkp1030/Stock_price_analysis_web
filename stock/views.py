@@ -5,9 +5,11 @@ import csv
 
 
 def detail(request, stock_id):
-    print(get_name(stock_id))
+    name = get_name(stock_id)
+    news = get_google_news(name)
+    contents = {'name': name, 'news': news}
 
-    return render(request, "stock/detail.html")
+    return render(request, "stock/detail.html", contents)
 
 
 # 주식 코드의 한글 종목명을 가져옴

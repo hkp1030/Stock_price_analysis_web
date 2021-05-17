@@ -34,7 +34,7 @@
                 <div>
                     <h3 class="join_title"><label for="password1">비밀번호</label></h3>
                     <span class="box int_pass">
-                        <input type="text" id="password1" name="password1" class="int" maxlength="20"
+                        <input type="password" id="password1" name="password1" class="int" maxlength="20"
                    value="{{ form.password1.value|default_if_none:'' }}">
                         <span id="alertTxt">사용불가</span>
                         <img src="https://raw.githubusercontent.com/from97/naver_join/master/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
@@ -46,7 +46,7 @@
                 <div>
                     <h3 class="join_title"><label for="password2">비밀번호 재확인</label></h3>
                     <span class="box int_pass_check">
-                        <input type="text" id="password2" name="password2" class="int" maxlength="20"
+                        <input type="password" id="password2" name="password2" class="int" maxlength="20"
                    value="{{ form.password2.value|default_if_none:'' }}">
                         <img src="https://raw.githubusercontent.com/from97/naver_join/master/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
                     </span>
@@ -80,7 +80,7 @@
                     <div id="bir_wrap">
                         <!-- BIRTH -->
                         <div id="bir_yy">
-                            <span class="box int_birth">
+                            <span class="box2 int_birth">
                                 <input type="date" id="birth" name="birth"
                        value="{{ form.birth.value|default_if_none:'' }}">
                             </span>
@@ -93,7 +93,7 @@
                 <!-- GENDER -->
                 <div>
                     <h3 class="join_title"><label for="sex">성별</label></h3>
-                    <span class="box gender_code">
+                    <span class="box2 gender_code">
                         <select id="sex" name="sex" class="sel"
                    value="{{ form.sex.value|default_if_none:'' }}">
                             <option>성별</option>
@@ -118,7 +118,7 @@
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="submit" class="inlineToBlock ordinaryJoin">가입하기</button>
+                    <button type="submit" class="ordinaryJoin">가입하기</button>
                 </div>
 
                 <div class="si_btn" style="color: white;">
