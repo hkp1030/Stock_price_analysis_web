@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/navi.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+<!-- jQuery JS -->
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'bootstrap.js' %}"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale=1.0>
+    <title>Title</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <!-- 헤드 영역 -->
+    <div class="head">
+        <div class="name"><a href='/' class="noneunderline">은혜갚은 AI</a></div>
+        <div class="home"><a href="#" class="noneunderline">주식</a></div>
+        <div class="menu" style="color: #0080FF; font-weight: 600;"><a href="#" class="noneunderline">커뮤니티</a></div>
+        <div class="menu"><a href="#" class="noneunderline">문의하기</a></div>
+        <div class="q"><a href="#" class="noneunderline">마이페이지</a></div>
+        {% if user.is_authenticated %}
+        <div class="h_right2"><a onclick="location.href='{% url 'users:logout' %}'" class="noneunderline">{{ user.username }}님</a></div>
+        <div class="h_right"><a onclick="location.href='{% url 'users:logout' %}'" class="noneunderline">로그아웃</a></div>
+        {% else %}
+        <div class="h_right2"><a href="{% url 'users:signup' %}"} class="noneunderline">회원가입</a></div>
+        <div class="h_right"><a href="{% url 'users:login' %}"} class="noneunderline">로그인</a></div>
+        {% endif %}
+    </div>
+</nav>
+</body>
+</html>
