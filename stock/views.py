@@ -1,14 +1,22 @@
 from django.shortcuts import render
 import requests
 import feedparser
+from stock.link_creon import LinkCreon
 from stock import static_app
+import json
 
 
 # 주식 상세페이지
 def detail(request, stock_id):
     name = get_stock_name(stock_id)
     news = get_google_news(name)
-    contents = {'name': name, 'news': news}
+
+    creon = LinkCreon('D:/rltrader-master/venv32/Scripts/python.exe', 'stock/creon_minute.py')
+    stock = creon.get_stock_data(stock_id)
+    stock.reverse()
+    stock_json = json.dumps(stock)
+
+    contents = {'name': name, 'news': news, 'stock_json':stock_json}
 
     return render(request, "stock/detail.html", contents)
 

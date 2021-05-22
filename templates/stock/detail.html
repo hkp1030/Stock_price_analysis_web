@@ -11,6 +11,10 @@
             crossorigin="anonymous">
   </script>
 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
@@ -146,9 +150,46 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <div class="w3-container w3-card w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>{{name}}</h2>
         <div class="w3-container">
-          <iframe src="https://finance.daum.net/chart/A017670" width="800" height="500" scrolling="no" frameborder="2">
-            <p>Your browser does not support iframes.</p>
-          </iframe>
+          <div id="container" style="height: 400px; min-width: 310px"></div>
+          <script>
+
+    var chartdata = [];
+    var stock_json = JSON.parse(" {{ stock_json|escapejs }} ");
+    console.log(chartdata);
+    for (key in stock_json) {
+      chartdata.push([stock_json[key]['date']*1000, stock_json[key]['open'], stock_json[key]['high'], stock_json[key]['low'], stock_json[key]['close']]);
+    }
+
+    Highcharts.stockChart('container',{
+						title: {
+							text: "{{ name }}"
+						},
+						rangeSelector: {
+							buttons: [
+							  {type: 'day',count: 1,text: '1일'},
+								{type: 'day',count: 7,text: '1주일'},
+								{type: 'month',count: 1,text: '1개월'},
+								{type: 'all',count: 1,text: '전체'}
+							],
+							selected: 2,
+							inputEnabled: true
+						},
+						plotOptions: {
+							candlestick: {
+								downColor: 'blue',
+								upColor: 'red'
+							}
+						},
+						series: [{
+							name: "{{ name }}",
+							type: 'candlestick',
+							data: chartdata,
+							tooltip: {
+								valueDecimals: 0
+							}
+						}]
+	});
+		  </script>
         </div>
         <div class="w3-container">
 
