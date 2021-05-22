@@ -1,11 +1,12 @@
 from django.shortcuts import render
 import requests
 import feedparser
-import csv
+from stock import static_app
 
 
+# 주식 상세페이지
 def detail(request, stock_id):
-    name = get_name(stock_id)
+    name = get_stock_name(stock_id)
     news = get_google_news(name)
     contents = {'name': name, 'news': news}
 
@@ -13,12 +14,8 @@ def detail(request, stock_id):
 
 
 # 주식 코드의 한글 종목명을 가져옴
-def get_name(code):
-    with open('./stock/res/stock_names.csv', mode='r') as file:
-        reader = csv.reader(file)
-        names = {rows[0][1:] : rows[1] for rows in reader}
-    return names[code]
-
+def get_stock_name(code):
+    return static_app.stock_names[code]
 
 # 구글 뉴스 가져오기
 def get_google_news(keyword, country='ko'):
