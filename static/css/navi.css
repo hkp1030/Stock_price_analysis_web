@@ -72,7 +72,7 @@ body {
     color: #d49466;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;

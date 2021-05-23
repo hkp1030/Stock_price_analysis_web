@@ -21,15 +21,15 @@
         </div>
 
         <ul class="navbar_menu">
-            <li><a class="a_d" href="#">주식</a></li>
-            <li><a class="a_d" href="">커뮤니티</a></li>
+            <li><a class="a_d" href="{% url 'stock:search' %}">주식</a></li>
+            <li><a class="a_d" href="{% url 'board:list' %}">커뮤니티</a></li>
             <li><a class="a_d" href="">문의하기</a></li>
             <li><a class="a_d" href="">마이페이지</a></li>
         </ul>
 
         <ul class="navbar_icons">
             {% if user.is_authenticated %}
-            <li><a class="a_d" href="{% url 'users:logout' %}">{{ user.username }}님</a></li>
+            <li><a class="a_d" >{{ user.n_name }}님</a></li>
             <li><a class="a_d" href="{% url 'users:logout' %}">로그아웃</a></li>
             {% else %}
             <li><a class="a_d" href="{% url 'users:signup' %}">회원가입</a></li>

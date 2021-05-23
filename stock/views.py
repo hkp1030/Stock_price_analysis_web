@@ -1,7 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 import feedparser
 import csv
+from bs4 import BeautifulSoup
+import urllib.request as req
+import sys
+import io
+
+
+def search(request):
+    return render(request, 'stock/stock_se.html')
 
 
 def detail(request, stock_id):
@@ -16,7 +24,7 @@ def detail(request, stock_id):
 def get_name(code):
     with open('./stock/res/stock_names.csv', mode='r') as file:
         reader = csv.reader(file)
-        names = {rows[0][1:] : rows[1] for rows in reader}
+        names = {rows[0][1:]: rows[1] for rows in reader}
     return names[code]
 
 

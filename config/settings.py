@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,8 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+INSTALLED_APPS += [
     'users',
-    'board'
+    'board',
+    'django_summernote',
+
 ]
 
 MIDDLEWARE = [
@@ -122,4 +127,56 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'users.User'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MEDIA_URL = '/media/'
+
+# 클릭재킹 방지설정 변경
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+
+    'airMode': True,
+
+    'width': '1150px',
+    'height': '600px',
+
+    'toolbar': [
+        # ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
+        # ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        # ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['table', ['table']],
+        ['insert', ['link', 'video', 'hr']],
+        ['view', ['fullscreen', 'codeview']],
+        ['help', ['help']],
+    ],
+    'maximumImageFileSize': '2097152',
+
+    'popover': {
+        'image': [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+        ],
+        'link': [
+            ['link', ['linkDialogShow', 'unlink']]
+        ],
+        'table': [
+            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        'air': [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+        ]
+    }
+}

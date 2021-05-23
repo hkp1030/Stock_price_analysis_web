@@ -42,7 +42,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     list-style: none;
     display: block;
     float: none;
+    margin-left: -20px;
     width: 600px;
+  }
+  @media screen and (max-width: 900px) {
+    .one_quarter {
+      width: 280px;
+    }
   }
 
   .heading {
@@ -75,7 +81,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     display: block;
     margin-bottom: 15px;
     padding: 0 0 15px 0;
-    border-bottom: 1px solid;
 }
 
 *, *::before, *::after {
@@ -168,6 +173,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
         <div class="w3-container">
           <h5 class="w3-opacity"><b>관련기사</b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-newspaper fa-fw w3-margin-right"></i></h6>
           <div class="one_quarter">
           <ul class="linklist">
             {% for n in news %}
