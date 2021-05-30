@@ -233,3 +233,7 @@ class CNN(Network):
         sample = np.array(sample).reshape(
             (-1, self.num_steps, self.input_dim, 1))
         return super().predict(sample)
+
+
+network = LSTMNetwork(input_dim=28, output_dim=2, num_steps=5)
+network.load_model('stock/res/a2c_lstm_policy_20210510034416.h5')

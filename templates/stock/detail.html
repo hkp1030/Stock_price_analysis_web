@@ -157,7 +157,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     var stock_json = JSON.parse(" {{ stock_json|escapejs }} ");
     console.log(chartdata);
     for (key in stock_json) {
-      chartdata.push([stock_json[key]['date']*1000, stock_json[key]['open'], stock_json[key]['high'], stock_json[key]['low'], stock_json[key]['close']]);
+      chartdata.push([stock_json[key]['date_sec']*1000, stock_json[key]['open'], stock_json[key]['high'], stock_json[key]['low'], stock_json[key]['close']]);
     }
 
     Highcharts.stockChart('container',{

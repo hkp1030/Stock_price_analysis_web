@@ -4,7 +4,7 @@ import feedparser
 from stock.data.link_creon import LinkCreon
 from stock.data.static_app import get_stock_name
 import json
-from stock.data.networks import LSTMNetwork
+from stock.data.networks import network
 import numpy as np
 
 
@@ -13,17 +13,18 @@ def detail(request, stock_id):
     name = get_stock_name(stock_id)
     news = get_google_news(name)
 
-    #creon = LinkCreon('D:/rltrader-master/venv32/Scripts/python.exe', 'stock/creon_minute.py')
-    #stock = creon.get_stock_data(stock_id)
-    #stock.reverse()
-    #stock_json = json.dumps(stock)
-
+    creon = LinkCreon('D:/PycharmProjects/Stock_price_analysis_web/venv32/Scripts/python.exe', 'stock/data/creon.py')
+    stock = creon.get_stock_data(stock_id)
+    stock.reverse()
+    stock_json = json.dumps(stock)
     #contents = {'name': name, 'news': news, 'stock_json':stock_json}
-    net = LSTMNetwork(input_dim=10, output_dim=2, num_steps=5)
-    pred = net.predict(np.random.normal(size=[1, 5, 10]))
+
+    results = creon.execute("creon.get_data_to_prediction('{}', 5)".format(stock_id))
+
+    pred = network.predict(results)
     pred = list(map(lambda x: int(x*100), pred))
 
-    contents = {'name': name, 'news': news, 'pred': pred}
+    contents = {'name': name, 'news': news, 'pred': pred, 'stock_json':stock_json}
 
     return render(request, "stock/detail.html", contents)
 
