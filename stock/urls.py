@@ -5,6 +5,7 @@ app_name = 'stock'
 
 urlpatterns = [
     path('<str:stock_id>', views.detail, name='detail'),
+    path('index/', views.index, name='index'),
     path('search/', views.search, name='search')
 
 ]

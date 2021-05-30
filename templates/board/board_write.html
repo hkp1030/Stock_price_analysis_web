@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 글쓰기</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    {% block summernote %}
+    <link href="{% static 'js/summernote/summernote-bs4.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/summernote/summernote-bs4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/summernote/lang/summernote-ko-KR.js'%}"></script>
+
+
+    {% endblock %}
+</head>
+<body>
+{% include "navi.html" %}
+
+<div class="container">
+<h1 style="padding-top:30px;padding-left:20px">커뮤니티 글쓰기</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="card" style="width:1200px;height:800px;  padding:30px;">
+            <div class="card-header" style="width:1150px; margin-bottom:30px">
+                {{ form.title }}
+            </div>
+            <div>
+                    <span class="box category">
+                        <select id="category" name="category" class="sel"
+                   value="{{ form.category.value|default_if_none:'' }}">
+                            <option value="자유">자유</option>
+                            <option value="주식">주식</option>
+                            {% if user.n_name == '관리자' %}
+                            <option value="공지">공지</option>
+                            {% endif %}
+                        </select>
+                    </span>
+                    <span class="error_next_box">선택을 안하면 자유주제.</span>
+                </div>
+
+            <div>
+                {{ form.contents }}
+            </div>
+            <div style="text-align:right;">
+                <button type="submit"style="margin:20px; background-color:#ff7f00" id="write" class="btn btn-primary">작성하기</button>
+                <button type="button" class="btn btn-primary" style="background-color:#ff7f00" onclick="location.href='/board/list'">돌아가기</button>
+            </div>
+
+        </div>
+
+
+
+    </form>
+
+</div>
+</body>
+</html>

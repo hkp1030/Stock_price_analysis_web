@@ -4,6 +4,7 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <title>회원가입</title>
+
     </head>
     <body>
      {% include "navi.html" %}
@@ -84,6 +85,7 @@
                                 <input type="date" id="birth" name="birth"
                        value="{{ form.birth.value|default_if_none:'' }}">
                             </span>
+                            <span class="error_next_box">필수 정보입니다.</span>
                         </div>
 
                     </div>
@@ -93,19 +95,19 @@
                 <!-- GENDER -->
                 <div>
                     <h3 class="join_title"><label for="sex">성별</label></h3>
-                    <span class="box2 gender_code">
+                    <span class="box2 gender_code" >
                         <select id="sex" name="sex" class="sel"
                    value="{{ form.sex.value|default_if_none:'' }}">
-                            <option>성별</option>
-                            <option value="M">남자</option>
-                            <option value="F">여자</option>
+                            <option ></option>
+                            <option value="남">남</option>
+                            <option value="여">여</option>
                         </select>
                     </span>
                     <span class="error_next_box">필수 정보입니다.</span>
                 </div>
 
                 <!-- EMAIL -->
-                <div>
+                <div style="margin-bottom: 2rem;">
                     <h3 class="join_title"><label for="email">본인확인 이메일<span class="optional">(선택)</span></label></h3>
                     <span class="box int_email">
                         <input type="text" id="email" name="email" class="int" maxlength="100" placeholder="선택입력"
@@ -114,7 +116,7 @@
                     <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
                 </div>
 
-                {% include "form_errors.html" %}
+            {% include "form_errors.html" %}
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
@@ -122,7 +124,7 @@
                 </div>
 
                 <div class="si_btn" style="color: white;">
-                    계정이 있으신가요?<a href="#" class="noneunderline" style="color: #ffc400; font-weight: 600; "> 로그인</a>
+                    계정이 있으신가요? <a href="{% url 'users:login' %}" class="noneunderline" style="color: #ffc400; font-weight: 600; "> 로그인</a>
                 </div>
 
 
@@ -133,5 +135,6 @@
         </div>
         <!-- wrapper -->
         </div>
-
-</body></html>
+<script src="{% static 'js/signup.js' %}"></script>
+</body>
+</html>

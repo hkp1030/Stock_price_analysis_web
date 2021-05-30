@@ -2,21 +2,39 @@ from django.shortcuts import render, redirect
 import requests
 import feedparser
 import csv
+
+from .models import Stock
 from bs4 import BeautifulSoup
 import urllib.request as req
 import sys
 import io
 
 
-def search(request):
+def index(request):
     return render(request, 'stock/stock_se.html')
+
+
+def search(request):
+    search = request.GET.get('query')
+    sname = Stock.objects.get(stock=search)
+    code = sname.code
+
+    return redirect('stock:detail', code)
+
+
+'''
+# csv db저장
+with open('./stock/res/stock_names.csv', mode='r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        Stock(stock=row[1], code=row[0][1:]).save()
+'''
 
 
 def detail(request, stock_id):
     name = get_name(stock_id)
     news = get_google_news(name)
     contents = {'name': name, 'news': news}
-
     return render(request, "stock/detail.html", contents)
 
 

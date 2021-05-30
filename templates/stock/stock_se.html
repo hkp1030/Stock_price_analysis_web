@@ -10,13 +10,22 @@
 {% include "navi.html" %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/stock_se.css' %}">
 <div class="main-image">
-    <div class="search-box">
-        <input type="text" class="search-txt" name="">
-        <a class="search-btn" href="#">
-          <i class="fas fa-search"></i>
-        </a>
-    </div>
-</div>
+    <form action="{% url 'stock:search' %}" method="GET">
+        <div class="search-box">
+            <!-- <input  type="text" class="search-txt" name="name">
+             <a type="submit" class="search-btn" href="#">
+               <i  class="fas fa-search"></i>
+             </a>-->
 
+            <input id="tags" type="text" class="search-txt" name="query">
+
+
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+
+        </div>
+    </form>
+</div>
 </body>
 </html>

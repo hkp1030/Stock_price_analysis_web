@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 리스트</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <style type="text/css">
+
+            /* 게시판 목록 */
+            .p-link {
+                position: relative;
+                display: block;
+                padding: 0.5rem 0.75rem;
+                margin-left: -1px;
+                line-height: 1.25;
+                color: #007bff;
+                background-color: #fff;
+
+            }
+
+            .p-link:hover {
+            position: relative;
+                display: block;
+                padding: 0.5rem 0.75rem;
+                margin-left: -1px;
+                line-height: 1.25;
+                color: #007bff;
+                background-color: #fff;
+                text_decoration : none;
+            }
+
+            .se {
+              position: relative;
+              height: 35px;
+              background: rgba(0, 0, 0, 0);
+              width: 280px;
+              margin-bottom: 10px;
+            }
+
+            .se_input {
+              position: absolute;
+              right: 28px;
+              width: 250px;
+              height: 32px;
+              float:left;
+              font-size: 16px;
+              border-radius: 5px;
+              border-top-right-radius: 0;
+              border-bottom-right-radius: 0;
+              border: 1px solid #eea528;
+              padding-left: 20px;
+              outline: none;
+            }
+
+            .se_btn {
+              position: absolute;
+              right: 0;
+              width: 55px;
+              height: 32px;
+              background: #eea528;
+              border: none;
+              border-radius: 5px;
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+              color: #FFF;
+              font-size: 16px;
+              outline: none;
+              cursor: pointer;
+            }
+
+</style>
+
+</head>
+<body>
+{% include "navi.html" %}
+
+
+<div id="board_area" style="padding-top: 50px; width: 900px; position: relative;  margin: 0 auto;
+                 ">
+    <h1>커뮤니티</h1>
+
+    <table class="table table-hover" >
+        <form    action="{% url 'board:search' %}" method="get">
+            <div class="se" style="float:right">
+                <input class="se_input" type="text"  name="b" placeholder="Search"  value="{{ b }}">
+                <input class="se_btn" type="submit" value="검색">
+            </div>
+        </form>
+
+
+
+        <thead>
+        <tr>
+            <th width="70" style="text-align:center">분류</th>
+            <th width="400" style="text-align:center">제목</th>
+            <th width="120" style="text-align:center">작성자</th>
+            <th width="280" style="text-align:center">작성일</th>
+            <th width="100" style="text-align:center">조회수</th>
+        </tr>
+        </thead>
+
+        <tbody style="cursor: pointer;">
+        {% for board in boards %}
+        <tr onclick="location.href='/board/detail/{{ board.id }}/'">
+            <th width="70" style="text-align:center">{{ board.category }}</th>
+            <th width="400" >{{ board.title }}</th>
+
+            {% if board.writer.level == '1' %}
+            <th width="200" style="text-align:center"> 관리자 </th>
+            {% else %}
+            <th width="200" style="text-align:center"> {{ board.writer.n_name }}</th>
+            {% endif %}
+
+
+
+            <th width="280" style="text-align:center">{{ board.created_at }}</th>
+            <th width="100" style="text-align:center">{{ board.hits }}</th>
+            <!--  <td>{{ board.updated_at }}</td> -->
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p style="text-align:right; margin-top:30px" ><button type="button" class="btn btn-primary"  onclick="location.href='/board/write/'">글쓰기</button></p>
+
+
+
+    <nav aria-label="Page navigation example" style="padding-top:150px" >
+        <ul class="pagination justify-content-center">
+
+            {% if boards.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?p={{ boards.previous_page_number }}" style="width:90px; text-align:center; margin-right:5px;"
+                >Previous</a
+                >
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" style="width:90px; text-align:center; margin-right:5px;" >Previous</a>
+            </li>
+            {% endif %}
+            <li class="page-item" >
+                <label class="p-link" style="text_decoration: none;"
+                >{{ boards.number }} / {{ boards.paginator.num_pages }}</label
+                >
+            </li>
+            {% if boards.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?p={{ boards.next_page_number }}" style="width:90px; text-align:center; margin-left:5px;">Next</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" style="width:90px; text-align:center; margin-left:5px;">Next</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
+
+
+</body>
+</html>

@@ -42,6 +42,9 @@ INSTALLED_APPS += [
     'users',
     'board',
     'django_summernote',
+    'stock',
+    'mypage',
+    'comment'
 
 ]
 

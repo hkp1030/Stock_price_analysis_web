@@ -4,10 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from .models import User
 from .forms import UserForm
 
+import csv
 
 # Create your views here.
 
 def login_view(request):
+
     if request.method == "GET":
         return render(request, 'users/login.html')
 
@@ -43,22 +45,17 @@ def logout_view(request):
 
 def signup_view(request):
     # print(request.POST)
+
     if request.method == "POST":
         form = UserForm(request.POST)
         # print(form)
 
         if form.is_valid():
-            print("성공")
             form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('/')
+            return redirect('/auth/login')
     else:
         form = UserForm()
     return render(request, 'users/signup.html', {'form': form})
-
 
 '''
     if request.method == "POST":

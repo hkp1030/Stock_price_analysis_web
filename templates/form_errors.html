@@ -1,15 +1,29 @@
+
 {% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}  <!-- 필드 오류를 출력한다. -->
-            <div class="alert alert-danger">
-                <strong>{{ field.label }}</strong>
-                {{ error }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}   <!-- 넌필드 오류를 출력한다. -->
-        <div class="alert alert-danger">
-            <strong>{{ error }}</strong>
-        </div>
-    {% endfor %}
+    <div class="alert_e alert-danger_e" role="alert">
+    {% if form.username.errors %}
+        {{form.username.label}}
+        {{ form.username.errors.0 }}
+    {% elif form.password1.errors %}
+        {{form.password1.label}}
+        {{ form.password1.errors.0 }}
+    {% elif form.password2.errors %}
+        {{form.password2.label}}
+        {{ form.password2.errors.0 }}
+    {% elif form.name.errors %}
+        {{form.name.label}}
+        {{ form.name.errors.0 }}
+    {% elif form.n_name.errors %}
+        {{ form.n_name.errors.0 }}
+    {% elif form.birth.errors %}
+        {{form.birth.label}}
+        {{ form.birth.errors.0 }}
+    {% elif form.sex.errors %}
+        {{form.sex.label}}
+        {{ form.sex.errors.0 }}
+    {% elif form.email.errors %}
+        {{form.email.label}}
+        {{ form.email.errors.0 }}
+    {% endif %}
+    </div>
 {% endif %}

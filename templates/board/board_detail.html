@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<!--<link rel="stylesheet" type="text/css" href="{% static 'css/board_detail.css' %}">-->
+<head>
+    <meta charset="UTF-8">
+    <title>상세 페이지</title>
+
+    <style type="text/css">
+
+        .box-to {
+            border: 1px solid white;
+            border-radius: 10px;
+            display: block;
+            padding: 22px 20px;
+            margin: 50px 300px 50px 300px;
+        }
+
+        .box-radius{
+            border: 2px solid rgb(161, 161, 161);
+            border-radius: 10px;
+            display: block;
+            padding: 22px 15px;
+        }
+
+        .page-foot {
+            padding: 15px 30px 20px;
+        }
+
+        .form-control {
+            line-height: 30px;
+            font-weight: 700;
+            width: 100%;
+            font-size: 26px;
+        }
+
+        .form-group {
+            border: 1px solid white;
+            margin-top: 20px;
+            margin-bottom: 22px;
+            padding: 20px 30px 10px;
+        }
+        .page-head {
+            padding-bottom: 15px;
+            position: relative;
+            display: block;
+        }
+        .sec-box{
+            margin-left: -38px;
+            margin-bottom: 18px;
+        }
+        .page-head .list-info {
+            display: flex;
+            flex-wrap: wrap;
+            -webkit-box-align: center;
+            float: right;
+        }
+
+        .page-head .list-info .list-info-tit {
+
+            padding-right: 10px;
+            vertical-align: middle;
+
+        }
+
+        .page-head .list-info li {
+            display: table;
+            line-height: 1;
+
+        }
+
+        .page-head .list-info li .list-info-tit + .list-info-txt {
+            padding-left: 0;
+        }
+
+        .page-head .list-info .list-info-tit + .list-info-txt {
+            position: relative;
+        }
+
+        .page-head .list-info .list-info-txt {
+            display: table-cell;
+            color: #000;
+            padding-right: 30px;
+            vertical-align: middle;
+        }
+
+        .btn-ch {
+            width: 100%;
+            border: 0;
+            cursor: pointer;
+            color: #fff;
+            background-color: #eea528;
+            width:70px;
+            line-height:35px;
+            text-align:center;
+            font-weight:500;
+        }
+
+        .btn-bc {
+            width: 100%;
+            border: 0;
+            cursor: pointer;
+            color: #fff;
+            background-color: #dcdcdc;
+            width:75px;
+            line-height:27px;
+            text-align:center;
+            font-weight: 600;
+        }
+        .btn-group {
+            margin-top: 20px;
+            position: relative;
+        }
+        .l-btn {
+            margin-right: 20px;
+            text-align: right;
+        }
+        .b-btn {
+            margin-left: 20px;
+            margin-top: -27px;
+            text-align: left;
+        }
+
+        .re {
+            border: 1px solid white;
+            border-radius: 10px;
+            display: block;
+            padding: 20px;
+            margin: 30px 50px 30px 50px;
+            height: 60px;
+        }
+
+        .re_input {
+            border: 2px solid rgb(161, 161, 161);
+            border-radius: 10px;
+            display: block;
+            padding: 10px;
+            height: 25px;
+            width: 88%;
+            float:left;
+            font-size: 16px;
+            padding-left: 20px;
+            outline: none;
+            margin-top: 6px;
+        }
+
+            .re_btn {
+              width: 85px;
+              height: 47px;
+              background: #eea528;
+              border: none;
+              border-radius: 5px;
+              color: #FFF;
+              font-size: 16px;
+              outline: none;
+              cursor: pointer;
+              margin-left: 10px;
+              margin-top: 6px;
+            }
+
+            .del_btn {
+                background-color: none;
+                border: 2px solid #eea528;
+                color: #d49466;
+                line-height: 50px;
+                padding: 2px;
+                margin-left: 20px;
+            }
+
+            .del_btn:hover {
+                background-color: #fff;
+                border-color: #eea528;
+            }
+
+            .re_form{
+                background-color: #F2F2F2;
+                padding: 10px;
+                margin: 50px 320px 50px 320px;
+                border-radius: 5px;
+            }
+
+            .line {
+                display: block;
+            }
+
+        @media ( max-width: 1800px ) {
+            .re {
+              width: auto;
+              height: auto;
+            }
+
+            .re_input {
+                width: 50%;
+                margin-top: 5px;
+            }
+
+        }
+        @media ( max-width: 1500px ) {
+
+            .box-to {
+                margin: 30px 50px 30px 50px;
+                }
+
+            .re_form {
+                margin: 30px 70px 30px 70px;
+            }
+            .sec-box{
+                height: auto;
+            }
+
+        }
+
+        @media ( max-width: 700px ) {
+        .list-info {
+            display:inline-block;
+        }
+        .line {
+            display:block;
+            margin-top: 30px;
+        }
+        }
+
+
+       </style>
+</head>
+<body>
+{% include "navi.html" %}
+
+<div class="box-to">
+    <div class="box-radius">
+        <div class="page-foot">
+            <h1 class="form-control" readonly>{{ board.title }}</h1>
+            <div class="sec-box page-head">
+                <ul class="list-info">
+                    <li>
+                        <span class="list-info-tit">작성자 :</span>
+                        <span class="list-info-txt">{{ board.writer.n_name }}</span>
+
+                    </li>
+                    <li>
+                        <span class="list-info-txt" style="color: rgb(192, 190, 190);">|</span>
+                    </li>
+                    <li>
+                        <span class="list-info-tit">날짜 :</span>
+                        <span class="list-info-txt" >{{ board.updated_at }}</span>
+                    </li>
+                    <li>
+                        <span class="list-info-txt" style="color: rgb(192, 190, 190);">|</span>
+                    </li>
+                    <li>
+                        <span class="list-info-tit">조회수 :</span>
+                        <span class="list-info-txt">{{board.hits}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="line" style="border-bottom: 2px solid #000;"></div>
+        <div class="form-group">
+            <td class="form-control" readonly>{{board.contents | safe }}</td>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        {% if request.user == board.writer %}
+        <div class="l-btn">
+            <button class="btn-ch" style="margin-right: 15px;" onclick="location.href='/board/{{board.id}}/edit/'">수정</button>
+            <button class="btn-ch" onclick="location.href='/board/{{board.id}}/delete'">삭제</button>
+        </div>
+        {% elif request.user.n_name == '관리자' %}
+         <div class="l-btn">
+            <button class="btn-ch" onclick="location.href='/board/{{board.id}}/delete'">삭제</button>
+        </div>
+        {% endif %}
+        <br>
+
+        <div class="b-btn">
+            <button class="btn-bc" onclick="location.href='/board/list'">돌아가기</button>
+        </div>
+
+
+    </div>
+</div>
+
+<!--답변등록을 위한 것-->
+<form class="re_form" action="{% url 'comment:answer_create' board.id %}" method="post">
+    {% csrf_token %}
+    <h1 style="margin:30px 50px 30px 50px; color: #585858">Comments</h1>
+    <div style=" border-bottom: 2px solid #848484;"></div>
+    <div class="re">
+    <input type="text" class="re_input" name="content" id="content"></input>
+    <input class="re_btn" type="submit" value="답변등록">
+    </div>
+
+<!--답변을 보기 위한 것-->
+
+<div>
+    <ul style="color: #585858; padding:20px;">
+        {% for comment in board.comment_set.all %}
+        <div class="line" style="border-bottom: 2px solid #BDBDBD;"></div>
+        <h3 style="display:inline-block; padding-left: 20px;">{{ comment.writer.n_name}}</h3>
+        <h5 style="display:inline-block; color:#848484; padding-left: 20px;">{{ comment.create_date }}</h5>
+        <p style="color: #585858; padding-left: 20px; font-size: 25px; margin-top: 8px;">{{ comment.content |safe}}</p>
+
+         {% if request.user == comment.writer %}
+        <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
+         {% elif request.user == board.writer %}
+        <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
+         {% elif request.user.n_name == '관리자' %}
+        <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+</form>
+
+</body>
+</html>

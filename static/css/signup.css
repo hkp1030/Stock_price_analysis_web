@@ -38,8 +38,7 @@ form h2 {
     font-weight: 700;
     margin: 30px 0 30px;
     background: none;
-    background: none;
-    margin-top: 43px;
+    margin-top: 1rem;
 }
 
 .ordinaryJoin:hover {
@@ -112,7 +111,6 @@ h3 {
     top: 55%;
     right: 18px;
     margin-top: -10px;
-    cursor: pointer;
 }
 
 #bir_wrap {
@@ -178,18 +176,39 @@ select {
     font-size: 12px;
     color: red;
     display: none;
+    text-align: left;
 }
 
 #alertTxt {
     position: absolute;
-    top: 19px;
+    top: 30px;
     right: 38px;
     font-size: 12px;
     color: red;
     display: none;
+    margin-right:3px;
+    text-align: right;
 }
 
 .si_btn {
 text-align: center;
 margin-bottom: 30px;
+}
+
+.alert_e {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-danger_e {
+  color: #263343;
+  background-color: #FAFAFA;
+  border-color: #FAFAFA;
+  opacity: 0.35;
+  width: 53%;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
 }

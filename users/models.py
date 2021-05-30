@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    birth = models.DateField(verbose_name="생년월일")
+    birth = models.DateField(default="2000-01-01",verbose_name="생년월일")
     email = models.EmailField(unique=True, verbose_name="이메일")
     name = models.CharField(max_length=20, verbose_name="이름")
     sex = models.CharField(max_length=10, verbose_name="성별")
