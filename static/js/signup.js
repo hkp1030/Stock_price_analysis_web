@@ -121,7 +121,7 @@ function checkN_name() {
 }
 
 function isBirthCompleted() {
-    if(gender.value === "생년월일") {
+    if(birth.value === "생년월일") {
         error[5].innerHTML = "생년월일을 다시 확인해주세요.";
         error[5].style.display = "block";
     } else {

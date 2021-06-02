@@ -130,11 +130,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <br>
         </div>
       </div>
-
+<!--
       <div class="w3-card w3-round">
         <div class="w3-white" style="padding-bottom: 8px;">
           <hr>
-          <p style="margin-left: 17px;"><b> 인기 검색 종목</b><i class="far fa-plus-square" style="float: right; margin-right: 17px;"></i></p>
+          <p style="margin-left: 17px;"><b> 인기 검색 종목</b></p>
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 1</span> 삼성전자</button>
 
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 2</span> 카카오</button>
@@ -144,7 +144,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 5</span> SK바이오사이..</button>
         </div>
       </div>
-
+-->
     <!-- End Left Column -->
     </div>
 
@@ -158,6 +158,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <script>
 
     var chartdata = [];
+
     var stock_json = JSON.parse(" {{ stock_json|escapejs }} ");
     console.log(chartdata);
     for (key in stock_json) {
@@ -206,9 +207,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <div class="w3-container w3-card w3-white">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>information</h2>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>게시판</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i></h6>
-          <p>삼성전자 배당금 지급일은?</p>
+          <h5 class="w3-opacity"><b>게시판</b><i class="far fa-plus-square" onclick="location.href='{%url 'stock:board' %}'" style="float: right; margin-right: 17px; cursor: pointer;"></i></h5>
           <hr>
         </div>
         <div class="w3-container">

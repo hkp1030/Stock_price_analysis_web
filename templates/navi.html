@@ -16,15 +16,14 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar_logo">
-            <a class="a_d" href="/">은혜갚은 AI</a>
-        </div>
 
         <ul class="navbar_menu">
-            <li><a class="a_d" href="{% url 'stock:index' %}">주식</a></li>
-            <li><a class="a_d" href="{% url 'board:list' %}">커뮤니티</a></li>
-            <li><a class="a_d" href="">문의하기</a></li>
-            <li><a class="a_d" href="">마이페이지</a></li>
+            <div class="navbar_logo">
+            <a class="a_d" href="/">은혜갚은 AI</a>
+            </div>
+            <li><a class="a_d" href="{%url 'stock:index' %}">주식</a></li>
+            <li><a class="a_d" href="{%url 'board:list' %}">커뮤니티</a></li>
+            <li><a class="a_d" href="{%url 'mypage:mypage' %}">마이페이지</a></li>
         </ul>
 
         <ul class="navbar_icons">

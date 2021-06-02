@@ -106,10 +106,22 @@ def board_search(request):
     board = Board.objects.all().order_by('-id')  # 모든 Border 테이블의 모든 object들을 br에 저장하라
 
     b = request.GET.get('b','')  # GET request의 인자중에 b 값이 있으면 가져오고, 없으면 빈 문자열 넣기
-    if b:  # b에 값이 들어있으면 true
+    f = request.GET.get('f','')
+
+    if f == 't':
+        if b:  # b에 값이 들어있으면 true
         # 의 title이 contains br의 title에 포함되어 있으면 br에 저장
-        board = board.filter(title__icontains=b) or board.filter(category__icontains=b) or board.filter(
-            contents__icontains=b)
+            board = board.filter(title__icontains=b)
+    elif f == 'c':
+        if b:
+            board = board.filter(contents__icontains=b)
+    elif f == 'g':
+        if b:
+            board = board.filter(category__icontains=b)
+    elif f == 'w':
+        if b:
+            board = board.filter(writer__n_name__icontains=b)
+
     page = int(request.GET.get('p', 1))
 
     # p라는 값으로 받을거고, 없으면 첫번째 페이지로

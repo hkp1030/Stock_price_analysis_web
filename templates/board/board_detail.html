@@ -90,6 +90,7 @@
             cursor: pointer;
             color: #fff;
             background-color: #eea528;
+            border-radius: 5px;
             width:70px;
             line-height:35px;
             text-align:center;
@@ -97,28 +98,30 @@
         }
 
         .btn-bc {
-            width: 100%;
-            border: 0;
+            border: 2px solid #eea528;
             cursor: pointer;
-            color: #fff;
-            background-color: #dcdcdc;
+            color: #eea528;
+            background-color: #fff;
+            border-radius: 5px;
             width:75px;
-            line-height:27px;
+            line-height:33px;
             text-align:center;
             font-weight: 600;
         }
         .btn-group {
             margin-top: 20px;
+            margin-bottom: 70px;
             position: relative;
+
         }
         .l-btn {
             margin-right: 20px;
-            text-align: right;
+            float: right;
         }
         .b-btn {
             margin-left: 20px;
-            margin-top: -27px;
-            text-align: left;
+            float: left;
+            width: 100px;
         }
 
         .re {
@@ -271,7 +274,6 @@
             <button class="btn-ch" onclick="location.href='/board/{{board.id}}/delete'">삭제</button>
         </div>
         {% endif %}
-        <br>
 
         <div class="b-btn">
             <button class="btn-bc" onclick="location.href='/board/list'">돌아가기</button>

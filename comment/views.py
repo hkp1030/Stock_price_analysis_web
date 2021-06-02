@@ -9,6 +9,8 @@ from users.models import User
 
 
 def answer_create(request, board_id):
+    if not request.session.get('user'):
+        return redirect('/auth/login')
     board = get_object_or_404(Board, pk=board_id)
     user_id = request.session.get('user')
     member = User.objects.get(pk=user_id)
