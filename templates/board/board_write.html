@@ -14,12 +14,40 @@
 
 
     {% endblock %}
+
+    <style type="text/css">
+
+        .btn-group {
+            margin-top: 20px;
+            margin-bottom: 70px;
+            position: relative;
+
+        }
+        .l-btn {
+            margin-right: 20px;
+            float: right;
+        }
+
+        .btn-ch {
+            width: 90px;
+            border: 0;
+            cursor: pointer;
+            color: #fff;
+            background-color: #eea528;
+            border-radius: 5px;
+            width:70px;
+            line-height:35px;
+            text-align:center;
+            font-weight:500;
+        }
+
+    </style>
 </head>
-<body>
+<body style="overflow: auto;">
 {% include "navi.html" %}
 
 <div class="container">
-<h1 style="padding-top:30px;padding-left:20px">커뮤니티 글쓰기</h1>
+<h1 style="padding-top:35px;padding-left:20px; padding-bottom: 20px;">커뮤니티 글쓰기</h1>
     <form action="" method="POST">
         {% csrf_token %}
         <div class="card" style="width:1200px;height:800px;  padding:30px;">
@@ -43,10 +71,13 @@
             <div>
                 {{ form.contents }}
             </div>
-            <div style="text-align:right;">
-                <button type="submit"style="margin:20px; background-color:#ff7f00" id="write" class="btn btn-primary">작성하기</button>
-                <button type="button" class="btn btn-primary" style="background-color:#ff7f00" onclick="location.href='/board/list'">돌아가기</button>
+            <div class="btn-group" style="margin-top: 65px; margin-bottom: 50px; position: relative;">
+            <div class="l-btn" style="margin-right: 20px; float: right;">
+                <button type="submit" class="btn-ch" style="margin-right: 15px; width: 90px;" id="write">작성하기</button>
+                <button type="button" class="btn-ch" style="width: 90px;" onclick="location.href='/board/list'">돌아가기</button>
             </div>
+            </div>
+            <br>
 
         </div>
 
