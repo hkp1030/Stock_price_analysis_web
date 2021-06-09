@@ -36,7 +36,6 @@ def move_board(request):
 
 def index(request):
     contents = {}
-
     # 맞춤 종목 불러오기
     by_age, by_gender = get_custom_analytics_data(request.user)
     custom_stock = list_shuffle(by_age, by_gender)
