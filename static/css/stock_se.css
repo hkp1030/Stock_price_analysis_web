@@ -12,7 +12,6 @@
 .search-box{
   padding: 10px;
   position: absolute;
-  top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   height: 60px;
@@ -22,6 +21,7 @@
   transition: 0.4s;
   width:370px;
   box-shadow: 0px 0px .5px 1px #464646;
+  margin: 90px auto;
 }
 
 .search-btn{
