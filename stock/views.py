@@ -15,6 +15,8 @@ from bs4 import BeautifulSoup as bs  # 웹 크롤링을 위한 모듈
 import sys
 import io
 
+def move_board(request):
+    return redirect('/board/search?f=g&b=주식')
 
 def move_board(request):
     return redirect('/board/search?f=g&b=주식')
