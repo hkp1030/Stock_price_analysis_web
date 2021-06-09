@@ -9,6 +9,7 @@ class Board(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="최종수정일")
     hits = models.PositiveIntegerField(default=0, verbose_name="조회수")
     category = models.CharField(max_length=10, verbose_name="카테고리")
+    locate = models.IntegerField(default=0, verbose_name="상단고정")
 
     def __str__(self):
         return self.title

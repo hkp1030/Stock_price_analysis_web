@@ -14,15 +14,14 @@ body {
     align-items: center;
     background-color: #263343;
     padding: 8px 12px;
+
 }
 
 .navbar_logo a {
     font-size: 24px;
     color: #d49466;
     text-decoration: none;
-    line
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 23px;
 }
 
 .navbar_menu {
@@ -80,6 +79,7 @@ body {
         flex-direction: column;
         align-items: flex-start;
         padding: 8px 24px;
+        line-height: 40px;
     }
 
     .navbar_menu {
@@ -87,6 +87,7 @@ body {
         flex-direction: column;
         align-items: center;
         width: 100%;
+        line-height: 30px;
     }
 
     .navbar_menu li {

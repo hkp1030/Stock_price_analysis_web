@@ -76,11 +76,12 @@
     <div class="loginWindow" style="margin-top:60px;">
         <form action="{% url 'users:login' %}" method="POST">
             {% csrf_token %}
-            <h2>Login</h2>
+            <h2>로그인</h2>
             <input name="username" type="text" placeholder="아이디">
             <input name="password" type="password" placeholder="비밀번호">
             <input type="submit" value="로그인" />
             <link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
+            <!--
             <div class="find">
                 <p style="color: white">
                     <a href="#" style="color: #d49466; text-decoration:none;">아이디</a>
@@ -89,6 +90,7 @@
                     를 잊으셨나요?
                 </p>
             </div>
+            -->
         </form>
     </div>
 

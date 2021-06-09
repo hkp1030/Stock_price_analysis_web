@@ -1,33 +1,70 @@
+import csv
+
 from django.shortcuts import render, redirect
 import requests
 import feedparser
 from stock.data.link_creon import LinkCreon
 from stock.data.static_app import get_stock_name
 import json
-from stock.data.networks import network
-import numpy as np
 
 from .models import Stock
-from bs4 import BeautifulSoup
-import urllib.request as req
+import requests
+import urllib.request  # 웹에 접근하기 위한 모듈
+from bs4 import BeautifulSoup as bs  # 웹 크롤링을 위한 모듈
+
 import sys
 import io
 
 
+def move_board(request):
+    return redirect('/board/search?f=g&b=주식')
+
+
 def index(request):
-    return render(request, 'stock/stock_se.html')
+
+    STOCKLIST_URL = "https://finance.naver.com/sise/lastsearch2.nhn"
+
+    response = urllib.request.urlopen(STOCKLIST_URL)
+    STOCKLIST_HTML = response.read()
+    soup = bs(STOCKLIST_HTML)
+
+    STOCK_NAME_LIST = []
+
+    for tr in soup.findAll('tr'):
+        stockName = tr.findAll('a', attrs={'class', 'tltle'})
+        if stockName is None or stockName == []:
+            pass
+        else:
+
+            STOCK_NAME_LIST.append(stockName[0].contents[-1])
+
+        search = request.GET.get('query')
+
+    list = []
+    codelist = []
+    for name in STOCK_NAME_LIST[:20]:
+        isok = Stock.objects.filter(stock__exact=name)
+        if isok:
+            list.append(name)
+            sname = Stock.objects.get(stock=name)
+            code = sname.code
+            codelist.append(code)
+
+    return render(request, 'stock/stock_se.html', {'list': list, 'codelist': codelist})
 
 
 def search(request):
     search = request.GET.get('query')
-    sname = Stock.objects.get(stock=search)
-    code = sname.code
-
-    return redirect('stock:detail', code)
+    if Stock.stock == search:
+        sname = Stock.objects.get(stock=search)
+        code = sname.code
+        return redirect('stock:detail', code)
+    else:
+        return render(request, 'stock/nodata.html')
 
 
 '''
-# csv db저장
+csv db저장
 with open('./stock/res/stock_names.csv', mode='r') as file:
     reader = csv.reader(file)
     for row in reader:
@@ -37,23 +74,7 @@ with open('./stock/res/stock_names.csv', mode='r') as file:
 
 # 주식 상세페이지
 def detail(request, stock_id):
-    name = get_stock_name(stock_id)
-    news = get_google_news(name)
-
-    creon = LinkCreon('D:/PycharmProjects/Stock_price_analysis_web/venv32/Scripts/python.exe', 'stock/data/creon.py')
-    stock = creon.get_stock_data(stock_id)
-    stock.reverse()
-    stock_json = json.dumps(stock)
-    #contents = {'name': name, 'news': news, 'stock_json':stock_json}
-
-    results = creon.execute("creon.get_data_to_prediction('{}', 5)".format(stock_id))
-
-    pred = network.predict(results)
-    pred = list(map(lambda x: int(x*100), pred))
-
-    contents = {'name': name, 'news': news, 'pred': pred, 'stock_json':stock_json}
-
-    return render(request, "stock/detail.html", contents)
+    return render(request, "stock/detail.html")
 
 
 # 구글 뉴스 가져오기

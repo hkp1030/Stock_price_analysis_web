@@ -16,11 +16,10 @@
 </head>
 <body>
     <nav class="navbar">
-
-        <ul class="navbar_menu">
-            <div class="navbar_logo">
+        <div class="navbar_logo">
             <a class="a_d" href="/">은혜갚은 AI</a>
-            </div>
+        </div>
+        <ul class="navbar_menu">
             <li><a class="a_d" href="{%url 'stock:index' %}">주식</a></li>
             <li><a class="a_d" href="{%url 'board:list' %}">커뮤니티</a></li>
             <li><a class="a_d" href="{%url 'mypage:mypage' %}">마이페이지</a></li>
@@ -28,7 +27,11 @@
 
         <ul class="navbar_icons">
             {% if user.is_authenticated %}
-            <li><a class="a_d" >{{ user.n_name }}님</a></li>
+            {% if not user.n_name %}
+            <li><a><b style="color:red; font-weight:bolder;">관리자</b> 님</a></li>
+            {% else %}
+            <li><a> {{ user.n_name }} 님 </a></li>
+            {% endif %}
             <li><a class="a_d" href="{% url 'users:logout' %}">로그아웃</a></li>
             {% else %}
             <li><a class="a_d" href="{% url 'users:signup' %}">회원가입</a></li>

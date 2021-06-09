@@ -20,7 +20,7 @@
         }
     </script>
 
-<style type="text/css">
+    <style type="text/css">
     .pw_btn:hover {
           background: #ec3b3b;
           color: #000;
@@ -37,14 +37,18 @@
         <div class="line" style="border-bottom: 2px solid #BDBDBD;"></div>
         <div class="card-body text-center">
             <img src="https://cdn.icon-icons.com/icons2/1161/PNG/512/1487716857-user_81635.png" class="img-fluid rounded-circle mb-2" width="128" height="128">
+            {% if not user.n_name %}
+            <h5 class="card-title mb-0">관리자</h5>
+            {% else %}
             <h5 class="card-title mb-0">{{ nick }}</h5>
+            {% endif %}
             {% if request.user.is_authenticated %}
             <form style="margin-top: 20px;" action="{% url 'mypage:delete' %}" method="POST">
-            {% csrf_token %}
-            <div>
-                <a class="btn btn-primary btn-sm pw_btn" style="background-color: #eea528; border: none;" href="{% url 'mypage:password' %}">비밀번호 변경</a>
-                <input type="button" onclick="button_event();" class="btn btn-primary btn-sm pw_btn" style="background-color: #eea528; border: none;" value="회원탈퇴">
-            </div>
+                {% csrf_token %}
+                <div>
+                    <a class="btn btn-primary btn-sm pw_btn" style="background-color: #eea528; border: none;" href="{% url 'mypage:password' %}">비밀번호 변경</a>
+                    <input type="button" onclick="button_event();" class="btn btn-primary btn-sm pw_btn" style="background-color: #eea528; border: none;" value="회원탈퇴">
+                </div>
             </form>
             {% endif %}
 
@@ -53,18 +57,24 @@
         <div class="card-body">
             <h5 class="h6 card-title"><i class="far fa-address-card" style="margin-right:10px; color: #dcdcdc;"></i>About</h5>
             <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">아이디</a> <a>{{ id }}</a>
-                </li>
-
+                {% if not user.n_name %}
+                <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">아이디</a> <a>{{ id }}</a></li>
+                <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">이름</a><a>관리자</a></li>
+                <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">성별</a> <a>비밀</a></li>
+                <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">생년월일</a> <a>비밀</a></li>
+                <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">이메일</a><a>비밀</a></li>
+                {% else %}
+                <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">아이디</a> <a>{{ id }}</a></li>
                 <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">이름</a><a>{{ name }}</a></li>
                 <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">성별</a> <a>{{ sex }}</a></li>
                 <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">생년월일</a> <a>{{ birth }}</a></li>
                 <li class="mb-1"><a style="margin-right:15px; color: #dcdcdc;">이메일</a><a>{{ email }}</a></li>
+                {% endif %}
             </ul>
         </div>
 
     </div>
-    </div>
+</div>
 
 </body>
 </html>

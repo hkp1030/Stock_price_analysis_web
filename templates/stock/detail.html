@@ -92,7 +92,46 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     box-sizing: border-box;
 }
 
+.c_table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  display: table;
+  border: 1px solid #ccc;
+  text-indent: initial;
+}
 
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.c_table tr:nth-child(odd) {
+    background-color: #fff;
+}
+.c_table tr, .c_table tr {
+    border-bottom: 1px solid #ddd;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.c_table th:first-child, .c_table td:first-child, .c_table th:first-child, .c_table td:first-child {
+    padding-left: 16px;
+}
+
+.c_table td, .c_table th, .c_table td, .c_table th {
+    padding: 8px 8px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: top;
+}
+
+th{
+ font-weight: bold;
+}
 </style>
 {% include "navi.html" %}
 <body class="w3-light-grey">
@@ -130,21 +169,35 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <br>
         </div>
       </div>
-<!--
+
       <div class="w3-card w3-round">
-        <div class="w3-white" style="padding-bottom: 8px;">
+        <div class="w3-white" style="padding-bottom: 20px; padding-left: 10px; padding-right: 10px;">
           <hr>
-          <p style="margin-left: 17px;"><b> 인기 검색 종목</b></p>
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 1</span> 삼성전자</button>
-
-          <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 2</span> 카카오</button>
-
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 3</span> 넥스트사이언..</button>
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 4</span> 한국조선해양</button>
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><span> 5</span> SK바이오사이..</button>
+            <table class="c_table">
+              <tr>
+                <th>First Name</th>
+                <th>Points</th>
+              </tr>
+              <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+              </tr>
+              <tr>
+                <td>Eve</td>
+                <td>Jackson</td>
+              </tr>
+              <tr>
+                <td>Adam</td>
+                <td>Johnson</td>
+              </tr>
+              <tr>
+                <td>Bo</td>
+                <td>Nilson</td>
+              </tr>
+            </table>
         </div>
       </div>
--->
+
     <!-- End Left Column -->
     </div>
 
@@ -152,7 +205,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird">
 
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>{{name}}</h2>
+        <h2 class="w3-text-grey w3-padding-16" style="position: relative;"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>{{name}}<a onclick="location.href='{%url 'stock:board' %}'" style="font-size: 15px; float: right; margin-right: 17px; cursor: pointer; display: block; color: #f6941c;"><b>주식  커뮤니티</b></a></h2>
+
         <div class="w3-container">
           <div id="container" style="height: 400px; min-width: 310px"></div>
           <script>
@@ -205,14 +259,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </div>
 
       <div class="w3-container w3-card w3-white">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>information</h2>
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-newspaper fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>관련기사</h2>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>게시판</b><i class="far fa-plus-square" onclick="location.href='{%url 'stock:board' %}'" style="float: right; margin-right: 17px; cursor: pointer;"></i></h5>
-          <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>관련기사</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-newspaper fa-fw w3-margin-right"></i></h6>
           <div class="one_quarter">
           <ul class="linklist">
             {% for n in news %}

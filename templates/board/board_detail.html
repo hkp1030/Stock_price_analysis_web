@@ -237,7 +237,13 @@
                 <ul class="list-info">
                     <li>
                         <span class="list-info-tit">작성자 :</span>
+                        {% if not board.writer.n_name %}
+                        <span class="list-info-txt" style="color:red; font-weight:bolder">관리자</span>
+
+                        {% else %}
                         <span class="list-info-txt">{{ board.writer.n_name }}</span>
+
+                        {% endif %}
 
                     </li>
                     <li>
@@ -269,8 +275,8 @@
             <button class="btn-ch" style="margin-right: 15px;" onclick="location.href='/board/{{board.id}}/edit/'">수정</button>
             <button class="btn-ch" onclick="location.href='/board/{{board.id}}/delete'">삭제</button>
         </div>
-        {% elif request.user.n_name == '관리자' %}
-         <div class="l-btn">
+        {% elif not request.user.n_name %}
+        <div class="l-btn">
             <button class="btn-ch" onclick="location.href='/board/{{board.id}}/delete'">삭제</button>
         </div>
         {% endif %}
@@ -289,30 +295,34 @@
     <h1 style="margin:30px 50px 30px 50px; color: #585858">Comments</h1>
     <div style=" border-bottom: 2px solid #848484;"></div>
     <div class="re">
-    <input type="text" class="re_input" name="content" id="content"></input>
-    <input class="re_btn" type="submit" value="답변등록">
+        <input type="text" class="re_input" name="content" id="content"></input>
+        <input class="re_btn" type="submit" value="답변등록">
     </div>
 
-<!--답변을 보기 위한 것-->
+    <!--답변을 보기 위한 것-->
 
-<div>
-    <ul style="color: #585858; padding:20px;">
-        {% for comment in board.comment_set.all %}
-        <div class="line" style="border-bottom: 2px solid #BDBDBD;"></div>
-        <h3 style="display:inline-block; padding-left: 20px;">{{ comment.writer.n_name}}</h3>
-        <h5 style="display:inline-block; color:#848484; padding-left: 20px;">{{ comment.create_date }}</h5>
-        <p style="color: #585858; padding-left: 20px; font-size: 25px; margin-top: 8px;">{{ comment.content |safe}}</p>
+    <div>
+        <ul style="color: #585858; padding:20px;">
+            {% for comment in board.comment_set.all %}
+            <div class="line" style="border-bottom: 2px solid #BDBDBD;"></div>
+            {% if request.user == comment.writer %}
+            <h3 style="display:inline-block; padding-left: 20px; color:red; font-weight:900 ">관리자</h3>
+            {% else %}
+            <h3 style="display:inline-block; padding-left: 20px;">{{ comment.writer.n_name}}</h3>
+            {% endif %}
+            <h5 style="display:inline-block; color:#848484; padding-left: 20px;">{{ comment.create_date }}</h5>
+            <p style="color: #585858; padding-left: 20px; font-size: 25px; margin-top: 8px;">{{ comment.content |safe}}</p>
 
-         {% if request.user == comment.writer %}
-        <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
-         {% elif request.user == board.writer %}
-        <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
-         {% elif request.user.n_name == '관리자' %}
-        <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
-        {% endif %}
-        {% endfor %}
-    </ul>
-</div>
+            {% if request.user == comment.writer %}
+            <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
+            {% elif request.user == board.writer %}
+            <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
+            {% elif not request.user.n_name %}
+            <a href="{% url 'comment:answer_delete' comment.id  %}" class="del_btn" >댓글삭제</a>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 </form>
 
 </body>

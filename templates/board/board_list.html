@@ -34,8 +34,9 @@
               position: relative;
               height: 35px;
               background: rgba(0, 0, 0, 0);
-              width: 280px;
+              width: 360px;
               margin-bottom: 10px;
+              float: right;
             }
 
             .se_input {
@@ -69,6 +70,18 @@
               cursor: pointer;
             }
 
+            .box{
+                position: absolute;
+                float: left;
+                margin-right: 10px;
+            }
+
+            .sel {
+                height: 32px;
+                border-radius: 5px;
+                border: 1px solid #eea528;
+            }
+
 </style>
 
 </head>
@@ -78,28 +91,26 @@
 
 <div id="board_area" style="padding-top: 50px; width: 900px; position: relative;  margin: 0 auto;
                  ">
-    <h1>커뮤니티</h1>
+    <h1 style="margin-bottom: 25px; padding-left: 10px;">커뮤니티</h1>
 
     <table class="table table-hover" >
         <form    action="{% url 'board:search' %}" method="get">
 
-            <div>
-                    <span class="box">
+            <div class="se" style="float:right">
+                <span class="box">
                 <select id ="f" name="f" class="sel">
-                    <optgroup label="검색" >
+
                         <option value="t">제목</option>
                         <option value="c">내용</option>
                         <option value="g">분류</option>
                         <option value="w">작성자</option>
-                    </optgroup>
                 </select>
                 </span>
-                <span class="error_next_box">미선택시 제목으로 검색</span>
-            </div>
-            <div class="se" style="float:right">
                 <input class="se_input" type="text"  name="b" placeholder="Search"  value="{{ b }}">
+
                 <input class="se_btn" type="submit" value="검색">
             </div>
+
         </form>
 
 
@@ -107,7 +118,7 @@
         <thead>
         <tr>
             <th width="70" style="text-align:center">분류</th>
-            <th width="400" style="text-align:center">제목</th>
+            <th width="400" style="text-align:center; display: block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">제목</th>
             <th width="120" style="text-align:center">작성자</th>
             <th width="280" style="text-align:center">작성일</th>
             <th width="100" style="text-align:center">조회수</th>
@@ -117,55 +128,62 @@
         <tbody style="cursor: pointer;">
         {% for board in boards %}
         <tr onclick="location.href='/board/detail/{{ board.id }}/'">
+            {% if board.category == '공지' %}
+            <th width="70" style="text-align:center; color:red;font-weight:bolder;">{{ board.category }}</th>
+            {% else %}
             <th width="70" style="text-align:center">{{ board.category }}</th>
-            <th width="400" >{{ board.title }}</th>
-
-            {% if board.writer.level == '1' %}
-            <th width="200" style="text-align:center"> 관리자 </th>
+            {% endif %}
+            {% if not board.writer.n_name %}
+            {% if board.category == '공지' %}
+            <th width="400" style="color:red; font-weight:bolder; display: block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" >{{ board.title }}</th>
+            {% else %}
+             <th width="400" style="display: block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ board.title }}</th>
+            {% endif %}
+            {% else %}
+            <th width="400" style="display: block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" >{{ board.title }}</th>
+            {% endif %}
+            {% if not board.writer.n_name %}
+            <th width="200" style="color:red; font-weight:bolder;text-align:center; "> 관리자 </th>
             {% else %}
             <th width="200" style="text-align:center"> {{ board.writer.n_name }}</th>
             {% endif %}
-
-
-
             <th width="280" style="text-align:center">{{ board.created_at }}</th>
             <th width="100" style="text-align:center">{{ board.hits }}</th>
-            <!--  <td>{{ board.updated_at }}</td> -->
         </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <p style="text-align:right; margin-top:30px" ><button type="button" class="btn btn-primary"  onclick="location.href='/board/write/'">글쓰기</button></p>
+    <p style="text-align:right; margin-top:30px" ><button type="button" class="btn btn-primary"  onclick="location.href='/board/write/'" style="background-color: #eea528; border: #eea528;">글쓰기</button></p>
 
 
 
-    <nav aria-label="Page navigation example" style="padding-top:150px" >
+    <nav aria-label="Page navigation example" style="padding-top:150px color: #eea528; margin-top: 80px;" >
         <ul class="pagination justify-content-center">
 
             {% if boards.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?p={{ boards.previous_page_number }}" style="width:90px; text-align:center; margin-right:5px;"
+                <a class="page-link" href="?p={{ boards.previous_page_number }}" style="width:90px; text-align:center; margin-right:5px; color: #eea528;"
                 >Previous</a
                 >
             </li>
             {% else %}
             <li class="page-item disabled">
-                <a class="page-link" href="#" style="width:90px; text-align:center; margin-right:5px;" >Previous</a>
+                <a class="page-link" href="#" style="width:90px; text-align:center; margin-right:5px; color: #eea528;" >Previous</a>
             </li>
             {% endif %}
             <li class="page-item" >
-                <label class="p-link" style="text_decoration: none;"
+                <label class="p-link" style="text_decoration: none; color: #eea528;"
                 >{{ boards.number }} / {{ boards.paginator.num_pages }}</label
                 >
             </li>
             {% if boards.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?p={{ boards.next_page_number }}" style="width:90px; text-align:center; margin-left:5px;">Next</a>
+                <a class="page-link" href="?p={{ boards.next_page_number }}" style="width:90px; text-align:center; margin-left:5px; color: #eea528;">Next</a>
             </li>
             {% else %}
             <li class="page-item disabled">
-                <a class="page-link" href="#" style="width:90px; text-align:center; margin-left:5px;">Next</a>
+                <a class="page-link" href="#" style="width:90px; text-align:center; margin-left:5px; color: #eea528;">Next</a>
             </li>
             {% endif %}
 

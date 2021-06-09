@@ -13,7 +13,7 @@ from datetime import date, datetime, timedelta
 
 
 def board_list(request):
-    all_boards = Board.objects.all().order_by('-id')
+    all_boards = Board.objects.all().order_by('-locate','-id')
     # 변수명을 all_boards 로 바꿔주었다.
     page = int(request.GET.get('p', 1))
     # p라는 값으로 받을거고, 없으면 첫번째 페이지로
@@ -42,6 +42,8 @@ def board_write(request):
             board.title = form.cleaned_data['title']
             board.category = form.cleaned_data['category']
             board.contents = form.cleaned_data['contents']
+            if board.category == "공지" :
+                board.locate = 1
             # 검증에 성공한 값들은 사전타입으로 제공 (form.cleaned_data)
             # 검증에 실패시 form.error 에 오류 정보를 저장
 

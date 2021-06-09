@@ -32,7 +32,7 @@
                    value="{{ form.category.value|default_if_none:'' }}">
                             <option value="자유">자유</option>
                             <option value="주식">주식</option>
-                            {% if user.n_name == '관리자' %}
+                            {% if not user.n_name  %}
                             <option value="공지">공지</option>
                             {% endif %}
                         </select>
