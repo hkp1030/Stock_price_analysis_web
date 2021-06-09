@@ -6,6 +6,8 @@ import feedparser
 from stock.data.link_creon import LinkCreon
 from stock.data.static_app import get_stock_name
 import json
+from stock.data.networks import network
+import numpy as np
 
 from .models import Stock
 import requests
@@ -14,6 +16,7 @@ from bs4 import BeautifulSoup as bs  # 웹 크롤링을 위한 모듈
 
 import sys
 import io
+
 
 def move_board(request):
     return redirect('/board/search?f=g&b=주식')
@@ -54,26 +57,44 @@ def index(request):
 
 def search(request):
     search = request.GET.get('query')
-    if Stock.stock == search:
+    try:
         sname = Stock.objects.get(stock=search)
         code = sname.code
         return redirect('stock:detail', code)
-    else:
+    except:
         return render(request, 'stock/nodata.html')
 
 
+
+#csv db저장
 '''
-csv db저장
-with open('./stock/res/stock_names.csv', mode='r') as file:
+with open('./stock/res/stockitems.csv', mode='r') as file:
     reader = csv.reader(file)
     for row in reader:
-        Stock(stock=row[1], code=row[0][1:]).save()
+        Stock(code=row[0][1:], stock=row[1], market=row[2], industry=row[4]).save()
 '''
+
 
 
 # 주식 상세페이지
 def detail(request, stock_id):
-    return render(request, "stock/detail.html")
+    name = get_stock_name(stock_id)
+    news = get_google_news(name)
+
+    creon = LinkCreon('D:/PycharmProjects/Stock_price_analysis_web/venv32/Scripts/python.exe', 'stock/data/creon.py')
+    stock = creon.get_stock_data(stock_id)
+    stock.reverse()
+    stock_json = json.dumps(stock)
+    # contents = {'name': name, 'news': news, 'stock_json':stock_json}
+
+    results = creon.execute("creon.get_data_to_prediction('{}', 5)".format(stock_id))
+
+    pred = network.predict(results)
+    pred = list(map(lambda x: int(x * 100), pred))
+
+    contents = {'name': name, 'news': news, 'pred': pred, 'stock_json': stock_json}
+
+    return render(request, "stock/detail.html", contents)
 
 
 # 구글 뉴스 가져오기
