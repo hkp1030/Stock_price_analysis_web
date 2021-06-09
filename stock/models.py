@@ -2,8 +2,10 @@ from django.db import models
 
 # Create your models here.
 class Stock(models.Model):
-    stock = models.CharField(max_length=30)
     code = models.CharField(unique=True, max_length=10)
+    stock = models.CharField(max_length=30)
+    market = models.CharField(max_length=30)
+    industry = models.CharField(max_length=30)
 
     def __str__(self):
         return self.stock
