@@ -13,6 +13,8 @@ import urllib.request as req
 import sys
 import io
 
+def move_board(request):
+    return redirect('/board/search?f=g&b=주식')
 
 def index(request):
     return render(request, 'stock/stock_se.html')
