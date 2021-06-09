@@ -169,7 +169,8 @@ def get_stock_info(stocks):
     date = time.strftime('%Y%m%d', time.localtime(time.time()))
     stock_info = stock.get_market_ohlcv_by_ticker(date)
 
-    result = [{'name' : Stock.objects.get(code=code).stock,
+    result = [{'code' : code,
+               'name' : Stock.objects.get(code=code).stock,
                'close' : stock_info.loc[code]['종가'],
                'rate' : stock_info.loc[code]['등락률']}
               for code in stocks]
