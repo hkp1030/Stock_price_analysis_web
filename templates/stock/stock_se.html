@@ -2678,24 +2678,98 @@
   </div>
 
 
-    <div class="w3-row-padding" style="padding-left: 17px; padding-right: 17px;">
+    <div class="w3-row-padding" style="padding-left: 17px; padding-right: 17px; margin-bottom: 30px;">
   <div class="w3-container w3-card w3-white">
     <p style="font-size: 20px;"><b>마켓 트렌드</b></p>
       <hr>
-    <div class="w3-container">
-</div>
-<div class="w3-bar w3-black">
+
+<div class="w3-bar" style="background-color: #da8a02!important; color: #fff!important;">
     <button class="w3-bar-item w3-button" onclick="openDtock('up')">상승률 상위</button>
   <button class="w3-bar-item w3-button" onclick="openDtock('down')">하락률 상위</button>
   <button class="w3-bar-item w3-button" onclick="openDtock('foreign')">외국인 순매수</button>
     <button class="w3-bar-item w3-button" onclick="openDtock('indi')">개인 순매수</button>
   <button class="w3-bar-item w3-button" onclick="openDtock('deal')">거래량</button>
 </div>
-</div>
-<div class="box_contents">
+
+<div class="box_contents" style="margin-bottom: 17px;">
 
     <!-- 상승률 상위 -->
     <div id="up" class="w3-container dtock">
+        <table class="w3-table">
+    <tr>
+      <th>코스피</th>
+      <th></th>
+      <th></th>
+        <th></th>
+        <th></th>
+        <th>코스닥</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>쌍방울</td>
+        <td>907</td>
+        <td style="color: #f51818 !important;"><i>▲</i>209</td>
+        <td style="color: #f51818 !important;">+29.94%</td>
+        <td>289,584,732</td>
+        <td style="color: #333333 !important;">퓨전</td>
+        <td style="color: #333333 !important;">330</td>
+        <td style="color: #f51818 !important;"><i>▲</i>122</td>
+        <td style="color: #f51818 !important;">+58.65%</td>
+        <td>3,950,205</td>
+    </tr>
+    <tr>
+      <td>두산2우B</td>
+        <td>187,000</td>
+        <td style="color: #f51818 !important;"><i>▲</i>43,000</td>
+        <td style="color: #f51818 !important;">+29.86%</td>
+        <td>60,592</td>
+        <td style="color: #333333 !important;">쎄미시스코</td>
+        <td style="color: #333333 !important;">40,550</td>
+        <td style="color: #f51818 !important;"><i>▲</i>9,350</td>
+        <td style="color: #f51818 !important;">+29.93%</td>
+        <td>14,527,962</td>
+    </tr>
+    <tr>
+      <td>티웨이항공</td>
+        <td>4,835</td>
+        <td style="color: #f51818 !important;"><i>▲</i>780</td>
+        <td style="color: #f51818 !important;">+19.24%</td>
+        <td>40,998,167</td>
+        <td style="color: #333333 !important;">삼성스팩4호</td>
+        <td style="color: #333333 !important;">9,030</td>
+        <td style="color: #f51818 !important;"><i>▲</i>2,080</td>
+        <td style="color: #f51818 !important;">+29.93%</td>
+        <td>14,527,962</td>
+    </tr>
+    <tr>
+        <td>신성통상</td>
+        <td>3,250</td>
+        <td style="color: #f51818 !important;"><i>▲</i>510</td>
+        <td style="color: #f51818 !important;">+18.61%</td>
+        <td>91,260,974</td>
+        <td style="color: #333333 !important;">에이치엘비파워</td>
+        <td style="color: #333333 !important;">2,505</td>
+        <td style="color: #f51818 !important;"><i>▲</i>575</td>
+        <td style="color: #f51818 !important;">+29.79%</td>
+        <td>6,780,999</td>
+    </tr>
+    <tr>
+        <td>대원전선</td>
+        <td>2,475</td>
+        <td style="color: #f51818 !important;"><i>▲</i>385</td>
+        <td style="color: #f51818 !important;">+18.42%</td>
+        <td>126,154,785</td>
+        <td style="color: #333333 !important;">삼성스팩2호</td>
+        <td style="color: #333333 !important;">5,950</td>
+        <td style="color: #f51818 !important;"><i>▲</i>1,300</td>
+        <td style="color: #f51818 !important;">+27.96%</td>
+        <td>14,195,656</td>
+    </tr>
+  </table>
+        <!--
     <div class="halfB">
     <div class="titB">
         <h5>코스피</h5>
@@ -2770,7 +2844,7 @@
 </div>
 </div>
 
-    <!-- 하락률 상위 -->
+
     <div id="down" class="w3-container dtock" style="display:none">
 <div class="halfB">
     <div class="titB">
@@ -2846,7 +2920,7 @@
 </div>
     </div>
 
-    <!-- 외국인 순매수 -->
+
    <div id="foreign" class="w3-container dtock" style="display:none">
 <div class="halfB">
     <div class="titB">
@@ -2918,7 +2992,8 @@
     </div>
   </div>
     </div>
-
+ -->
+    </div>
 
   <!-- End Page Container -->
 </div>
