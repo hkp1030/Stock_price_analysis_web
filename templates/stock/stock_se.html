@@ -2693,7 +2693,7 @@
                         <p style="text-align: center; font-size: 20px;"><b>맞춤 종목 추천</b></p>
                         <div style=" border-top: 1px solid #B4B3B3;"></div>
                         {% for stock in custom_stock %}
-                        <button class="w3-button w3-block w3-theme-l1 w3-left-align" style="display: list-item; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-right: 27px; padding-left: 27px;"><span><a style="font-size: 20px; text-decoration: none; width:30%; float: left;" href="{%url 'stock:detail' stock.code %}">{{ stock.name }}</a></span><span style="font-size: 20px; text-decoration: none; width: 20%; margin-left: 65px; display: block; float: left;"><a>{{ stock.close }}</a></span></span><span style="font-size: 20px; text-decoration: none; width: 10%; margin-left: 70px; display: block; float: left;"><a>{{ stock.rate }}</a></span></button>
+                        <button class="w3-button w3-block w3-theme-l1 w3-left-align" style="display: list-item; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-right: 27px; padding-left: 27px;"><span><a style="font-size: 20px; text-decoration: none; width:30%; float: left;" href="{%url 'stock:detail' stock.code %}">{{ stock.name }}</a></span><span style="font-size: 20px; text-decoration: none; width: 20%; margin-left: 65px; display: block; float: left;"><a>{{ stock.close|floatformat:"0" }}</a></span></span><span style="font-size: 20px; text-decoration: none; width: 10%; margin-left: 70px; display: block; float: left;"><a>{{ stock.rate|floatformat:2 }}</a></span></button>
                         {% endfor %}
 
                         <div class="w3-container">
@@ -2712,333 +2712,384 @@
 
             <div class="w3-row-padding" style="padding-left: 17px; padding-right: 17px; margin-bottom: 30px;">
                 <div class="w3-container w3-card w3-white">
-                    <p style="font-size: 20px;"><b>마켓 트렌드</b></p>
-                    <hr>
+        <p style="font-size: 20px;"><b>마켓 트렌드</b></p>
+        <hr>
 
-                    <div class="w3-bar" style="background-color: #da8a02!important; color: #fff!important;">
-                        <button class="w3-bar-item w3-button" onclick="openDtock('up')">상승률 상위</button>
-                        <button class="w3-bar-item w3-button" onclick="openDtock('down')">하락률 상위</button>
-                        <button class="w3-bar-item w3-button" onclick="openDtock('foreign')">외국인 순매수</button>
-                        <button class="w3-bar-item w3-button" onclick="openDtock('indi')">개인 순매수</button>
-                        <button class="w3-bar-item w3-button" onclick="openDtock('deal')">거래량</button>
-                    </div>
+        <div class="w3-bar" style="background-color: #da8a02!important; color: #fff!important;">
+            <button class="w3-bar-item w3-button" onclick="openDtock('up')">상승률 상위</button>
+            <button class="w3-bar-item w3-button" onclick="openDtock('down')">하락률 상위</button>
+            <button class="w3-bar-item w3-button" onclick="openDtock('foreign')">외국인 순매수</button>
+            <button class="w3-bar-item w3-button" onclick="openDtock('indi')">개인 순매수</button>
+            <button class="w3-bar-item w3-button" onclick="openDtock('deal')">거래량</button>
+        </div>
 
-                    <div class="box_contents" style="margin-bottom: 17px;">
+        <div class="box_contents" style="margin-bottom: 17px;">
 
-                        <!-- 상승률 상위 -->
-                        <div id="up" class="w3-container dtock">
-                            <table class="w3-table">
-                                <tr>
-                                    <th>코스피</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>코스닥</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <td>쌍방울</td>
-                                    <td>907</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>209</td>
-                                    <td style="color: #f51818 !important;">+29.94%</td>
-                                    <td>289,584,732</td>
-                                    <td style="color: #333333 !important;">퓨전</td>
-                                    <td style="color: #333333 !important;">330</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>122</td>
-                                    <td style="color: #f51818 !important;">+58.65%</td>
-                                    <td>3,950,205</td>
-                                </tr>
-                                <tr>
-                                    <td>두산2우B</td>
-                                    <td>187,000</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>43,000</td>
-                                    <td style="color: #f51818 !important;">+29.86%</td>
-                                    <td>60,592</td>
-                                    <td style="color: #333333 !important;">쎄미시스코</td>
-                                    <td style="color: #333333 !important;">40,550</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>9,350</td>
-                                    <td style="color: #f51818 !important;">+29.93%</td>
-                                    <td>14,527,962</td>
-                                </tr>
-                                <tr>
-                                    <td>티웨이항공</td>
-                                    <td>4,835</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>780</td>
-                                    <td style="color: #f51818 !important;">+19.24%</td>
-                                    <td>40,998,167</td>
-                                    <td style="color: #333333 !important;">삼성스팩4호</td>
-                                    <td style="color: #333333 !important;">9,030</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>2,080</td>
-                                    <td style="color: #f51818 !important;">+29.93%</td>
-                                    <td>14,527,962</td>
-                                </tr>
-                                <tr>
-                                    <td>신성통상</td>
-                                    <td>3,250</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>510</td>
-                                    <td style="color: #f51818 !important;">+18.61%</td>
-                                    <td>91,260,974</td>
-                                    <td style="color: #333333 !important;">에이치엘비파워</td>
-                                    <td style="color: #333333 !important;">2,505</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>575</td>
-                                    <td style="color: #f51818 !important;">+29.79%</td>
-                                    <td>6,780,999</td>
-                                </tr>
-                                <tr>
-                                    <td>대원전선</td>
-                                    <td>2,475</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>385</td>
-                                    <td style="color: #f51818 !important;">+18.42%</td>
-                                    <td>126,154,785</td>
-                                    <td style="color: #333333 !important;">삼성스팩2호</td>
-                                    <td style="color: #333333 !important;">5,950</td>
-                                    <td style="color: #f51818 !important;"><i>▲</i>1,300</td>
-                                    <td style="color: #f51818 !important;">+27.96%</td>
-                                    <td>14,195,656</td>
-                                </tr>
-                            </table>
+            <!-- 상승률 상위 -->
+            <div id="up" class="w3-container dtock" style="display: block;">
+                <table class="w3-table" >
+                    <tr>
+                        <th>코스피</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>코스닥</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.상위.종목명.0 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.상위.종가.0 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kospi_list.상위.변동폭.0 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kospi_list.상위.등락률.0|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.상위.거래대금.0 }}</td>
+                        <td>{{ market_updown_kosdaq_list.상위.종목명.0 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.상위.종가.0 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kosdaq_list.상위.변동폭.0 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kosdaq_list.상위.등락률.0|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.상위.거래대금.0 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.상위.종목명.1 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.상위.종가.1 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kospi_list.상위.변동폭.1 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kospi_list.상위.등락률.1|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.상위.거래대금.1 }}</td>
+                        <td>{{ market_updown_kosdaq_list.상위.종목명.1 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.상위.종가.1 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kosdaq_list.상위.변동폭.1}}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kosdaq_list.상위.등락률.1|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.상위.거래대금.1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.상위.종목명.2 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.상위.종가.2 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kospi_list.상위.변동폭.2 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kospi_list.상위.등락률.2|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.상위.거래대금.2 }}</td>
+                        <td>{{ market_updown_kosdaq_list.상위.종목명.2 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.상위.종가.2 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kosdaq_list.상위.변동폭.2 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kosdaq_list.상위.등락률.2|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.상위.거래대금.2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.상위.종목명.3 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.상위.종가.3 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kospi_list.상위.변동폭.3 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kospi_list.상위.등락률.3|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.상위.거래대금.3 }}</td>
+                        <td>{{ market_updown_kosdaq_list.상위.종목명.3 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.상위.종가.3 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kosdaq_list.상위.변동폭.3 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kosdaq_list.상위.등락률.3|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.상위.거래대금.3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.상위.종목명.4 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.상위.종가.4 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kospi_list.상위.변동폭.4 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kospi_list.상위.등락률.4|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.상위.거래대금.4 }}</td>
+                        <td>{{ market_updown_kosdaq_list.상위.종목명.4 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.상위.종가.4 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>▲</i>{{ market_updown_kosdaq_list.상위.변동폭.4 }}</td>
+                        <td style="text-align: right; color: #f51818 !important;"><i>+</i>{{ market_updown_kosdaq_list.상위.등락률.4|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.상위.거래대금.4 }}</td>
+                    </tr>
+                </table>
 
-                                                    <!--
-
-                            <div class="halfB">
-                                <div class="titB">
-                                    <h5>코스피</h5>
-                                </div>
-                                <ul class="list boxKospi">
-                                    <li><em class="ty01">1</em>
-                                        <a href="#" class="txt">쌍방울</a>
-                                        <p data-realtime-trade-price="yes">907</p>
-                                        <span class="num up1" data-realtime-change-price="yes"><i>↑</i>209</span>
-                                        <span class="up1" data-realtime-change-ratio="yes">+29.94%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">289,584,732</p>
-                                    </li>
-                                    <li><em class="ty02">2</em>
-                                        <a href="#" class="txt">두산2우B</a>
-                                        <p data-realtime-trade-price="yes">187,000</p>
-                                        <span class="num up1" data-realtime-change-price="yes"><i>↑</i>43,000</span>
-                                        <span class="up1" data-realtime-change-ratio="yes">+29.86%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">60,592</p>
-                                    </li>
-                                    <li><em class="ty03">3</em>
-                                        <a href="#" class="txt">티웨이항공</a>
-                                        <p data-realtime-trade-price="yes">4,835</p>
-                                        <span class="num up" data-realtime-change-price="yes"><i>▲</i>780</span>
-                                        <span class="up" data-realtime-change-ratio="yes">+19.24%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">40,998,167</p>
-                                    </li>
-                                    <li><em class="ty04">4</em>
-                                        <a href="#" class="txt">신성통상</a>
-                                        <p data-realtime-trade-price="yes">3,250</p>
-                                        <span class="num up" data-realtime-change-price="yes"><i>▲</i>510</span>
-                                        <span class="up" data-realtime-change-ratio="yes">+18.61%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">91,260,974</p>
-                                    </li>
-                                    <li><em class="ty05">5</em>
-                                        <a href="#" class="txt">대원전선</a>
-                                        <p data-realtime-trade-price="yes">2,475</p>
-                                        <span class="num up" data-realtime-change-price="yes"><i>▲</i>385</span>
-                                        <span class="up" data-realtime-change-ratio="yes">+18.42%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">126,154,785</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="halfB fr">
-                                <div class="titB">
-                                    <h5>코스닥</h5>
-                                </div>
-                                <ul class="list boxKosdaq">
-                                    <li><em class="ty01">1</em>
-                                        <a href="#" class="txt">퓨전</a>
-                                        <p data-realtime-trade-price="yes">330</p>
-                                        <span class="num up" data-realtime-change-price="yes"><i>▲</i>122</span>
-                                        <span class="up" data-realtime-change-ratio="yes">+58.65%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">3,950,205</p>
-                                    </li>
-                                    <li><em class="ty02">2</em>
-                                        <a href="#" class="txt">쎄미시스코</a>
-                                        <p data-realtime-trade-price="yes">40,550</p>
-                                        <span class="num up1" data-realtime-change-price="yes"><i>↑</i>9,350</span>
-                                        <span class="up1" data-realtime-change-ratio="yes">+29.97%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">1,923,701</p>
-                                    </li>
-                                    <li><em class="ty03">3</em>
-                                        <a href="#" class="txt">삼성스팩4호</a>
-                                        <p data-realtime-trade-price="yes">9,030</p>
-                                        <span class="num up1" data-realtime-change-price="yes"><i>↑</i>2,080</span>
-                                        <span class="up1" data-realtime-change-ratio="yes">+29.93%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">14,527,962</p>
-                                    </li>
-                                    <li><em class="ty04">4</em>
-                                        <a href="#" class="txt">에이치엘비파워</a>
-                                        <p data-realtime-trade-price="yes">2,505</p>
-                                        <span class="num up1" data-realtime-change-price="yes"><i>↑</i>575</span>
-                                        <span class="up1" data-realtime-change-ratio="yes">+29.79%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">6,780,999</p>
-                                    </li>
-                                    <li><em class="ty05">5</em>
-                                        <a href="#" class="txt">삼성스팩2호</a>
-                                        <p data-realtime-trade-price="yes">5,950</p>
-                                        <span class="num up" data-realtime-change-price="yes"><i>▲</i>1,300</span>
-                                        <span class="up" data-realtime-change-ratio="yes">+27.96%</span>
-                                        <p class="num" data-realtime-acc-trade-volume="yes">14,195,656</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-
-    <div id="down" class="w3-container dtock" style="display:none">
-<div class="halfB">
-    <div class="titB">
-        <h5>코스피</h5>
-    </div>
-    <ul class="list boxKospi"><li><em class="ty01">1</em>
-<a href="#" class="txt">사조산업</a>
-<p data-realtime-trade-price="yes">67,500</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>7,800</span>
-<span class="down" data-realtime-change-ratio="yes">-10.36%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">275,048</p>
-</li><li><em class="ty02">2</em>
-<a href="#" class="txt">IHQ</a>
-<p data-realtime-trade-price="yes">2,070</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>215</span>
-<span class="down" data-realtime-change-ratio="yes">-9.41%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">9,491,193</p>
-</li><li><em class="ty03">3</em>
-<a href="#" class="txt">대유에이텍</a>
-<p data-realtime-trade-price="yes">1,245</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>115</span>
-<span class="down" data-realtime-change-ratio="yes">-8.46%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">6,641,985</p>
-</li><li><em class="ty04">4</em>
-<a href="#" class="txt">STX</a>
-<p data-realtime-trade-price="yes">8,970</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>800</span>
-<span class="down" data-realtime-change-ratio="yes">-8.19%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">369,342</p>
-</li><li><em class="ty05">5</em>
-<a href="#" class="txt">SNT중공업</a>
-<p data-realtime-trade-price="yes">10,200</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>900</span>
-<span class="down" data-realtime-change-ratio="yes">-8.11%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">415,779</p>
-</li></ul>
-</div>
-<div class="halfB fr">
-    <div class="titB">
-        <h5>코스닥</h5>
-    </div>
-    <ul class="list boxKosdaq"><li><em class="ty01">1</em>
-<a href="#" class="txt">에스앤씨엔진그룹</a>
-<p data-realtime-trade-price="yes">26</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>4</span>
-<span class="down" data-realtime-change-ratio="yes">-13.33%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">33,788,199</p>
-</li><li><em class="ty02">2</em>
-<a href="#" class="txt">제넥신</a>
-<p data-realtime-trade-price="yes">85,400</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>11,600</span>
-<span class="down" data-realtime-change-ratio="yes">-11.96%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">3,112,670</p>
-</li><li><em class="ty03">3</em>
-<a href="#" class="txt">이즈미디어</a>
-<p data-realtime-trade-price="yes">33,000</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>4,050</span>
-<span class="down" data-realtime-change-ratio="yes">-10.93%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">507,443</p>
-</li><li><em class="ty04">4</em>
-<a href="#" class="txt">수성이노베이션</a>
-<p data-realtime-trade-price="yes">2,585</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>275</span>
-<span class="down" data-realtime-change-ratio="yes">-9.62%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">2,848,741</p>
-</li><li><em class="ty05">5</em>
-<a href="#" class="txt">싸이토젠</a>
-<p data-realtime-trade-price="yes">45,600</p>
-<span class="num down" data-realtime-change-price="yes"><i>▼</i>4,600</span>
-<span class="down" data-realtime-change-ratio="yes">-9.16%</span>
-<p class="num" data-realtime-acc-trade-volume="yes">276,777</p>
-</li></ul>
-</div>
-    </div>
-   <div id="foreign" class="w3-container dtock" style="display:none">
-<div class="halfB">
-    <div class="titB">
-        <h5>코스피</h5>
-        <p><i>i</i>단위 : 백만원, 천주</p>
-    </div>
-    <ul class="list boxKospi"><li><em class="ty01">1</em>
-<a href="#" class="txt">SK하이닉스</a>
-<p>45,953</p>
-<span class="num1">361</span>
-<span class="num1 down" data-realtime-change-ratio="">-3.92%</span>
-</li><li><em class="ty02">2</em>
-<a href="#" class="txt">카카오</a>
-<p>28,957</p>
-<span class="num1">226</span>
-<span class="num1 up" data-realtime-change-ratio="">+0.39%</span>
-</li><li><em class="ty03">3</em>
-<a href="#" class="txt">삼성바이오로직스</a>
-<p>28,895</p>
-<span class="num1">33</span>
-<span class="num1 down" data-realtime-change-ratio="">-2.46%</span>
-</li><li><em class="ty04">4</em>
-<a href="#" class="txt">HMM</a>
-<p>28,463</p>
-<span class="num1">675</span>
-<span class="num1 down" data-realtime-change-ratio="">-2.89%</span>
-</li><li><em class="ty05">5</em>
-<a href="#" class="txt">기아</a>
-<p>26,097</p>
-<span class="num1">286</span>
-<span class="num1 down" data-realtime-change-ratio="">-1.31%</span>
-</li></ul>
-</div>
-<div class="halfB fr">
-    <div class="titB">
-        <h5>코스닥</h5>
-        <p><i>i</i>단위 : 백만원, 천주</p>
-    </div>
-    <ul class="list boxKosdaq"><li><em class="ty01">1</em>
-<a href="#" class="txt">셀트리온헬스케어</a>
-<p>16,044</p>
-<span class="num1">134</span>
-<span class="num1 down" data-realtime-change-ratio="">-2.85%</span>
-</li><li><em class="ty02">2</em>
-<a href="#" class="txt">셀트리온제약</a>
-<p>8,683</p>
-<span class="num1">62</span>
-<span class="num1 down" data-realtime-change-ratio="">-3.69%</span>
-</li><li><em class="ty03">3</em>
-<a href="#" class="txt">헬릭스미스</a>
-<p>5,560</p>
-<span class="num1">164</span>
-<span class="num1 up" data-realtime-change-ratio="">+0.80%</span>
-</li><li><em class="ty04">4</em>
-<a href="#" class="txt">현대바이오</a>
-<p>5,075</p>
-<span class="num1">151</span>
-<span class="num1 down" data-realtime-change-ratio="">-4.14%</span>
-</li><li><em class="ty05">5</em>
-<a href="#" class="txt">휴마시스</a>
-<p>4,456</p>
-<span class="num1">374</span>
-<span class="num1 down" data-realtime-change-ratio="">-2.50%</span>
-</li></ul>
-</div>
-   </div>
-    -->
-
-                        <div style="display: none;"></div>
-                        <div style="display: none;"></div>
-                        <div style="display: none;"></div>
-                    </div>
-                </div>
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
             </div>
+
+            <!-- 하락률 상위 -->
+            <div id="down" class="w3-container dtock" style="display: none;">
+                <table class="w3-table" >
+                    <tr>
+                        <th>코스피</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>코스닥</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.하위.종목명.0 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.하위.종가.0 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kospi_list.하위.변동폭.0 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kospi_list.하위.등락률.0|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.하위.거래대금.0 }}</td>
+                        <td>{{ market_updown_kosdaq_list.하위.종목명.0 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.하위.종가.0 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kosdaq_list.하위.변동폭.0 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kosdaq_list.하위.등락률.0|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.하위.거래대금.0 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.하위.종목명.1 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.하위.종가.1 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kospi_list.하위.변동폭.1 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kospi_list.하위.등락률.1|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.하위.거래대금.1 }}</td>
+                        <td>{{ market_updown_kosdaq_list.하위.종목명.1 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.하위.종가.1 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kosdaq_list.하위.변동폭.1}}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kosdaq_list.하위.등락률.1|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.하위.거래대금.1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.하위.종목명.2 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.하위.종가.2 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kospi_list.하위.변동폭.2 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kospi_list.하위.등락률.2|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.하위.거래대금.2 }}</td>
+                        <td>{{ market_updown_kosdaq_list.하위.종목명.2 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.하위.종가.2 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kosdaq_list.하위.변동폭.2 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kosdaq_list.하위.등락률.2|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.하위.거래대금.2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.하위.종목명.3 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.하위.종가.3 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kospi_list.하위.변동폭.3 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kospi_list.하위.등락률.3|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.하위.거래대금.3 }}</td>
+                        <td>{{ market_updown_kosdaq_list.하위.종목명.3 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.하위.종가.3 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kosdaq_list.하위.변동폭.3 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kosdaq_list.하위.등락률.3|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.하위.거래대금.3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_updown_kospi_list.하위.종목명.4 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kospi_list.하위.종가.4 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kospi_list.하위.변동폭.4 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kospi_list.하위.등락률.4|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kospi_list.하위.거래대금.4 }}</td>
+                        <td>{{ market_updown_kosdaq_list.하위.종목명.4 }}</td>
+                        <td style="text-align: right;">{{ market_updown_kosdaq_list.하위.종가.4 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i>▼</i>{{ market_updown_kosdaq_list.하위.변동폭.4 }}</td>
+                        <td style="text-align: right; color: #1b61d1 !important;"><i> </i>{{ market_updown_kosdaq_list.하위.등락률.4|floatformat:2 }}<i>%</i></td>
+                        <td>{{ market_updown_kosdaq_list.하위.거래대금.4 }}</td>
+                    </tr>
+                </table>
+
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+            </div>
+
+            <!-- 외국인 순매수 -->
+            <div id="foreign" class="w3-container dtock" style="display: none;">
+                <table class="w3-table">
+                    <tr>
+                        <th>코스피</th>
+                        <th style="text-align: right;">거래대금</th>
+                        <th style="text-align: right;">거래량</th>
+                        <th>코스닥</th>
+                        <th style="text-align: right;">거래대금</th>
+                        <th style="text-align: right;">거래량</th>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_f_list.코스피.종목명.0 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래대금.0 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래량.0 }}</td>
+                        <td>{{ market_net_purchases_f_list.코스닥.종목명.0 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래대금.0 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래량.0 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_f_list.코스피.종목명.1 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래대금.1 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래량.1 }}</td>
+                        <td>{{ market_net_purchases_f_list.코스닥.종목명.1 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래대금.1 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래량.1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_f_list.코스피.종목명.2 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래대금.2 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래량.2 }}</td>
+                        <td>{{ market_net_purchases_f_list.코스닥.종목명.2 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래대금.2 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래량.2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_f_list.코스피.종목명.3 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래대금.3 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래량.3 }}</td>
+                        <td>{{ market_net_purchases_f_list.코스닥.종목명.3}}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래대금.3 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래량.3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_f_list.코스피.종목명.4 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래대금.4 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스피.순매수거래량.4 }}</td>
+                        <td>{{ market_net_purchases_f_list.코스닥.종목명.4 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래대금.4 }}</td>
+                        <td style="text-align: right;">{{ market_net_purchases_f_list.코스닥.순매수거래량.4 }}</td>
+                    </tr>
+                </table>
+
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+            </div>
+
+            <!-- 개인 순매수 -->
+            <div id="indi" class="w3-container dtock" style="display: none;">
+                <table class="w3-table">
+                    <tr>
+                        <th>코스피</th>
+                        <th>거래대금</th>
+                        <th>거래량</th>
+                        <th>코스닥</th>
+                        <th>거래대금</th>
+                        <th>코스닥</th>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_n_list.코스피.종목명.0 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래대금.0 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래량.0 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.종목명.0 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래대금.0 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래량.0 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_n_list.코스피.종목명.1 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래대금.1 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래량.1 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.종목명.1 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래대금.1 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래량.1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_n_list.코스피.종목명.2 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래대금.2 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래량.2 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.종목명.2 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래대금.2 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래량.2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_n_list.코스피.종목명.3 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래대금.3 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래량.3 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.종목명.3}}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래대금.3 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래량.3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_net_purchases_n_list.코스피.종목명.4 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래대금.4 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스피.순매수거래량.4 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.종목명.4 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래대금.4 }}</td>
+                        <td>{{ market_net_purchases_n_list.코스닥.순매수거래량.4 }}</td>
+                    </tr>
+                </table>
+
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+            </div>
+
+            <!-- 거래량 -->
+            <div id="deal" class="w3-container dtock" style="display: none;">
+                <table class="w3-table">
+                    <tr>
+                        <th>코스피</th>
+                        <th>종가</th>
+                        <th>변동폭</th>
+                        <th>등락률</th>
+                        <th>거래량</th>
+                        <th>코스닥</th>
+                        <th>종가</th>
+                        <th>변동폭</th>
+                        <th>등락률</th>
+                        <th>거래량</th>
+                    </tr>
+                    <tr>
+                        <td>{{ market_trading_change_list.코스피.종목명.0 }}</td>
+                        <td>{{ market_trading_change_list.코스피.종가.0 }}</td>
+                        <td>{{ market_trading_change_list.코스피.변동폭.0 }}</td>
+                        <td>{{ market_trading_change_list.코스피.등락률.0|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.거래량.0 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종목명.0 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종가.0 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.변동폭.0 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.등락률.0|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.거래량.0 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_trading_change_list.코스피.종목명.1 }}</td>
+                        <td>{{ market_trading_change_list.코스피.종가.1 }}</td>
+                        <td>{{ market_trading_change_list.코스피.변동폭.1 }}</td>
+                        <td>{{ market_trading_change_list.코스피.등락률.1|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.거래량.1 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종목명.1 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종가.1 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.변동폭.1 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.등락률.1|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.거래량.1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_trading_change_list.코스피.종목명.2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.종가.2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.변동폭.2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.등락률.2|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.거래량.2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종목명.2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종가.2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.변동폭.2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.등락률.2|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.거래량.2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_trading_change_list.코스피.종목명.3 }}</td>
+                        <td>{{ market_trading_change_list.코스피.종가.3 }}</td>
+                        <td>{{ market_trading_change_list.코스피.변동폭.3 }}</td>
+                        <td>{{ market_trading_change_list.코스피.등락률.3|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.거래량.3 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종목명.3 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종가.3 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.변동폭.3 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.등락률.3|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.거래량.3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ market_trading_change_list.코스피.종목명.4 }}</td>
+                        <td>{{ market_trading_change_list.코스피.종가.4 }}</td>
+                        <td>{{ market_trading_change_list.코스피.변동폭.4 }}</td>
+                        <td>{{ market_trading_change_list.코스피.등락률.4|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스피.거래량.4 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종목명.4 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.종가.4 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.변동폭.4 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.등락률.4|floatformat:2 }}</td>
+                        <td>{{ market_trading_change_list.코스닥.거래량.4 }}</td>
+                    </tr>
+                </table>
+
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+                <div style="display: none;"></div>
+            </div>
+
+
+        </div>
+    </div>
         </div>
     </div>
 

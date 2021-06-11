@@ -12,3 +12,7 @@ class LinkCreon:
     def get_stock_data(self, code):
         results = self.execute("creon.creon_7400_주식차트조회('" + code + "')")
         return results
+
+    def get_stock_info(self, code):
+        results = self.execute("creon.creon_7059_주식지수('" + code + "')")
+        return results

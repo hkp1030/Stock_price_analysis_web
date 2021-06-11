@@ -176,23 +176,23 @@ th{
             <table class="c_table">
               <tr>
                 <th>현재가</th>
-                <th>39,600</th>
+                <th>{{ info.now }}</th>
               </tr>
               <tr>
                 <td>시가총액(억)</td>
-                <td>27,773</td>
+                <td>{{ info.시가총액 }}</td>
               </tr>
               <tr>
                 <td>ROE(%)</td>
-                <td>2.74%</td>
+                <td>{{ info.roe |floatformat:3 }}</td>
               </tr>
               <tr>
                 <td>PER(배)</td>
-                <td>26.1825</td>
+                <td>{{ info.per |floatformat:3 }}</td>
               </tr>
               <tr>
                 <td>PBR(배)</td>
-                <td>2.0698</td>
+                <td>{{ info.pbr |floatformat:3 }}</td>
               </tr>
             </table>
         </div>
