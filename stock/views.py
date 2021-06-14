@@ -1,12 +1,15 @@
 import csv
+import time
 import datetime
+from datetime import timedelta
+from datetime import datetime as datetime2
 from django.shortcuts import render, redirect
 import requests
 import feedparser
 from stock.data.link_creon import LinkCreon
 from stock.data.static_app import get_stock_name
 import json
-#from stock.data.networks import network
+from stock.data.networks import network
 import numpy as np
 import pandas as pd
 import random
@@ -25,15 +28,20 @@ from bs4 import BeautifulSoup as bs  # 웹 크롤링을 위한 모듈
 import sys
 import io
 
+COUNT_INFO = 5
+
 
 def move_board(request):
     return redirect('/board/search?f=g&b=주식')
 
 
 def index(request):
+    if not request.session.get('user'):
+        return redirect('/auth/login')
+
+    contents = {}
     # 맞춤 종목 불러오기
-    by_age, by_gender = get_custom_analytics_data(request.user)
-    custom_stock = list_shuffle(by_age, by_gender)
+    custom_stock = get_custom_analytics_data(request.user)
     custom_stock = get_stock_info(custom_stock)
 
     # 인기 검색어 불러오기
@@ -52,17 +60,112 @@ def index(request):
         else:
             STOCK_NAME_LIST.append(stockName[0].contents[-1])
 
-    list = []
+    list1 = []
     codelist = []
     for name in STOCK_NAME_LIST[:20]:
         isok = Stock.objects.filter(stock__exact=name)
         if isok:
-            list.append(name)
+            list1.append(name)
             sname = Stock.objects.get(stock=name)
             code = sname.code
             codelist.append(code)
 
-    return render(request, 'stock/stock_se.html', {'list': list, 'codelist': codelist, 'custom_stock' : custom_stock})
+    #주식 검색 페이지 - 마켓 트렌드 불러오기
+    market_updown_kospi = get_상위_하위_등락률(market='KOSPI')
+    market_updown_kosdaq = get_상위_하위_등락률(market='KOSDAQ')
+
+    market_updown_kospi_list = {
+        '상위' : {
+            '종목명' : list(market_updown_kospi[0]['종목명']),
+            '종가' : list(market_updown_kospi[0]['종가']),
+            '변동폭' : list(market_updown_kospi[0]['변동폭']),
+            '등락률' : list(market_updown_kospi[0]['등락률']),
+            '거래량' : list(market_updown_kospi[0]['거래량'])
+        },
+        '하위': {
+            '종목명': list(market_updown_kospi[1]['종목명']),
+            '종가': list(market_updown_kospi[1]['종가']),
+            '변동폭': list(market_updown_kospi[1]['변동폭']),
+            '등락률': list(market_updown_kospi[1]['등락률']),
+            '거래량': list(market_updown_kospi[1]['거래량'])
+        }
+    }
+    market_updown_kosdaq_list = {
+        '상위' : {
+            '종목명' : list(market_updown_kosdaq[0]['종목명']),
+            '종가' : list(market_updown_kosdaq[0]['종가']),
+            '변동폭' : list(market_updown_kosdaq[0]['변동폭']),
+            '등락률' : list(market_updown_kosdaq[0]['등락률']),
+            '거래량' : list(market_updown_kosdaq[0]['거래량'])
+        },
+        '하위': {
+            '종목명': list(market_updown_kosdaq[1]['종목명']),
+            '종가': list(market_updown_kosdaq[1]['종가']),
+            '변동폭': list(market_updown_kosdaq[1]['변동폭']),
+            '등락률': list(market_updown_kosdaq[1]['등락률']),
+            '거래량': list(market_updown_kosdaq[1]['거래량'])
+        }
+    }
+
+    market_net_purchases_f = [get_상위_순매수(market='KOSPI', purchases='외국인')
+                              , get_상위_순매수(market='KOSDAQ', purchases='외국인')]
+    market_net_purchases_n = [get_상위_순매수(market='KOSPI', purchases='개인')
+                              , get_상위_순매수(market='KOSDAQ', purchases='개인')]
+
+    market_net_purchases_f_list = {
+        '코스피' : {
+            '종목명': list(market_net_purchases_f[0]['종목명']),
+            '순매수거래대금': list(market_net_purchases_f[0]['순매수거래대금']),
+            '순매수거래량': list(market_net_purchases_f[0]['순매수거래량'])
+        },
+        '코스닥' : {
+            '종목명': list(market_net_purchases_f[1]['종목명']),
+            '순매수거래대금': list(market_net_purchases_f[1]['순매수거래대금']),
+            '순매수거래량': list(market_net_purchases_f[1]['순매수거래량'])
+        }
+    }
+    market_net_purchases_n_list = {
+        '코스피': {
+            '종목명': list(market_net_purchases_n[0]['종목명']),
+            '순매수거래대금': list(market_net_purchases_n[0]['순매수거래대금']),
+            '순매수거래량': list(market_net_purchases_n[0]['순매수거래량'])
+        },
+        '코스닥': {
+            '종목명': list(market_net_purchases_n[1]['종목명']),
+            '순매수거래대금': list(market_net_purchases_n[1]['순매수거래대금']),
+            '순매수거래량': list(market_net_purchases_n[1]['순매수거래량'])
+        }
+    }
+
+    market_trading_change = [get_거래량(market='KOSPI'), get_거래량(market='KOSDAQ')]
+
+    market_trading_change_list = {
+        '코스피' : {
+            '종목명': list(market_trading_change[0]['종목명']),
+            '종가': list(market_trading_change[0]['종가']),
+            '변동폭': list(market_trading_change[0]['변동폭']),
+            '등락률': list(market_trading_change[0]['등락률']),
+            '거래량': list(market_trading_change[0]['거래량'])
+        },
+        '코스닥' : {
+            '종목명': list(market_trading_change[1]['종목명']),
+            '종가': list(market_trading_change[1]['종가']),
+            '변동폭': list(market_trading_change[1]['변동폭']),
+            '등락률': list(market_trading_change[1]['등락률']),
+            '거래량': list(market_trading_change[1]['거래량'])
+        }
+    }
+
+    contents['list'] = list1
+    contents['codelist'] = codelist
+    contents['custom_stock'] = custom_stock
+    contents['market_updown_kospi_list'] = market_updown_kospi_list
+    contents['market_updown_kosdaq_list'] = market_updown_kosdaq_list
+    contents['market_net_purchases_f_list'] = market_net_purchases_f_list
+    contents['market_net_purchases_n_list'] = market_net_purchases_n_list
+    contents['market_trading_change_list'] = market_trading_change_list
+
+    return render(request, 'stock/stock_se.html', contents)
 
 
 def search(request):
@@ -77,11 +180,11 @@ def search(request):
 
 # csv db저장
 '''
-with open('./stock/res/stockitems.csv', mode='r') as file:
+with open('./stock/res/stockitems.csv', mode='r', encoding='utf-8') as file:
     reader = csv.reader(file)
     for row in reader:
-        Stock(code=row[0][1:], stock=row[1], market=row[2], industry=row[4]).save()
-'''
+        Stock(code=row[0][1:], stock=row[1], market=row[2], industry=row[4]).save()'''
+
 
 # 주식 상세페이지
 def detail(request, stock_id):
@@ -94,7 +197,7 @@ def detail(request, stock_id):
     name = get_stock_name(stock_id)
     news = get_google_news(name)
 
-    '''
+
     creon = LinkCreon('D:/PycharmProjects/Stock_price_analysis_web/venv32/Scripts/python.exe', 'stock/data/creon.py')
     stock = creon.get_stock_data(stock_id)
     stock.reverse()
@@ -104,10 +207,12 @@ def detail(request, stock_id):
 
     pred = network.predict(results)
     pred = list(map(lambda x: int(x * 100), pred))
-    '''
 
-    #contents = {'name': name, 'news': news, 'pred': pred, 'stock_json': stock_json}
-    contents = {'name': name, 'news': news}
+    info = creon.get_stock_info(stock_id)
+    info['시가총액'] = get_cap(stock_id) / 100000000
+
+    contents = {'name': name, 'news': news, 'pred': pred, 'stock_json': stock_json, 'info': info}
+    #contents = {'name': name, 'news': news}
 
     return render(request, "stock/detail.html", contents)
 
@@ -135,20 +240,25 @@ def get_google_news(keyword, country='ko'):
     return datas[:5]
 
 
-# 유저의 나이, 성별을 이용한 맞춤 종목을 분석
+# 유저의 나이, 성별, 관심 업종을 분석하여 맞춤 종목을 분석
 def get_custom_analytics_data(user):
     birth = user.birth
     start_date = datetime.date(birth.year-5, 1, 1)
     end_date = datetime.date(birth.year+5, 1, 1)
     gender = user.sex
 
+    # 성별 분석
     by_age = StockVisitHistory.objects.filter(user__birth__range=[start_date, end_date])\
         .values('stock_Code').annotate(Count('stock_Code')).order_by('-stock_Code__count')[:30]
     by_age = [Stock.objects.get(id=stock['stock_Code']).code for stock in by_age]
 
+    # 나이 분석
     by_gender = StockVisitHistory.objects.filter(user__sex=gender)\
         .values('stock_Code').annotate(Count('stock_Code')).order_by('-stock_Code__count')[:30]
     by_gender = [Stock.objects.get(id=stock['stock_Code']).code for stock in by_gender]
+
+    # 관심 업종 분석
+    by_cat = StockVisitHistory.objects.filter(user=user).values('stock_Code__industry').annotate(Count('stock_Code__industry')).order_by('-stock_Code__industry__count')
 
     return by_age, by_gender
 
@@ -166,7 +276,7 @@ def list_shuffle(*args, num=10):
 
 # 주식 코드가 담긴 리스트를 받아서 각 종목의 이름, 주가, 등락률을 반환
 def get_stock_info(stocks):
-    date = time.strftime('%Y%m%d', time.localtime(time.time()))
+    date = get_date()
     stock_info = stock.get_market_ohlcv_by_ticker(date)
 
     result = [{'code' : code,
@@ -175,3 +285,85 @@ def get_stock_info(stocks):
                'rate' : stock_info.loc[code]['등락률']}
               for code in stocks]
     return result
+
+
+
+def get_거래량(market='KOSPI'):
+    date = get_date()
+
+    market_price_change_a = stock.get_market_ohlcv_by_ticker(date, market=market)
+
+    market_price_change_a['변동폭'] = [(close - start) for close, start in
+                                    zip(market_price_change_a['종가'].values, market_price_change_a['시가'].values)]
+
+    market_price_change_a = market_price_change_a.drop(['시가'], axis='columns')
+    market_price_change_a = market_price_change_a.drop(['고가'], axis='columns')
+    market_price_change_a = market_price_change_a.drop(['저가'], axis='columns')
+    market_price_change_a = market_price_change_a.drop(['거래대금'], axis='columns')
+
+    market_price_change_a_s = market_price_change_a.sort_values(by=["거래량"], ascending=[False])
+
+    market_price_change_a_up = market_price_change_a_s.head(COUNT_INFO)
+    market_price_change_a_up["종목명"] = [stock.get_market_ticker_name(value) for value in
+                                       market_price_change_a_up.index.values]
+
+    return market_price_change_a_up
+
+# 개인 / 외국인 / 기관
+def get_상위_순매수(market='KOSPI', purchases='외국인'):
+    date = get_date(day=1)
+
+    market_net_purchases = \
+        stock.get_market_net_purchases_of_equities_by_ticker(date, date, market, purchases)
+
+    market_net_purchases = market_net_purchases.drop(['매도거래량'], axis='columns')
+    market_net_purchases = market_net_purchases.drop(['매수거래량'], axis='columns')
+    market_net_purchases = market_net_purchases.drop(['매도거래대금'], axis='columns')
+    market_net_purchases = market_net_purchases.drop(['매수거래대금'], axis='columns')
+
+    data_s = market_net_purchases.sort_values(by=["순매수거래대금"], ascending=[False])
+
+    data_up = data_s.head(COUNT_INFO)
+
+    return data_up
+
+
+def get_상위_하위_등락률(market='KOSPI'):
+    date = get_date()
+
+    market_price_change_a = stock.get_market_ohlcv_by_ticker(date, market=market)
+
+    market_price_change_a['변동폭'] = [(close - start) for close, start in
+                                    zip(market_price_change_a['종가'].values, market_price_change_a['시가'].values)]
+
+    market_price_change_a = market_price_change_a.drop(['시가'], axis='columns')
+    market_price_change_a = market_price_change_a.drop(['고가'], axis='columns')
+    market_price_change_a = market_price_change_a.drop(['저가'], axis='columns')
+    # market_price_change_a = market_price_change_a.drop(['종가'], axis='columns')
+    # market_price_change_a = market_price_change_a.drop(['거래량'], axis='columns')
+    market_price_change_a = market_price_change_a.drop(['거래대금'], axis='columns')
+
+    market_price_change_a_s = market_price_change_a.sort_values(by=["등락률"], ascending=[False])
+
+    market_price_change_a_up = market_price_change_a_s.head(COUNT_INFO)
+    market_price_change_a_up["종목명"] = [stock.get_market_ticker_name(value) for value in
+                                       market_price_change_a_up.index.values]
+
+    market_price_change_a_down = market_price_change_a_s.tail(COUNT_INFO).sort_values(by=["등락률"], ascending=[True])
+    market_price_change_a_down["종목명"] = [stock.get_market_ticker_name(value) for value in
+                                         market_price_change_a_down.index.values]
+
+    return market_price_change_a_up, market_price_change_a_down
+
+def get_cap(code):
+    date = get_date()
+    df = stock.get_market_cap_by_date(date, date, code)
+    return df.head()['시가총액'].values[0]
+
+def get_date(day=0):
+    date = datetime2.today().strftime("%Y%m%d")
+    df = stock.get_market_ohlcv_by_date('20210610', date, "005930")
+
+    ts = pd.to_datetime(str(df.tail(1).index.values[0]))
+    ts = ts - timedelta(days=day)
+    return ts.strftime("%Y%m%d")

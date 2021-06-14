@@ -35,7 +35,7 @@ def login_view(request):
 
 
             else:
-                res_data['error'] = '비밀번호가 다릅니다!'
+                res_data['error'] = '아이디 또는 비밀번호가 다릅니다!'
 
         return render(request, 'users/login.html', {'res_data': res_data})
 
