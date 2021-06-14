@@ -31,10 +31,6 @@ def move_board(request):
 
 
 def index(request):
-    if not request.session.get('user'):
-        return redirect('/auth/login')
-    # 세션에 'user' 키를 불러올 수 없으면, 로그인하지 않은 사용자이므로 로그인 페이지로 리다이렉트 한다.
-
     # 맞춤 종목 불러오기
     by_age, by_gender = get_custom_analytics_data(request.user)
     custom_stock = list_shuffle(by_age, by_gender)

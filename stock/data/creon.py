@@ -70,6 +70,7 @@ class Creon:
         stock_dict['per'] = self.obj_MarketEye.GetDataValue(2, 0)
         stock_dict['pbr'] = self.obj_MarketEye.GetDataValue(1, 0) / self.obj_MarketEye.GetDataValue(4, 0)
         stock_dict['roe'] = self.obj_MarketEye.GetDataValue(3, 0)
+        stock_dict['now'] = self.obj_MarketEye.GetDataValue(4, 0)
 
         return stock_dict
 
