@@ -36,13 +36,14 @@ def move_board(request):
 
 
 def index(request):
-    if not request.session.get('user'):
-        return redirect('/auth/login')
-
     contents = {}
     # 맞춤 종목 불러오기
-    custom_stock = get_custom_analytics_data(request.user)
-    custom_stock = get_stock_info(custom_stock)
+    if request.user.is_authenticated:
+        custom_stock = get_custom_analytics_data(request.user)
+    else:
+        custom_stock = get_cap_100()
+        custom_stock = list_shuffle(custom_stock, num=10)
+        custom_stock = get_stock_info(custom_stock)
 
     # 인기 검색어 불러오기
     STOCKLIST_URL = "https://finance.naver.com/sise/lastsearch2.nhn"
@@ -258,9 +259,28 @@ def get_custom_analytics_data(user):
     by_gender = [Stock.objects.get(id=stock['stock_Code']).code for stock in by_gender]
 
     # 관심 업종 분석
-    by_cat = StockVisitHistory.objects.filter(user=user).values('stock_Code__industry').annotate(Count('stock_Code__industry')).order_by('-stock_Code__industry__count')
+    by_cat = list(
+        StockVisitHistory.objects.filter(user=user)
+            .values('stock_Code__industry')
+            .annotate(Count('stock_Code__industry'))
+            .order_by('-stock_Code__industry__count')[:3]
+    )
+    by_cat_sum = sum([data['stock_Code__industry__count'] for data in by_cat])
+    by_cat = {data['stock_Code__industry']: data['stock_Code__industry__count'] / by_cat_sum for data in by_cat}
+    by_cat_stock = {}
+    for cat, value in by_cat.items():
+        stock_list = list(Stock.objects.filter(industry=cat))
+        by_cat_stock[cat] = list_shuffle(stock_list, num=30)
+    by_cat_final = []
+    for cat, value in by_cat_stock.items():
+        by_cat_final.extend(value[:int(30*by_cat[cat])])
+    by_cat_final = [stock.code for stock in by_cat_final]
 
-    return by_age, by_gender
+    # 합치기
+    result = list_shuffle(by_age, by_gender, by_cat_final, num=10)
+    result = get_stock_info(result)
+
+    return result
 
 
 # 리스트를 합친 후, 섞어서 중복제거하여 num 크기의 리스트 반환
@@ -269,15 +289,19 @@ def list_shuffle(*args, num=10):
     for l in args:
         total.extend(l)
     random.shuffle(total)
-    total = list(set(total))
+    result = []
+    for data in total:
+        if data not in result:
+            result.append(data)
 
-    return total[:num]
+    return result[:num]
 
 
 # 주식 코드가 담긴 리스트를 받아서 각 종목의 이름, 주가, 등락률을 반환
 def get_stock_info(stocks):
     date = get_date()
-    stock_info = stock.get_market_ohlcv_by_ticker(date)
+    stock_info = stock.get_market_ohlcv_by_ticker(date, market="ALL")
+    print(stocks)
 
     result = [{'code' : code,
                'name' : Stock.objects.get(code=code).stock,
@@ -311,7 +335,7 @@ def get_거래량(market='KOSPI'):
 
 # 개인 / 외국인 / 기관
 def get_상위_순매수(market='KOSPI', purchases='외국인'):
-    date = get_date(day=1)
+    date = get_date()
 
     market_net_purchases = \
         stock.get_market_net_purchases_of_equities_by_ticker(date, date, market, purchases)
@@ -360,10 +384,18 @@ def get_cap(code):
     df = stock.get_market_cap_by_date(date, date, code)
     return df.head()['시가총액'].values[0]
 
-def get_date(day=0):
+def get_cap_100():
+    date = get_date()
+    df = stock.get_market_cap_by_ticker(date)
+    df = df.sort_values(by=["시가총액"], ascending=[False])
+    df = df.index.values
+
+    return df[:100]
+
+
+def get_date():
     date = datetime2.today().strftime("%Y%m%d")
     df = stock.get_market_ohlcv_by_date('20210610', date, "005930")
 
     ts = pd.to_datetime(str(df.tail(1).index.values[0]))
-    ts = ts - timedelta(days=day)
     return ts.strftime("%Y%m%d")
