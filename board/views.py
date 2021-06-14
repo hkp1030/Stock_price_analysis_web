@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render, redirect
@@ -24,19 +25,14 @@ def board_list(request):
     # 처음 2개가 세팅 된다.
     return render(request, 'board/board_list.html', {"boards": boards})
 
-
+@login_required(login_url='users:login')
 def board_write(request):
-    if not request.session.get('user'):
-        return redirect('/auth/login')
-    # 세션에 'user' 키를 불러올 수 없으면, 로그인하지 않은 사용자이므로 로그인 페이지로 리다이렉트 한다.
-
     if request.method == "POST":
         form = BoardForm(request.POST)
 
         if form.is_valid():
             # form의 모든 validators 호출 유효성 검증 수행
-            user_id = request.session.get('user')
-            member = User.objects.get(pk=user_id)
+            member = request.user
 
             board = Board()
             board.title = form.cleaned_data['title']

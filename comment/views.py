@@ -8,12 +8,11 @@ from comment.models import Comment
 from users.models import User
 
 
+@login_required(login_url='users:login')
 def answer_create(request, board_id):
-    if not request.session.get('user'):
-        return redirect('/auth/login')
+
     board = get_object_or_404(Board, pk=board_id)
-    user_id = request.session.get('user')
-    member = User.objects.get(pk=user_id)
+    member = request.user
     comment = Comment(board=board, content=request.POST.get('content'), create_date=timezone.now(), writer=member)
     comment.save()
     return redirect('board:detail', pk=board.id)
@@ -21,8 +20,8 @@ def answer_create(request, board_id):
 
 def answer_delete(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
-    user_id = request.session.get('user')
-    member = User.objects.get(pk=user_id)
+
+    member = request.user
     if member == comment.writer:
         print("2")
         comment.delete()

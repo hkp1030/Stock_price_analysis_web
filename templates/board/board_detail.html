@@ -305,7 +305,7 @@
         <ul style="color: #585858; padding:20px;">
             {% for comment in board.comment_set.all %}
             <div class="line" style="border-bottom: 2px solid #BDBDBD;"></div>
-            {% if request.user == comment.writer %}
+            {% if not comment.writer.n_name %}
             <h3 style="display:inline-block; padding-left: 20px; color:red; font-weight:900 ">관리자</h3>
             {% else %}
             <h3 style="display:inline-block; padding-left: 20px;">{{ comment.writer.n_name}}</h3>
