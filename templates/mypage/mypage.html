@@ -47,7 +47,7 @@
                 {% csrf_token %}
                 <div>
                     <a class="btn btn-primary btn-sm pw_btn" style="background-color: #eea528; border: none;" href="{% url 'mypage:password' %}">비밀번호 변경</a>
-                    <input type="button" onclick="button_event();" class="btn btn-primary btn-sm pw_btn" style="background-color: #eea528; border: none;" value="회원탈퇴">
+                     <a class="btn btn-primary btn-sm pw_btn" style="background-color: #eea528; border: none;" href="{% url 'mypage:delete' %}">회원 탈퇴</a>
                 </div>
             </form>
             {% endif %}

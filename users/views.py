@@ -6,10 +6,10 @@ from .forms import UserForm
 
 import csv
 
+
 # Create your views here.
 
 def login_view(request):
-
     if request.method == "GET":
         return render(request, 'users/login.html')
 
@@ -22,8 +22,10 @@ def login_view(request):
             res_data['error'] = '모든 값을 입력하세요!'
 
         else:
-            user = User.objects.get(username=username)
-            # print(member.id)
+            try:
+                user = User.objects.get(username=username)
+            except:
+                return render(request, 'users/login.html')
 
             if check_password(password, user.password):
                 # print(request.session.get('user'))
@@ -35,7 +37,7 @@ def login_view(request):
             else:
                 res_data['error'] = '비밀번호가 다릅니다!'
 
-        return render(request, 'users/login.html', res_data)
+        return render(request, 'users/login.html', {'res_data': res_data})
 
 
 def logout_view(request):
@@ -56,6 +58,7 @@ def signup_view(request):
     else:
         form = UserForm()
     return render(request, 'users/signup.html', {'form': form})
+
 
 '''
     if request.method == "POST":

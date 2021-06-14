@@ -209,3 +209,21 @@ body {
     font-weight: 600;
     color: #ffc400;
 }
+
+.alert_e {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-danger_e {
+  color: #263343;
+  background-color: #FAFAFA;
+  border-color: #FAFAFA;
+  opacity: 0.35;
+  width: 53%;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+}

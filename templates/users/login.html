@@ -23,7 +23,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 8);
             width: 300px;
-            height: 400px;
+            height: 390px;
         }
 
         form h2 {
@@ -67,18 +67,39 @@
           color: #000;
         }
 
+        .alert_e {
+          position: relative;
+          padding: 0.75rem 1.25rem;
+          border: 1px solid transparent;
+          border-radius: 0.25rem;
+        }
+
+        .alert-danger_e {
+          color: #263343;
+          background-color: #FAFAFA;
+          border-color: #FAFAFA;
+          opacity: 0.35;
+          width: 65%;
+          font-size: 16px;
+          text-align: center;
+          font-weight: 500;
+        }
+
     </style>
 </head>
 <body>
 {% include "navi.html" %}
+
 <!-- 컨테이너 영역 -->
 <div class="contentsWrap" style="margin: 90px auto; text-align: center;">
     <div class="loginWindow" style="margin-top:60px;">
         <form action="{% url 'users:login' %}" method="POST">
             {% csrf_token %}
+
             <h2>로그인</h2>
-            <input name="username" type="text" placeholder="아이디">
-            <input name="password" type="password" placeholder="비밀번호">
+            <input id="username" name="username" type="text" placeholder="아이디">
+            <input id="password" name="password" type="password" placeholder="비밀번호">
+            {% include "login_errors.html" %}
             <input type="submit" value="로그인" />
             <link rel="stylesheet" type="text/css" href="{% static 'css/main_page.css' %}">
             <!--
