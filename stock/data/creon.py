@@ -224,7 +224,7 @@ class Creon:
         data = data_manager.load_data(data, date_start, date_end, 'v2',  False)[1]
         data = data.values.tolist()
 
-        return [d + [0.5, 0.5] for d in data]
+        return [d + [0.5] for d in data]
 
 
 if __name__ == '__main__':

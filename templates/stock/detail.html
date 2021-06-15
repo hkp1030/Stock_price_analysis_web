@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html>
 <title>주식</title>
 <meta charset="UTF-8">
@@ -176,23 +177,23 @@ th{
             <table class="c_table">
               <tr>
                 <th>현재가</th>
-                <th>{{ info.now }}</th>
+                <th style="text-align: right;  padding-right: 20px; ">{{ info.now |intcomma }}원</th>
               </tr>
               <tr>
                 <td>시가총액(억)</td>
-                <td>{{ info.시가총액 }}</td>
+                <td style="text-align: right; padding-right: 20px; ">{{ info.시가총액 |floatformat:3 |intcomma }}</td>
               </tr>
               <tr>
-                <td>ROE(%)</td>
-                <td>{{ info.roe |floatformat:3 }}</td>
+                <td>ROE</td>
+                <td style="text-align: right; padding-right: 20px; ">{{ info.roe |floatformat:3 }}%</td>
               </tr>
               <tr>
-                <td>PER(배)</td>
-                <td>{{ info.per |floatformat:3 }}</td>
+                <td>PER</td>
+                <td style="text-align: right; padding-right: 20px; ">{{ info.per |floatformat:3 }}배</td>
               </tr>
               <tr>
-                <td>PBR(배)</td>
-                <td>{{ info.pbr |floatformat:3 }}</td>
+                <td>PBR</td>
+                <td style="text-align: right; padding-right: 20px; ">{{ info.pbr |floatformat:3 }}배</td>
               </tr>
             </table>
         </div>

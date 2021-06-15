@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,8 +40,9 @@
               position: relative;
               height: 35px;
               background: rgba(0, 0, 0, 0);
-              width: 280px;
+              width: 360px;
               margin-bottom: 10px;
+              float: right;
             }
 
             .se_input {
@@ -74,6 +76,12 @@
               cursor: pointer;
             }
 
+            .sel {
+                height: 32px;
+                border-radius: 5px;
+                border: 1px solid #eea528;
+            }
+
         </style>
 
 </head>
@@ -85,24 +93,23 @@
 
     <table class="table table-hover">
     <form    action="{% url 'board:search' %}" method="get">
-         <div>
-                    <span class="box">
+
+            <div class="se" style="float:right">
+                <span class="box">
                 <select id ="f" name="f" class="sel">
-                    <optgroup label="검색" >
+
                         <option value="t">제목</option>
                         <option value="c">내용</option>
                         <option value="g">분류</option>
                         <option value="w">작성자</option>
-                    </optgroup>
                 </select>
                 </span>
-                <span class="error_next_box">미선택시 제목으로 검색</span>
+                <input class="se_input" type="text"  name="b" placeholder="Search"  value="{{ b }}">
+
+                <input class="se_btn" type="submit" value="검색">
             </div>
-            <div class="se" style="float:right;">
-                <input type="search" class="se_input" name="b" placeholder="Search"  value="{{ request.GET.b }}">
-                <input type="submit" class="se_btn" value="검색">
-            </div>
-    </form>
+
+        </form>
     <thead>
         <tr>
             <th width="70" style="text-align:center">분류</th>
@@ -118,7 +125,7 @@
             <th width="70" style="text-align:center">{{ board.category }}</th>
             <th width="400" >{{ board.title }}</th>
             <th width="200" style="text-align:center"> {{ board.writer.n_name }}</th>
-            <th width="280" style="text-align:center">{{ board.created_at }}</th>
+            <th width="400" style="text-align:center">{{ board.created_at| naturaltime }}</th>
             <th width="100" style="text-align:center">{{ board.hits }}</th>
         </tr>
     {% endfor %}

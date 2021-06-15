@@ -45,6 +45,7 @@ def index(request):
         custom_stock = list_shuffle(custom_stock, num=10)
         custom_stock = get_stock_info(custom_stock)
 
+
     # 인기 검색어 불러오기
     STOCKLIST_URL = "https://finance.naver.com/sise/lastsearch2.nhn"
 
@@ -75,96 +76,30 @@ def index(request):
     market_updown_kospi = get_상위_하위_등락률(market='KOSPI')
     market_updown_kosdaq = get_상위_하위_등락률(market='KOSDAQ')
 
-    market_updown_kospi_list = {
-        '상위' : {
-            '종목명' : list(market_updown_kospi[0]['종목명']),
-            '종가' : list(market_updown_kospi[0]['종가']),
-            '변동폭' : list(market_updown_kospi[0]['변동폭']),
-            '등락률' : list(market_updown_kospi[0]['등락률']),
-            '거래량' : list(market_updown_kospi[0]['거래량'])
-        },
-        '하위': {
-            '종목명': list(market_updown_kospi[1]['종목명']),
-            '종가': list(market_updown_kospi[1]['종가']),
-            '변동폭': list(market_updown_kospi[1]['변동폭']),
-            '등락률': list(market_updown_kospi[1]['등락률']),
-            '거래량': list(market_updown_kospi[1]['거래량'])
-        }
-    }
-    market_updown_kosdaq_list = {
-        '상위' : {
-            '종목명' : list(market_updown_kosdaq[0]['종목명']),
-            '종가' : list(market_updown_kosdaq[0]['종가']),
-            '변동폭' : list(market_updown_kosdaq[0]['변동폭']),
-            '등락률' : list(market_updown_kosdaq[0]['등락률']),
-            '거래량' : list(market_updown_kosdaq[0]['거래량'])
-        },
-        '하위': {
-            '종목명': list(market_updown_kosdaq[1]['종목명']),
-            '종가': list(market_updown_kosdaq[1]['종가']),
-            '변동폭': list(market_updown_kosdaq[1]['변동폭']),
-            '등락률': list(market_updown_kosdaq[1]['등락률']),
-            '거래량': list(market_updown_kosdaq[1]['거래량'])
-        }
-    }
+    market_up_list = pd.concat([market_updown_kospi[0],market_updown_kosdaq[0]], axis=1)
+    market_down_list = pd.concat([market_updown_kospi[1], market_updown_kosdaq[1]], axis=1)
 
     market_net_purchases_f = [get_상위_순매수(market='KOSPI', purchases='외국인')
                               , get_상위_순매수(market='KOSDAQ', purchases='외국인')]
     market_net_purchases_n = [get_상위_순매수(market='KOSPI', purchases='개인')
                               , get_상위_순매수(market='KOSDAQ', purchases='개인')]
 
-    market_net_purchases_f_list = {
-        '코스피' : {
-            '종목명': list(market_net_purchases_f[0]['종목명']),
-            '순매수거래대금': list(market_net_purchases_f[0]['순매수거래대금']),
-            '순매수거래량': list(market_net_purchases_f[0]['순매수거래량'])
-        },
-        '코스닥' : {
-            '종목명': list(market_net_purchases_f[1]['종목명']),
-            '순매수거래대금': list(market_net_purchases_f[1]['순매수거래대금']),
-            '순매수거래량': list(market_net_purchases_f[1]['순매수거래량'])
-        }
-    }
-    market_net_purchases_n_list = {
-        '코스피': {
-            '종목명': list(market_net_purchases_n[0]['종목명']),
-            '순매수거래대금': list(market_net_purchases_n[0]['순매수거래대금']),
-            '순매수거래량': list(market_net_purchases_n[0]['순매수거래량'])
-        },
-        '코스닥': {
-            '종목명': list(market_net_purchases_n[1]['종목명']),
-            '순매수거래대금': list(market_net_purchases_n[1]['순매수거래대금']),
-            '순매수거래량': list(market_net_purchases_n[1]['순매수거래량'])
-        }
-    }
+    market_net_purchases_f_list = pd.concat(market_net_purchases_f, axis=1)
+    market_net_purchases_n_list = pd.concat(market_net_purchases_n, axis=1)
 
     market_trading_change = [get_거래량(market='KOSPI'), get_거래량(market='KOSDAQ')]
-
-    market_trading_change_list = {
-        '코스피' : {
-            '종목명': list(market_trading_change[0]['종목명']),
-            '종가': list(market_trading_change[0]['종가']),
-            '변동폭': list(market_trading_change[0]['변동폭']),
-            '등락률': list(market_trading_change[0]['등락률']),
-            '거래량': list(market_trading_change[0]['거래량'])
-        },
-        '코스닥' : {
-            '종목명': list(market_trading_change[1]['종목명']),
-            '종가': list(market_trading_change[1]['종가']),
-            '변동폭': list(market_trading_change[1]['변동폭']),
-            '등락률': list(market_trading_change[1]['등락률']),
-            '거래량': list(market_trading_change[1]['거래량'])
-        }
-    }
+    market_trading_change_list = pd.concat(market_trading_change, axis=1)
 
     contents['list'] = list1
     contents['codelist'] = codelist
     contents['custom_stock'] = custom_stock
-    contents['market_updown_kospi_list'] = market_updown_kospi_list
-    contents['market_updown_kosdaq_list'] = market_updown_kosdaq_list
-    contents['market_net_purchases_f_list'] = market_net_purchases_f_list
-    contents['market_net_purchases_n_list'] = market_net_purchases_n_list
-    contents['market_trading_change_list'] = market_trading_change_list
+    contents['market_up_list'] = market_up_list.to_dict('records')
+    contents['market_down_list'] = market_down_list.to_dict('records')
+    contents['market_net_purchases_f_list'] = market_net_purchases_f_list.to_dict('records')
+    contents['market_net_purchases_n_list'] = market_net_purchases_n_list.to_dict('records')
+    contents['market_trading_change_list'] = market_trading_change_list.to_dict('records')
+
+    network.model.summary()
 
     return render(request, 'stock/stock_se.html', contents)
 
@@ -301,7 +236,6 @@ def list_shuffle(*args, num=10):
 def get_stock_info(stocks):
     date = get_date()
     stock_info = stock.get_market_ohlcv_by_ticker(date, market="ALL")
-    print(stocks)
 
     result = [{'code' : code,
                'name' : Stock.objects.get(code=code).stock,
@@ -317,8 +251,10 @@ def get_거래량(market='KOSPI'):
 
     market_price_change_a = stock.get_market_ohlcv_by_ticker(date, market=market)
 
-    market_price_change_a['변동폭'] = [(close - start) for close, start in
-                                    zip(market_price_change_a['종가'].values, market_price_change_a['시가'].values)]
+    market_price_change_a['변동폭'] = [int(close - (close / (1+(ratio/100)))) for close, ratio in
+                                    zip(market_price_change_a['종가'].values, market_price_change_a['등락률'].values)]
+
+
 
     market_price_change_a = market_price_change_a.drop(['시가'], axis='columns')
     market_price_change_a = market_price_change_a.drop(['고가'], axis='columns')
@@ -330,6 +266,14 @@ def get_거래량(market='KOSPI'):
     market_price_change_a_up = market_price_change_a_s.head(COUNT_INFO)
     market_price_change_a_up["종목명"] = [stock.get_market_ticker_name(value) for value in
                                        market_price_change_a_up.index.values]
+
+    market_price_change_a_up = market_price_change_a_up.reset_index(drop=False)
+    market_price_change_a_up = market_price_change_a_up.rename(columns={'티커': market + '티커'})
+    market_price_change_a_up = market_price_change_a_up.rename(columns={'종가': market + '종가'})
+    market_price_change_a_up = market_price_change_a_up.rename(columns={'거래량': market + '거래량'})
+    market_price_change_a_up = market_price_change_a_up.rename(columns={'등락률': market + '등락률'})
+    market_price_change_a_up = market_price_change_a_up.rename(columns={'변동폭': market + '변동폭'})
+    market_price_change_a_up = market_price_change_a_up.rename(columns={'종목명': market + '종목명'})
 
     return market_price_change_a_up
 
@@ -349,6 +293,12 @@ def get_상위_순매수(market='KOSPI', purchases='외국인'):
 
     data_up = data_s.head(COUNT_INFO)
 
+    data_up = data_up.reset_index(drop=False)
+    data_up = data_up.rename(columns={'티커': market + '티커'})
+    data_up = data_up.rename(columns={'종목명': market + '종목명'})
+    data_up = data_up.rename(columns={'순매수거래량': market + '순매수거래량'})
+    data_up = data_up.rename(columns={'순매수거래대금': market + '순매수거래대금'})
+
     return data_up
 
 
@@ -357,8 +307,8 @@ def get_상위_하위_등락률(market='KOSPI'):
 
     market_price_change_a = stock.get_market_ohlcv_by_ticker(date, market=market)
 
-    market_price_change_a['변동폭'] = [(close - start) for close, start in
-                                    zip(market_price_change_a['종가'].values, market_price_change_a['시가'].values)]
+    market_price_change_a['변동폭'] = [int(close - (close / (1 + (ratio / 100)))) for close, ratio in
+                                    zip(market_price_change_a['종가'].values, market_price_change_a['등락률'].values)]
 
     market_price_change_a = market_price_change_a.drop(['시가'], axis='columns')
     market_price_change_a = market_price_change_a.drop(['고가'], axis='columns')
@@ -369,13 +319,22 @@ def get_상위_하위_등락률(market='KOSPI'):
 
     market_price_change_a_s = market_price_change_a.sort_values(by=["등락률"], ascending=[False])
 
-    market_price_change_a_up = market_price_change_a_s.head(COUNT_INFO)
-    market_price_change_a_up["종목명"] = [stock.get_market_ticker_name(value) for value in
-                                       market_price_change_a_up.index.values]
+    market_price_change_a_s = market_price_change_a_s.rename(columns={'티커': market + '티커'})
+    market_price_change_a_s = market_price_change_a_s.rename(columns={'종가': market + '종가'})
+    market_price_change_a_s = market_price_change_a_s.rename(columns={'거래량': market + '거래량'})
+    market_price_change_a_s = market_price_change_a_s.rename(columns={'등락률': market + '등락률'})
+    market_price_change_a_s = market_price_change_a_s.rename(columns={'변동폭': market + '변동폭'})
+    market_price_change_a_s = market_price_change_a_s.rename(columns={'종목명': market + '종목명'})
 
-    market_price_change_a_down = market_price_change_a_s.tail(COUNT_INFO).sort_values(by=["등락률"], ascending=[True])
-    market_price_change_a_down["종목명"] = [stock.get_market_ticker_name(value) for value in
+    market_price_change_a_up = market_price_change_a_s.head(COUNT_INFO)
+    market_price_change_a_up[market + "종목명"] = [stock.get_market_ticker_name(value) for value in
+                                       market_price_change_a_up.index.values]
+    market_price_change_a_up = market_price_change_a_up.reset_index(drop=False)
+
+    market_price_change_a_down = market_price_change_a_s.tail(COUNT_INFO).sort_values(by=[market + "등락률"], ascending=[True])
+    market_price_change_a_down[market + "종목명"] = [stock.get_market_ticker_name(value) for value in
                                          market_price_change_a_down.index.values]
+    market_price_change_a_down = market_price_change_a_down.reset_index(drop=False)
 
     return market_price_change_a_up, market_price_change_a_down
 

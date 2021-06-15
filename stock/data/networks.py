@@ -235,5 +235,5 @@ class CNN(Network):
         return super().predict(sample)
 
 
-network = LSTMNetwork(input_dim=28, output_dim=2, num_steps=5)
-network.load_model('stock/res/210609_policy.h5')
+network = LSTMNetwork(input_dim=27, output_dim=2, num_steps=5)
+network.load_model('stock/res/a3c_lstm_policy_20210608103435.h5')

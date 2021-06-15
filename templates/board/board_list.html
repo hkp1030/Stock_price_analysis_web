@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -147,7 +148,7 @@
             {% else %}
             <th width="200" style="text-align:center"> {{ board.writer.n_name }}</th>
             {% endif %}
-            <th width="280" style="text-align:center">{{ board.created_at }}</th>
+            <th width="400" style="text-align:center">{{ board.created_at | naturaltime}}</th>
             <th width="100" style="text-align:center">{{ board.hits }}</th>
         </tr>
         {% endfor %}
