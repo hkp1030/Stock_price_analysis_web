@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
@@ -6,7 +7,7 @@ from django.shortcuts import render, redirect
 import users
 from users.models import User
 
-
+@login_required(login_url='users:login')
 def userInfo(request):
     info_user = request.user
     context = {

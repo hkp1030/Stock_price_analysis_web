@@ -28,6 +28,7 @@ from bs4 import BeautifulSoup as bs  # 웹 크롤링을 위한 모듈
 import sys
 import io
 
+TEMP_DATE = '20210615'
 COUNT_INFO = 5
 
 
@@ -99,8 +100,6 @@ def index(request):
     contents['market_net_purchases_n_list'] = market_net_purchases_n_list.to_dict('records')
     contents['market_trading_change_list'] = market_trading_change_list.to_dict('records')
 
-    network.model.summary()
-
     return render(request, 'stock/stock_se.html', contents)
 
 
@@ -134,7 +133,7 @@ def detail(request, stock_id):
     news = get_google_news(name)
 
 
-    creon = LinkCreon('D:/PycharmProjects/Stock_price_analysis_web/venv32/Scripts/python.exe', 'stock/data/creon.py')
+    creon = LinkCreon('C:/Users/LG/PycharmProjects/Stock_price_analysis_web/venv32/Scripts/python.exe', 'stock/data/creon.py')
     stock = creon.get_stock_data(stock_id)
     stock.reverse()
     stock_json = json.dumps(stock)
@@ -357,4 +356,6 @@ def get_date():
     df = stock.get_market_ohlcv_by_date('20210610', date, "005930")
 
     ts = pd.to_datetime(str(df.tail(1).index.values[0]))
-    return ts.strftime("%Y%m%d")
+    #print(ts)
+    #return ts.strftime("%Y%m%d")
+    return TEMP_DATE

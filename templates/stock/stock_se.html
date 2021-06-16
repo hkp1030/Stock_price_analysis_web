@@ -2622,7 +2622,7 @@
             </div>
         </form>
         <!-- Page Container -->
-        <div class="w3-content w3-margin-top" style="max-width:1200px;">
+        <div class="w3-content w3-margin-top" style="min-width:1200px;">
 
 
             <!-- The Grid -->
@@ -2694,9 +2694,9 @@
                         <p style="text-align: center; font-size: 20px;"><b>맞춤 종목 추천</b></p>
                         <div style=" border-top: 1px solid #B4B3B3;"></div>
                         {% for stock in custom_stock %}
-                        <button class="w3-button w3-block w3-theme-l1 w3-left-align" style=" href="{%url 'stock:detail' stock.code %}" display: list-item; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-right: 27px; padding-left: 27px;">
+                        <button class="w3-button w3-block w3-theme-l1 w3-left-align" href="{%url 'stock:detail' stock.code %}" style="  display: list-item; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-right: 27px; padding-left: 27px;">
                             <span>
-                                <a style="font-size: 20px; text-decoration: none; width:30%; float: left;">{{ stock.name }}</a>
+                                <a href="{%url 'stock:detail' stock.code %}" style="font-size: 20px; text-decoration: none; width:30%; float: left;">{{ stock.name }}</a>
                             </span>
                             <span style="text-align: right; font-size: 20px; text-decoration: none; width: 20%; margin-left: 65px; display: block; float: left;">
                                 <a>{{ stock.close|floatformat:"0"|intcomma }}</a>
@@ -2732,7 +2732,7 @@
             </div>
 
 
-            <div class="w3-row-padding" style="padding-left: 17px; padding-right: 17px; margin-bottom: 30px;">
+            <div class="w3-row-padding" style="padding-left: 17px; padding-right: 17px; margin-bottom: 30px; min-width:1200px;">
                 <div class="w3-container w3-card w3-white">
         <p style="font-size: 20px;"><b>마켓 트렌드</b></p>
         <hr>
